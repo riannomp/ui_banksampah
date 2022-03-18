@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSetoransTable extends Migration
+class CreateJenisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateSetoransTable extends Migration
      */
     public function up()
     {
-        Schema::create('setorans', function (Blueprint $table) {
-            $table->string('kode_setor',6)->primary();
-            $table->string('kode_nasabah',6);
-            $table->string('kode_koor',6);
-            $table->integer('total_harga');
-            $table->date('tanggal');
+        Schema::create('jenis', function (Blueprint $table) {
+            $table->string('kode_jenis',6)->primary();
+            $table->string('nama',45);
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreateSetoransTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('setorans');
+        Schema::dropIfExists('jenis');
     }
 }
