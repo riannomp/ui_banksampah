@@ -9,6 +9,7 @@ class Koordinator extends Model
 {
     use HasFactory;
     protected $fillable=[
+        'kode_koor',
         'nama',
         'foto',
         'alamat',
@@ -24,5 +25,9 @@ class Koordinator extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'id_user');
+    }
+    public function setoran()
+    {
+        return $this->hasOne(Setoran::class, 'kode_koor');
     }
 }

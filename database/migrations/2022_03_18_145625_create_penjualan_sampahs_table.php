@@ -14,12 +14,12 @@ class CreatePenjualanSampahsTable extends Migration
     public function up()
     {
         Schema::create('penjualan_sampahs', function (Blueprint $table) {
-            $table->string('kode_penjualan',6)->primary();
-            $table->string('kode_sampah',6);
-            $table->string('kode_pengrajin',6);
+            $table->string('kode_penjualan', 6)->primary();
+            $table->string('kode_sampah', 6);
+            $table->string('kode_pengrajin', 6);
             $table->integer('total_harga');
             $table->date('tanggal');
-            $table->string('pic_teller',45);
+            $table->string('pic_teller', 45);
             $table->timestamps();
         });
     }

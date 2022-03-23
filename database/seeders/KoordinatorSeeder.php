@@ -14,6 +14,7 @@ class KoordinatorSeeder extends Seeder
      */
     public function run()
     {
+        $kode = ['USR003'];
         $nama = ['Mamad'];
         $alamat = ['Nglanduk'];
         $no_telp = ['087653456'];
@@ -21,6 +22,7 @@ class KoordinatorSeeder extends Seeder
 
         for ($i=0; $i < count($nama) ; $i++) {
             Koordinator::create([
+                'kode_koor' => $kode[$i],
                 'nama' => $nama[$i],
                 'alamat' => $alamat[$i],
                 'no_telp' => $no_telp[$i],

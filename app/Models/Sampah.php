@@ -27,4 +27,12 @@ class Sampah extends Model
     {
         return $this->belongsTo(Jenis::class, 'kode_jenis');
     }
+    public function detail_setor()
+    {
+        return $this->hasMany(DetailSetoran::class, 'kode_sampah');
+    }
+    public function penjualan()
+    {
+        return $this->hasMany(PenjualanSampah::class, 'kode_sampah');
+    }
 }

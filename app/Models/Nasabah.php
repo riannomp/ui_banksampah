@@ -9,6 +9,7 @@ class Nasabah extends Model
 {
     use HasFactory;
     protected $fillable=[
+        'kode_nasabah',
         'nama',
         'foto',
         'alamat',
@@ -25,5 +26,10 @@ class Nasabah extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'id_user');
+    }
+
+    public function setoran()
+    {
+        return $this->hasOne(Setoran::class, 'kode_nasabah');
     }
 }

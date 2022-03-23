@@ -18,6 +18,9 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
+                <div class="login100-pic js-tilt" data-tilt>
+                    <img src="{{ asset('login') }}/images/banksampah.png" alt="IMG" height="300">
+                </div>
 				<form class="validate-form" action="{{ route('register') }}" method="post">
                     @csrf
 					<span class="login100-form-title">
@@ -44,7 +47,7 @@
 							<i class="fa fa-user" aria-hidden="true"></i>
 						</span>
 					</div> --}}
-                   
+
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
 						<input class="input100" type="text" name="email" placeholder="Email">

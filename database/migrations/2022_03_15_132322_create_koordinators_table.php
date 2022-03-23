@@ -14,7 +14,7 @@ class CreateKoordinatorsTable extends Migration
     public function up()
     {
         Schema::create('koordinators', function (Blueprint $table) {
-            $table->increments('id');
+            $table->string('kode_koor',6)->primary();
             $table->integer('id_user')->unsigned();
             $table->string('nama',50);
             $table->string('foto',15)->nullable();
