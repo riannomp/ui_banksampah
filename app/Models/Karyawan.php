@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Koordinator extends Model
+class Karyawan extends Model
 {
     use HasFactory;
     protected $fillable=[
         'nama',
         'foto',
         'alamat',
-        'no_telp'
+        'no_telp',
     ];
 
     protected $dates=[
@@ -22,6 +22,6 @@ class Koordinator extends Model
     ];
     public function user()
     {
-        return $this->hasMany(User::class, 'id_koor');
+        return $this->hasMany(User::class, 'id_karyawan');
     }
 }

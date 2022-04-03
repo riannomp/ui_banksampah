@@ -14,19 +14,15 @@ class NasabahSeeder extends Seeder
      */
     public function run()
     {
-        $kode = ['USR001'];
         $nama = ['Anno'];
         $alamat = ['Madiun'];
         $no_telp = ['09567876'];
-        $id_user = [4];
 
         for ($i=0; $i < count($nama) ; $i++) {
             Nasabah::create([
-                'kode_nasabah' => $kode[$i],
                 'nama' => $nama[$i],
                 'alamat' => $alamat[$i],
-                'no_telp' => $no_telp[$i],
-                'id_user' => $id_user[$i]
+                'no_telp' => $no_telp[$i]
             ]);
         }
 

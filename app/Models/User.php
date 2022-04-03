@@ -21,7 +21,10 @@ class User extends Authenticatable
         'email',
         'password',
         'status',
-        'id_role',
+        'level',
+        'id_karyawan',
+        'id_nasabah',
+        'id_koor',
     ];
 
     /**
@@ -43,28 +46,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function role()
+
+    public function karyawan()
     {
-        return $this->belongsTo(Role::class, 'id_role');
+        return $this->belongsTo(Karyawan::class, 'id_karyawan');
     }
-    public function admin()
-    {
-        return $this->hasOne(Admin::class, 'id_user');
-    }
-    public function teller()
-    {
-        return $this->hasOne(Teller::class, 'id_user');
-    }
-    public function kepala()
-    {
-        return $this->hasOne(Kepala::class, 'id_user');
-    }
+
     public function nasabah()
     {
-        return $this->hasOne(Nasabah::class, 'id_user');
+        return $this->belongsTo(Nasabah::class, 'id_nasabah');
     }
     public function koordinator()
     {
-        return $this->hasOne(Koordinator::class, 'id_user');
+        return $this->belongsTo(Koordinator::class, 'id_koor');
     }
 }

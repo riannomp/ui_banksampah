@@ -9,12 +9,10 @@ class Nasabah extends Model
 {
     use HasFactory;
     protected $fillable=[
-        'kode_nasabah',
         'nama',
         'foto',
         'alamat',
-        'no_telp',
-        'id_user'
+        'no_telp'
     ];
 
     protected $dates=[
@@ -25,11 +23,7 @@ class Nasabah extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'id_user');
+        return $this->hasMany(User::class, 'id_nasabah');
     }
 
-    public function setoran()
-    {
-        return $this->hasOne(Setoran::class, 'kode_nasabah');
-    }
 }

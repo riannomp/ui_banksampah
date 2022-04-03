@@ -27,7 +27,7 @@ Route::post('postlogin', [LoginController::class, 'postlogin'])->name('postlogin
 Route::get('register', [LoginController::class, 'showFormRegister'])->name('register');
 Route::post('register', [LoginController::class, 'register']);
 
-Route::group(['middleware' => 'auth', 'cekrole:1,2,3,4,5'], function () {
+Route::group(['middleware' => 'auth', 'ceklevel:admin,teller,kepala,nasabah,koor'], function () {
 
     Route::get('dashboard', [DashboardController::class, 'index']);
     Route::get('profile', [DashboardController::class, 'profile'])->name('profile');

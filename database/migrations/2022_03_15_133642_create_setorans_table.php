@@ -21,12 +21,12 @@ class CreateSetoransTable extends Migration
             $table->date('tanggal');
             $table->timestamps();
         });
-        Schema::table('setorans', function (Blueprint $table) {
-            $table->foreign('kode_nasabah', 'kode_nasabah_setorans_fk01')->references('kode_nasabah')->on('nasabahs')->onDelete('cascade')->onUpdate('cascade');
-        });
-        Schema::table('setorans', function (Blueprint $table) {
-            $table->foreign('kode_koor', 'kode_koor_setorans_fk02')->references('kode_koor')->on('koordinators')->onDelete('cascade')->onUpdate('cascade');
-        });
+        // Schema::table('setorans', function (Blueprint $table) {
+        //     $table->foreign('kode_nasabah', 'kode_nasabah_setorans_fk01')->references('kode_nasabah')->on('nasabahs')->onDelete('cascade')->onUpdate('cascade');
+        // });
+        // Schema::table('setorans', function (Blueprint $table) {
+        //     $table->foreign('kode_koor', 'kode_koor_setorans_fk02')->references('kode_koor')->on('koordinators')->onDelete('cascade')->onUpdate('cascade');
+        // });
     }
 
     /**
