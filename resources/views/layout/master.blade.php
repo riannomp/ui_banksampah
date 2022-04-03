@@ -151,17 +151,20 @@
                     <ul class="metismenu" id="side-menu">
 
 
-                        @if (Auth::user()->id_role == 1)
+                        @if (Auth::user()->level == 'admin')
                         <li class="menu-title">ADMIN</li>
                         @endif
-                        @if (Auth::user()->id_role == 2)
+                        @if (Auth::user()->level == 'teller')
                         <li class="menu-title">TELLER</li>
                         @endif
-                        @if (Auth::user()->id_role == 3)
+                        @if (Auth::user()->level == 'kepala')
                         <li class="menu-title">KEPALA BANK SAMPAH</li>
                         @endif
-                        @if (Auth::user()->id_role == 3)
+                        @if (Auth::user()->level == 'nasabah')
                         <li class="menu-title">NASABAH</li>
+                        @endif
+                        @if (Auth::user()->level == 'koor')
+                        <li class="menu-title">KOORDINATOR</li>
                         @endif
                         <li>
                             <a href="{{ url('dashboard') }}">
@@ -169,7 +172,7 @@
                                 <span> Dashboard </span>
                             </a>
                         </li>
-                        @if (auth()->user()->id_role == '1')
+                        @if (auth()->user()->level == 'admin')
                             <li>
                                 <a href="javascript: void(0);">
                                     <i class="mdi mdi-flip-horizontal"></i>
@@ -211,7 +214,7 @@
                                 </a>
                             </li>
                         @endif
-                        @if (auth()->user()->id_role == '2')
+                        @if (auth()->user()->level == 'teller')
                             <li>
                                 <a href="javascript: void(0);">
                                     <i class="mdi mdi-flip-horizontal"></i>
@@ -250,7 +253,7 @@
                             </li>
                         @endif
 
-                        @if (auth()->user()->id_role == '3')
+                        @if (auth()->user()->level == 'kepala')
                             <li>
                                 <a href="javascript: void(0);">
                                     <i class="mdi mdi-format-underline"></i>
@@ -268,7 +271,7 @@
                                 </ul>
                             </li>
                         @endif
-                        @if (auth()->user()->id_role == '4')
+                        @if (auth()->user()->level == 'nasabah')
                             <li>
                                 <a href="{{ url('nasabah/tabungan') }}">
                                     <i class="mdi mdi-format-underline"></i>
