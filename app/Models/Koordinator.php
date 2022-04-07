@@ -24,4 +24,9 @@ class Koordinator extends Model
     {
         return $this->hasMany(User::class, 'id_koor');
     }
+    public function setoran()
+    {
+        return $this->hasOne(Setoran::class, 'id_koor');
+    }
 }
+

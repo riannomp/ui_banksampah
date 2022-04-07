@@ -15,8 +15,8 @@ class CreateDetailSetoransTable extends Migration
     {
         Schema::create('detail_setorans', function (Blueprint $table) {
             $table->increments('id_detail');
-            $table->string('kode_setor',6);
-            $table->string('kode_sampah',6);
+            $table->string('id_setoran',6);
+            $table->string('id_sampah',6);
             $table->integer('jumlah');
             $table->integer('harga');
             $table->integer('subtotal');
@@ -24,10 +24,10 @@ class CreateDetailSetoransTable extends Migration
             $table->timestamps();
         });
         Schema::table('detail_setorans', function (Blueprint $table) {
-            $table->foreign('kode_setor', 'kode_setor_detail_setorans_fk01')->references('kode_setor')->on('setorans')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_setoran', 'id_setoran_detail_setorans_fk01')->references('id_setoran')->on('setorans')->onDelete('cascade')->onUpdate('cascade');
         });
         Schema::table('detail_setorans', function (Blueprint $table) {
-            $table->foreign('kode_sampah', 'kode_sampah_detail_setorans_fk02')->references('kode_sampah')->on('sampahs')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_sampah', 'id_sampah_detail_setorans_fk02')->references('id_sampah')->on('sampahs')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

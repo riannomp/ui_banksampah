@@ -9,8 +9,9 @@ class Setoran extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'kode_nasabah',
-        'kode_koor',
+        'id_setoran',
+        'id_nasabah',
+        'id_koor',
         'total_harga',
         'tanggal'
     ];
@@ -22,14 +23,14 @@ class Setoran extends Model
     ];
     public function nasabah()
     {
-        return $this->belongsTo(Nasabah::class, 'kode_nasabah');
+        return $this->belongsTo(Nasabah::class, 'id_nasabah');
     }
     public function koor()
     {
-        return $this->belongsTo(Koordinator::class, 'kode_koor');
+        return $this->belongsTo(Koordinator::class, 'id_koor');
     }
     public function detail()
     {
-        return $this->hasOne(DetailSetoran::class, 'kode_setor');
+        return $this->hasOne(DetailSetoran::class, 'id_setoran');
     }
 }

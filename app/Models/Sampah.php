@@ -10,8 +10,8 @@ class Sampah extends Model
     use HasFactory;
 
     protected $fillable = [
-        'kode_sampah',
-        'kode_jenis',
+        'id_sampah',
+        'id_jenis',
         'nama',
         'jumlah',
         'harga',
@@ -25,14 +25,14 @@ class Sampah extends Model
     ];
     public function jenis()
     {
-        return $this->belongsTo(Jenis::class, 'kode_jenis');
+        return $this->belongsTo(Jenis::class, 'id_jenis');
     }
     public function detail_setor()
     {
-        return $this->hasMany(DetailSetoran::class, 'kode_sampah');
+        return $this->hasMany(DetailSetoran::class, 'id_sampah');
     }
-    public function penjualan()
+    public function detail_jual_sampah()
     {
-        return $this->hasMany(PenjualanSampah::class, 'kode_sampah');
-    }
+        return $this->belongsTo(DetailJualsampah::class, 'id_sampah');
+    }   
 }

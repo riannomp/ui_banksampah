@@ -14,7 +14,7 @@ class CreatePengrajinsTable extends Migration
     public function up()
     {
         Schema::create('pengrajins', function (Blueprint $table) {
-            $table->string('kode_pengrajin',6)->primary();
+            $table->string('id_pengrajin',6)->primary();
             $table->string('nama',45);
             $table->string('alamat');
             $table->string('no_telp',15);

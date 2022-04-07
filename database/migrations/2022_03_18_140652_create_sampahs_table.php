@@ -15,8 +15,8 @@ class CreateSampahsTable extends Migration
     public function up()
     {
         Schema::create('sampahs', function (Blueprint $table) {
-            $table->string('kode_sampah',6)->primary();
-            $table->string('kode_jenis',6);
+            $table->string('id_sampah',6)->primary();
+            $table->string('id_jenis',6);
             $table->string('nama');
             $table->integer('jumlah');
             $table->integer('harga');
@@ -24,7 +24,7 @@ class CreateSampahsTable extends Migration
             $table->timestamps();
         });
         Schema::table('sampahs', function (Blueprint $table) {
-            $table->foreign('kode_jenis', 'kode_jenis_sampahs_fk01')->references('kode_jenis')->on('jenis')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_jenis', 'id_jenis_sampahs_fk01')->references('id_jenis')->on('jenis')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

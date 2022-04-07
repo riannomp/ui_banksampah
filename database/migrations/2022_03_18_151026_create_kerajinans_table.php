@@ -14,8 +14,8 @@ class CreateKerajinansTable extends Migration
     public function up()
     {
         Schema::create('kerajinans', function (Blueprint $table) {
-            $table->string('kode_produk',6)->primary();
-            $table->string('kode_pengrajin',6);
+            $table->string('id_kerajinan',6)->primary();
+            $table->string('id_pengrajin',6);
             $table->string('nama',45);
             $table->integer('stok');
             $table->string('gambar',15);

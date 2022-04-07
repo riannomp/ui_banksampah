@@ -9,12 +9,10 @@ class PenjualanSampah extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'kode_penjualan',
-        'kode_sampah',
-        'kode_pengrajin',
+        'id_penjualan',
+        'id_pengrajin',
         'total_harga',
-        'tanggal',
-        'pic_teller'
+        'tanggal'
     ];
 
     protected $dates = [
@@ -22,8 +20,12 @@ class PenjualanSampah extends Model
         'updated_at',
         'deleted_at'
     ];
-    public function sampah()
+    public function detail_jual_sampah()
     {
-        return $this->belongsTo(Sampah::class, 'kode_sampah');
+        return $this->belongsTo(DetailJualsampah::class, 'id_penjualan');
+    }
+    public function pengrajin()
+    {
+        return $this->hasOne(Pengrajin::class, 'id_pengrajin');
     }
 }

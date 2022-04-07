@@ -14,13 +14,15 @@ class CreatePenjualanSampahsTable extends Migration
     public function up()
     {
         Schema::create('penjualan_sampahs', function (Blueprint $table) {
-            $table->string('kode_penjualan', 6)->primary();
-            $table->string('kode_sampah', 6);
-            $table->string('kode_pengrajin', 6);
+            $table->string('id_penjualan', 6)->primary();
+            $table->string('id_pengrajin', 6);
             $table->integer('total_harga');
             $table->date('tanggal');
             $table->string('pic_teller', 45);
             $table->timestamps();
+        });
+        Schema::table('penjualan_sampahs', function (Blueprint $table) {
+            $table->foreign('id_pengrajin', 'id_pengrajin_penjualan_sampah_fk01')->references('id_pengrajin')->on('pengrajins')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

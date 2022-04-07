@@ -25,5 +25,8 @@ class Nasabah extends Model
     {
         return $this->hasMany(User::class, 'id_nasabah');
     }
-
+    public function setoran()
+    {
+        return $this->hasOne(Setoran::class, 'id_nasabah');
+    }
 }

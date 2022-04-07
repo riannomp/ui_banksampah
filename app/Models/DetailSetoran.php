@@ -10,8 +10,8 @@ class DetailSetoran extends Model
     use HasFactory;
 
     protected $fillable = [
-        'kode_setor',
-        'kode_sampah',
+        'id_setoran',
+        'id_sampah',
         'jumlah',
         'subtotal',
         'total'
@@ -24,10 +24,10 @@ class DetailSetoran extends Model
     ];
     public function setoran()
     {
-        return $this->belongsTo(Setoran::class, 'kode_setor');
+        return $this->belongsTo(Setoran::class, 'id_setoran');
     }
     public function sampah()
     {
-        return $this->belongsTo(Sampah::class, 'kode_sampah');
+        return $this->belongsTo(Sampah::class, 'id_sampah');
     }
 }
