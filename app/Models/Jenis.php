@@ -10,7 +10,7 @@ class Jenis extends Model
     use HasFactory;
 
     protected $fillable=[
-        'kode_sampah',
+        'id_jenis',
         'nama'
     ];
 
@@ -19,8 +19,11 @@ class Jenis extends Model
         'updated_at',
         'deleted_at'
     ];
+    protected $primaryKey = 'id_jenis';
+    public $incrementing = false;
+
     public function sampah()
     {
-        return $this->hasMany(Sampah::class, 'kode_jenis');
+        return $this->hasMany(Sampah::class, 'id_sampah');
     }
 }

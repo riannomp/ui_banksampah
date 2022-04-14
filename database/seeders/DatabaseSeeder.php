@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             NasabahSeeder::class,
             KoordinatorSeeder::class,
             UserSeeder::class,
+            JenisSeeder::class,
         ]);
     }
 }

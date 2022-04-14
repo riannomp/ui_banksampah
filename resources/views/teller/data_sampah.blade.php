@@ -48,8 +48,8 @@
                         <tbody>
                             @foreach ($data_sampah as $sampah)
                                 <tr>
-                                    <td>{{ $sampah->nama_sampah }}</td>
-                                    <td>{{ $sampah->kode_sampah }}</td>
+                                    <td>{{ $sampah->nama }}</td>
+                                    <td>{{ $sampah->id_sampah }}</td>
                                     <td>{{ $sampah->jenis }}</td>
                                     <td>{{ $sampah->jumlah }}</td>
                                     <td>{{ $sampah->harga }}</td>

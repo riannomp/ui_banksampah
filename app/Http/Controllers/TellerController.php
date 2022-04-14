@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\DataSampah;
+use App\Models\Sampah;
 use Illuminate\Http\Request;
 
 class TellerController extends Controller
 {
     public function dataSampah()
     {
-        $data_sampah = DataSampah::all();
+        $data_sampah = Sampah::all();
         // dd($data_sampah);
         return view('teller.data_sampah', compact('data_sampah'));
     }
@@ -27,14 +28,14 @@ class TellerController extends Controller
 
 
             $kode = strtoupper(substr($request->nama_sampah, 0, 3));
-            $check = count(DataSampah::where('kode_sampah', 'like', "%$kode%")->get()->toArray());
+            $check = count(DataSampah::where('id_sampah', 'like', "%$kode%")->get()->toArray());
             $angka = sprintf("%03d", (int)$check + 1);
-            $kode_sampah = $kode . "" . $angka;
+            $id_sampah = $kode . "" . $angka;
 
             DataSampah::create([
 
                 'nama_sampah' => $request->nama_sampah,
-                'kode_sampah' => $kode_sampah,
+                'id_sampah' => $id_sampah,
                 'jenis' => $request->jenis_sampah,
                 'jumlah' => $request->jumlah,
                 'gambar' => $namaFile,
@@ -44,14 +45,14 @@ class TellerController extends Controller
 
 
             $kode = strtoupper(substr($request->nama_sampah, 0, 3));
-            $check = count(DataSampah::where('kode_sampah', 'like', "%$kode%")->get()->toArray());
+            $check = count(DataSampah::where('id_sampah', 'like', "%$kode%")->get()->toArray());
             $angka = sprintf("%03d", (int)$check + 1);
-            $kode_sampah = $kode . "" . $angka;
+            $id_sampah = $kode . "" . $angka;
 
             DataSampah::create([
 
                 'nama_sampah' => $request->nama_sampah,
-                'kode_sampah' => $kode_sampah,
+                'id_sampah' => $id_sampah,
                 'jenis' => $request->jenis_sampah,
                 'jumlah' => $request->jumlah,
                 'harga' => $request->harga

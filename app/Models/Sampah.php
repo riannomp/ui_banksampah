@@ -23,6 +23,9 @@ class Sampah extends Model
         'updated_at',
         'deleted_at'
     ];
+    protected $primaryKey = 'id_sampah';
+    public $incrementing = false;
+
     public function jenis()
     {
         return $this->belongsTo(Jenis::class, 'id_jenis');
@@ -34,5 +37,5 @@ class Sampah extends Model
     public function detail_jual_sampah()
     {
         return $this->belongsTo(DetailJualsampah::class, 'id_sampah');
-    }   
+    }
 }

@@ -48,17 +48,7 @@
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $usr->email }}</td>
                                 <td>
-                                    @if ($usr->id_role == '1')
-                                    <span>Admin</span>
-                                    @elseif ($usr->id_role == '2')
-                                    <span>Teller</span>
-                                    @elseif ($usr->id_role == '3')
-                                    <span>Kepala Bank Sampah</span>
-                                    @elseif ($usr->id_role == '4')
-                                    <span>Nasabah</span>
-                                    @else
-                                    <span>-</span>
-                                    @endif
+                                    <span>{{ $usr->level }}</span>
                                 </td>
                                 <td>
                                     @if($usr->status == '1')

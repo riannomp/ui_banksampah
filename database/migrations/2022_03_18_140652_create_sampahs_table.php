@@ -20,7 +20,7 @@ class CreateSampahsTable extends Migration
             $table->string('nama');
             $table->integer('jumlah');
             $table->integer('harga');
-            $table->string('gambar', 15);
+            $table->string('gambar', 15)->nullable();
             $table->timestamps();
         });
         Schema::table('sampahs', function (Blueprint $table) {

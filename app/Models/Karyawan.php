@@ -22,6 +22,6 @@ class Karyawan extends Model
     ];
     public function user()
     {
-        return $this->hasMany(User::class, 'id_karyawan');
+        return $this->hasOne(User::class, 'id_karyawan');
     }
 }

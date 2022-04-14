@@ -142,30 +142,13 @@
 
         <!-- ========== Left Sidebar Start ========== -->
         <div class="left-side-menu">
-
             <div class="slimscroll-menu">
-
                 <!--- Sidemenu -->
                 <div id="sidebar-menu">
-
                     <ul class="metismenu" id="side-menu">
 
-
-                        @if (Auth::user()->level == 'admin')
-                        <li class="menu-title">ADMIN</li>
-                        @endif
-                        @if (Auth::user()->level == 'teller')
-                        <li class="menu-title">TELLER</li>
-                        @endif
-                        @if (Auth::user()->level == 'kepala')
-                        <li class="menu-title">KEPALA BANK SAMPAH</li>
-                        @endif
-                        @if (Auth::user()->level == 'nasabah')
-                        <li class="menu-title">NASABAH</li>
-                        @endif
-                        @if (Auth::user()->level == 'koor')
-                        <li class="menu-title">KOORDINATOR</li>
-                        @endif
+                        <li class="menu-title">{{ Auth::user()->level }}</li>
+                        
                         <li>
                             <a href="{{ url('dashboard') }}">
                                 <i class="mdi mdi-view-dashboard"></i>

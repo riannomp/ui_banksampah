@@ -27,6 +27,9 @@ class User extends Authenticatable
         'id_koor',
     ];
 
+    // nek primaryne uduk 'id' kudu di definisikan sek
+    protected $primaryKey = 'id_user';
+
     /**
      * The attributes that should be hidden for serialization.
      *

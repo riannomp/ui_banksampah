@@ -37,7 +37,7 @@ class LoginController extends Controller
 
         $validator = FacadesValidator::make($request->all(), $rules, $messages);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($request->all);
         }
 
@@ -48,30 +48,30 @@ class LoginController extends Controller
         ];
 
 
-        $login = Auth::attempt(['email' => $request->email,'password' => $request->password, 'status' => '1']);
-        $login2 = Auth::attempt(['email' => $request->email,'password' => $request->password, 'status' => '2']);
+        $login = Auth::attempt(['email' => $request->email, 'password' => $request->password, 'status' => '1']);
+        $login2 = Auth::attempt(['email' => $request->email, 'password' => $request->password, 'status' => '2']);
 
-
+        $user = Auth::user();
         // Auth::attempt($data);
-
-        if($login === TRUE){
-            return redirect('dashboard');
-        }else{
-            if($login2 === TRUE){
-                Auth::logout();
-                FacadesSession::flash('error', 'Akun Belum AKTIF, silhkan hubungi Admin');
-                return redirect()->route('login');
-            }else{
-                FacadesSession::flash('error', 'Email atau password salah');
-                return redirect()->route('login');
-            }
-        }
-        // if(Auth::attempt($request->only('email','password')) ){
-        //     return redirect('dashboard');
-        // }else {
-        //     FacadesSession::flash('error', 'Email atau password salah');
-        //     return redirect()->route('login');
+        // if ($login === TRUE) {
+        //     return redirect()->route('dashboard');
+        // } else {
+        //     if ($login2 === TRUE) {
+        //         Auth::logout();
+        //         FacadesSession::flash('error', 'Akun Belum AKTIF, silhkan hubungi Admin');
+        //         return redirect()->route('login');
+        //     } else {
+        //         FacadesSession::flash('error', 'Email atau password salah');
+        //         return redirect()->route('login');
+        //     }
         // }
+        if (Auth::attempt($request->only('email', 'password'))) {
+            $request->session()->regenerate();
+            return redirect()->intended('/dashboard');
+        } else {
+            FacadesSession::flash('error', 'Email atau password salah');
+            return redirect()->route('login');
+        }
     }
 
     public function showFormRegister()
@@ -97,7 +97,7 @@ class LoginController extends Controller
 
         $validator = FacadesValidator::make($request->all(), $rules, $messages);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($request->all);
         }
 
@@ -106,10 +106,9 @@ class LoginController extends Controller
         $user->password = bcrypt($request->password);
         $user->email_verified_at = \Carbon\Carbon::now();
         $user->status = '2';
-        $user->id_role = '4';
         $simpan = $user->save();
 
-        if($simpan){
+        if ($simpan) {
             FacadesSession::flash('success', 'Register berhasil! Silahkan login untuk mengakses data');
             return redirect()->route('login');
         } else {
@@ -123,5 +122,4 @@ class LoginController extends Controller
         Auth::logout(); // menghapus session yang aktif
         return redirect()->route('login');
     }
-
 }

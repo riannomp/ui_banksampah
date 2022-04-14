@@ -27,17 +27,20 @@ Route::post('postlogin', [LoginController::class, 'postlogin'])->name('postlogin
 Route::get('register', [LoginController::class, 'showFormRegister'])->name('register');
 Route::post('register', [LoginController::class, 'register']);
 
-Route::group(['middleware' => 'auth', 'ceklevel:admin,teller,kepala,nasabah,koor'], function () {
+Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
-    Route::get('dashboard', [DashboardController::class, 'index']);
+// Route::group(['middleware' => 'auth', 'ceklevel:admin,teller,kepala,nasabah,koor'], function () {
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('profile', [DashboardController::class, 'profile'])->name('profile');
-    Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
     Route::group(['prefix' => 'admin/'], function () {
         Route::get('data_sampah', [AdminController::class, 'dataSampah']);
         Route::get('data_nasabah', [AdminController::class, 'dataNasabah']);
         Route::get('supplier', [AdminController::class, 'dataSupplier']);
 
+        Route::post('addsampah', [AdminController::class, 'addSampah'])->name('addsampah');
 
         Route::get('setoran_sampah', [AdminController::class, 'dataSetoran']);
         Route::get('detail_setoran', [AdminController::class, 'detailSetoran']);
@@ -47,19 +50,19 @@ Route::group(['middleware' => 'auth', 'ceklevel:admin,teller,kepala,nasabah,koor
         Route::get('kerajinan', [AdminController::class, 'dataKerajinan']);
         Route::get('penjualan', [AdminController::class, 'dataPenjualan']);
         Route::get('jenis_sampah', [AdminController::class, 'dataJenis']);
+        Route::post('addjenis', [AdminController::class, 'addJenis']);
 
 
         Route::get('data_user', [AdminController::class, 'dataUser']);
         Route::post('updateStatus/{id}', [AdminController::class, 'updateStatus']);
-
     });
 
-    Route::group(['prefix' => 'teller/'], function (){
+    Route::group(['prefix' => 'teller/'], function () {
         Route::get('data_sampah', [TellerController::class, 'dataSampah']);
         Route::get('add_sampah', [TellerController::class, 'addSampah'])->name('teller.addsampah');
-        Route::post('data_sampah/simpah',[TellerController::class, 'addSampah2'])->name('teller.simpahdata');
+        Route::post('data_sampah/simpah', [TellerController::class, 'addSampah2'])->name('teller.simpahdata');
         Route::get('data_sampah/ubah/{id}', [TellerController::class, 'editSampah']);
-        Route::put('data_sampah/ubah/simpan',[TellerController::class,'updateSampah'])->name('teller.update');
+        Route::put('data_sampah/ubah/simpan', [TellerController::class, 'updateSampah'])->name('teller.update');
 
         Route::get('data_nasabah', [TellerController::class, 'dataNasabah']);
         Route::get('addnasabah', [TellerController::class, 'addNasabah']);
@@ -72,9 +75,8 @@ Route::group(['middleware' => 'auth', 'ceklevel:admin,teller,kepala,nasabah,koor
         Route::get('transaksi_produk', [TellerController::class, 'dataTransaksiProduk']);
     });
 
-    Route::group(['prefix' => 'nasabah/'], function (){
+    Route::group(['prefix' => 'nasabah/'], function () {
         Route::get('tabungan', [NasabahController::class, 'tabungan']);
         Route::get('profile', [NasabahController::class, 'profile'])->name('nasabah.profile');
     });
-
 });
