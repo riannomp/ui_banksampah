@@ -63,20 +63,24 @@
                                         </span>
                                     </td>
                                     <td><a href="" class="btn btn-success waves-effect waves-light" data-toggle="modal"
-                                            data-target="#edit">
+                                            data-target="#updatesampah{{$sampah->id_sampah}}">
                                             <i class="mdi mdi-pencil"></i></a>
                                         <a href="" class="btn btn-danger waves-effect waves-light" data-toggle="modal"
                                             data-target="#hapus">
                                             <i class="mdi mdi-delete"></i></a>
                                     </td>
                                 </tr>
+
+                                @include('admin.update_sampah')
                             @endforeach
+                            @include('admin.add_sampah')
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-        @include('admin.add_sampah')
+
+
         <!-- end row -->
 
         <div id="hapus" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"

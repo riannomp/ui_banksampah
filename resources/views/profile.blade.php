@@ -22,129 +22,120 @@
         <!-- end page title -->
 
         <div class="row">
-            <div class="col-3">
+            <div class="col-8">
                 <div class="card-box">
-                    <div class="text-center">
-                        <h3>Foto Profile</h3>
-                        <div class="">
-                            <img src="{{ asset('template/dist') }}/assets/images/users/avatar-1.jpg"
-                                class="rounded-circle" alt="" style="width: 200px; height: 200px;">
-                            {{-- <input type="file" name="gambar">
-                        <input type="hidden" class="form-control-file" id="hidden_gambar" name="hidden_gambar" value=""> --}}
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-9">
-                <div class="card-box">
-                    <h3>Personal info</h3>
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-5">
                             <div class="form-group">
-                                <label for="userName">Nama Lengkap</label>
-                                @if ($user->id_role == 1)
-                                    <input value="{{ $user->admin->nama }}" type="text" name="nama"
-                                        parsley-trigger="change" required class="form-control">
-                                @endif
-                                @if ($user->id_role == 2)
-                                    <input value="{{ $user->teller->nama }}" type="text" name="nama"
-                                        parsley-trigger="change" required class="form-control">
-                                @endif
-                                @if ($user->id_role == 3)
-                                    <input value="{{ $user->kepala->nama }}" type="text" name="nama"
-                                        parsley-trigger="change" required class="form-control">
-                                @endif
-                                @if ($user->id_role == 4)
-                                    <input value="{{ $user->nasabah->nama }}" type="text" name="nama"
-                                        parsley-trigger="change" required class="form-control">
-                                @endif
-                            </div>
-                        </div>
-                        @if ($user->id_role == 4)
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="pass1">NIK</label>
-                                    <input value="{{ $user->nasabah->nik }}" name="nik" type="text" required
-                                        class="form-control" readonly>
+                                <div class="text-center">
+                                    <h3>Foto Profile</h3>
+                                    <div class="">
+                                        <img src="{{ asset('template/dist') }}/assets/images/users/avatar-1.jpg"
+                                            class="rounded-circle" alt="" style="width: 300px; height: 300px;">
+
+
+                                    </div>
                                 </div>
                             </div>
+                        </div>
+
+                        @if (auth()->user()->level == 'admin' || auth()->user()->level == 'teller' || auth()->user()->level == 'kepala')
+                            <div class="col-7">
+                                <h3>Personal info</h3>
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#profile" role="tab"
+                                            aria-controls="profile" aria-expanded="true">Profil</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#auth" role="tab"
+                                            aria-controls="auth">Auth</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content text-muted" id="myTabContent">
+                                    <div role="tabpanel" class="tab-pane fade in active show" id="profile"
+                                        aria-labelledby="home-tab">
+                                        <div class="form-group">
+
+                                            <div class="form-group row">
+                                                <label for="example-text-input" class="col-lg-2 col-form-label">Nama
+                                                </label>
+                                                <div class="col-lg-8">
+                                                    <input class="form-control" value="{{ $user->karyawan->nama }}"
+                                                        type="text">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="example-search-input" class="col-lg-2 col-form-label">No
+                                                    HP</label>
+                                                <div class="col-lg-8">
+                                                    <input class="form-control" value="{{ $user->karyawan->no_telp }}"
+                                                        type="text">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="example-search-input"
+                                                    class="col-lg-2 col-form-label">Alamat</label>
+                                                <div class="col-lg-8">
+                                                    <input class="form-control" value="{{ $user->karyawan->alamat }}"
+                                                        type="text">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="example-search-input"
+                                                    class="col-lg-2 col-form-label">Foto</label>
+                                                <div class="col-lg-8">
+                                                    <input class="form-control" value=""
+                                                        type="file">
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="auth" role="tabpanel" aria-labelledby="profile-tab">
+                                        <div class="form-group row">
+                                            <label for="example-text-input" class="col-lg-2 col-form-label">Email
+                                            </label>
+                                            <div class="col-lg-8">
+                                                <input class="form-control" value="{{ $user->email }}"
+                                                    type="text">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="example-search-input" class="col-lg-2 col-form-label">Password</label>
+                                            <div class="col-lg-8">
+                                                <input class="form-control" name="edit_password" type="password" id="inputPassword" value="">
+                                                <input class="form-control" name="password" type="hidden" id="inputPassword" value="{{ $user->password }}">
+
+                                                <input type="checkbox" onclick="shwoPassword()"> Show Password
+                                            </div>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                    </div>
+                                </div>
                         @endif
-                        <div class="col-4">
-                            <div class="form-group">
-                                <label for="pass1">No Telp</label>
-                                @if ($user->id_role == 1)
-                                    <input value="{{ $user->admin->no_telp }}" name="no_telp" type="text" required
-                                        class="form-control">
-                                @endif
-                                @if ($user->id_role == 2)
-                                    <input value="{{ $user->teller->no_telp }}" name="no_telp" type="text" required
-                                        class="form-control">
-                                @endif
-                                @if ($user->id_role == 3)
-                                    <input value="{{ $user->kepala->no_telp }}" name="no_telp" type="text" required
-                                        class="form-control">
-                                @endif
-                                @if ($user->id_role == 4)
-                                    <input value="{{ $user->nasabah->no_telp }}" name="no_telp" type="text" required
-                                        class="form-control">
-                                @endif
-                            </div>
-                        </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label for="pass1">Alamat</label>
-                                @if ($user->id_role == 1)
-                                    <input value="{{ $user->admin->alamat }}" name="alamat" type="text" required
-                                        class="form-control">
-                                @endif
-                                @if ($user->id_role == 2)
-                                    <input value="{{ $user->teller->alamat }}" name="alamat" type="text" required
-                                        class="form-control">
-                                @endif
-                                @if ($user->id_role == 3)
-                                    <input value="{{ $user->kepala->alamat }}" name="alamat" type="text" required
-                                        class="form-control">
-                                @endif
-                                @if ($user->id_role == 4)
-                                    <input value="{{ $user->nasabah->alamat }}" name="alamat" type="text" required
-                                        class="form-control">
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <h3>Auth</h3>
-
-                    <div class="row">
-                        <div class="col-4">
-                            <div class="form-group">
-                                <label for="pass1">Email</label>
-                                <input name="alamat" type="text" required class="form-control">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-
-                        <label class="col-lg-3 control-label">Password</label>
-                        <div class="col-lg-8">
-                            <input class="form-control" name="edit_password" type="password" id="myInput" value="">
-                            @error('edit_password')
-                                <div class="tulisan">{{ $message }}</div>
-                            @enderror
-                            <input class="form-control" name="password" type="hidden" id="myInput" value="">
-                            <input type="checkbox" onclick="myFunction()">Show Password
-                        </div>
-                    </div>
 
                 </div>
+
             </div>
+
+
+
         </div>
         <!-- end row -->
 
     </div> <!-- end container-fluid -->
 @endsection
+<script>
+    function shwoPassword() {
+        var pass = document.getElementById("inputPassword");
+        if (pass.type === "password") {
+            pass.type = "text";
+        } else {
+            pass.type = "password";
+        }
+    }
+</script>

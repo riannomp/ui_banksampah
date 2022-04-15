@@ -20,6 +20,8 @@ class Karyawan extends Model
         'updated_at',
         'deleted_at'
     ];
+    protected $primaryKey = 'id_karyawan';
+
     public function user()
     {
         return $this->hasOne(User::class, 'id_karyawan');
