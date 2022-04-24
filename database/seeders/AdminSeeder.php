@@ -16,14 +16,14 @@ class AdminSeeder extends Seeder
     {
         $nama = ['Agus'];
         $alamat = ['Blitar'];
-        $no_telp = ['08912876354'];
+        $no_hp = ['08912876354'];
         $id_user = [1];
 
         for ($i=0; $i < count($nama) ; $i++) {
             Admin::create([
                 'nama' => $nama[$i],
                 'alamat' => $alamat[$i],
-                'no_telp' => $no_telp[$i],
+                'no_hp' => $no_hp[$i],
                 'id_user' => $id_user[$i]
             ]);
         }

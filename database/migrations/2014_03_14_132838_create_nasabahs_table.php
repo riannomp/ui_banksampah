@@ -15,13 +15,13 @@ class CreateNasabahsTable extends Migration
     {
         Schema::create('nasabahs', function (Blueprint $table) {
             $table->increments('id_nasabah');
+            $table->integer('id_koordinator')->nullable()->unsigned();
             $table->string('nama',50);
             $table->string('nik',16)->nullable();
             $table->string('foto',15)->nullable();
             $table->text('alamat');
-            $table->string('no_telp',15);
+            $table->string('no_hp',15);
             $table->string('saldo',10)->nullable();
-            $table->string('penarikan',10)->nullable();
             $table->timestamps();
         });
         // Schema::table('nasabahs', function (Blueprint $table) {

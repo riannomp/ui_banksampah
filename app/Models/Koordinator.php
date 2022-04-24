@@ -12,7 +12,7 @@ class Koordinator extends Model
         'nama',
         'foto',
         'alamat',
-        'no_telp'
+        'no_hp'
     ];
 
     protected $dates=[

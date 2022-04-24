@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id_user');
-            $table->integer('id_karyawan')->nullable()->unsigned();
+            $table->integer('id_pegawai')->nullable()->unsigned();
             $table->integer('id_nasabah')->nullable()->unsigned();
             $table->integer('id_koor')->nullable()->unsigned();
             $table->string('level');
@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
         Schema::table('users', function (Blueprint $table) {
-            $table->foreign('id_karyawan', 'id_karyawan_fk01')->references('id_karyawan')->on('karyawans')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_pegawai', 'id_pegawai_fk01')->references('id_pegawai')->on('pegawais')->onDelete('cascade')->onUpdate('cascade');
         });
         Schema::table('users', function (Blueprint $table) {
             $table->foreign('id_nasabah', 'id_nasabah_fk02')->references('id_nasabah')->on('nasabahs')->onDelete('cascade')->onUpdate('cascade');

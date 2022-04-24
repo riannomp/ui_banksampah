@@ -22,16 +22,17 @@
         <!-- end page title -->
 
         <div class="row">
-            <div class="col-12">
+            <div class="col-8">
 
                 <div class="card-box">
                     <p>
-                        <a href="{{ route('teller.addsampah') }}" class="btn btn-success waves-effect waves-light">
+                        <a href="" class="btn btn-success waves-effect waves-light" data-toggle="modal"
+                            data-target="#addsampah">
                             <span class="btn-label"><i class="mdi mdi-plus"></i>
                             </span> Tambah Data</a>
                     </p>
 
-                    <table id="datatable" class="table table-bordered dt-responsive nowrap"
+                     <table id="datatable" class="table table-bordered dt-responsive nowrap"
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
@@ -46,23 +47,33 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($data_sampah as $sampah)
+                            @foreach ($sampah as $sampah)
                                 <tr>
                                     <td>{{ $sampah->nama }}</td>
                                     <td>{{ $sampah->id_sampah }}</td>
-                                    <td>{{ $sampah->jenis }}</td>
+                                    <td>{{ $sampah->jenis->nama }}</td>
                                     <td>{{ $sampah->jumlah }}</td>
-                                    <td>{{ $sampah->harga }}</td>
-                                    <td><span class="logo-lg">
-                                            <img src="{{ url('img') }}/{{ $sampah->gambar }}" alt=""
-                                                height="50">
-                                        </span></td>
-                                    <td><a href="{{ url('teller/data_sampah/ubah')}}/{{ $sampah->id }} " class="btn btn-success waves-effect waves-light">
+                                    <td>Rp {{number_format($sampah->harga, 2, ',', '.')  }}</td>
+                                    <td>
+                                        <span class="logo-lg">
+                                            @if ($sampah->gambar)
+                                                <img src="{{ url('img/logo') }}/{{ $sampah->gambar }}"
+                                                    style="width: 250px; height: 150px;">
+                                            @endif
+                                        </span>
+                                    </td>
+                                    <td><a href="" class="btn btn-success waves-effect waves-light" data-toggle="modal"
+                                            data-target="#updatesampah{{$sampah->id_sampah}}">
                                             <i class="mdi mdi-pencil"></i></a>
-
+                                        <a href="" class="btn btn-danger waves-effect waves-light" data-toggle="modal"
+                                            data-target="#hapus">
+                                            <i class="mdi mdi-delete"></i></a>
                                     </td>
                                 </tr>
+
+                                @include('teller.update_sampah')
                             @endforeach
+                            @include('admin.add_sampah')
                         </tbody>
                     </table>
                 </div>

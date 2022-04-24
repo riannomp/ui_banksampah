@@ -20,7 +20,6 @@ class CreateDetailSetoransTable extends Migration
             $table->integer('jumlah');
             $table->integer('harga');
             $table->integer('subtotal');
-            $table->integer('total');
             $table->timestamps();
         });
         Schema::table('detail_setorans', function (Blueprint $table) {

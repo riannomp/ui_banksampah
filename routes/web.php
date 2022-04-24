@@ -59,10 +59,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['prefix' => 'teller/'], function () {
         Route::get('data_sampah', [TellerController::class, 'dataSampah']);
-        Route::get('add_sampah', [TellerController::class, 'addSampah'])->name('teller.addsampah');
-        Route::post('data_sampah/simpah', [TellerController::class, 'addSampah2'])->name('teller.simpahdata');
-        Route::get('data_sampah/ubah/{id}', [TellerController::class, 'editSampah']);
-        Route::put('data_sampah/ubah/simpan', [TellerController::class, 'updateSampah'])->name('teller.update');
+
+        Route::post('addsampah', [TellerController::class, 'addSampah2'])->name('addsampah');
+
+        Route::get('data_sampah/ubah/{id_sampah}', [TellerController::class, 'editSampah']);
+        Route::put('data_sampah/ubah/simpan', [TellerController::class, 'updateSampah'])->name('updatesampah');
 
         Route::get('data_nasabah', [TellerController::class, 'dataNasabah']);
         Route::get('addnasabah', [TellerController::class, 'addNasabah']);

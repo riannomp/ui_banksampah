@@ -16,13 +16,13 @@ class KoordinatorSeeder extends Seeder
     {
         $nama = ['Mamad'];
         $alamat = ['Nglanduk'];
-        $no_telp = ['087653456'];
+        $no_hp = ['087653456'];
 
         for ($i=0; $i < count($nama) ; $i++) {
             Koordinator::create([
                 'nama' => $nama[$i],
                 'alamat' => $alamat[$i],
-                'no_telp' => $no_telp[$i]
+                'no_hp' => $no_hp[$i]
             ]);
         }
     }

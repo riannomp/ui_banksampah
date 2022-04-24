@@ -18,8 +18,8 @@ class CreateSampahsTable extends Migration
             $table->string('id_sampah',6)->primary();
             $table->string('id_jenis',6);
             $table->string('nama');
-            $table->integer('jumlah');
-            $table->integer('harga');
+            $table->integer('harga_nasabah');
+            $table->integer('harga_koordinator');
             $table->string('gambar', 15)->nullable();
             $table->timestamps();
         });

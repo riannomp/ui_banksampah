@@ -16,13 +16,13 @@ class NasabahSeeder extends Seeder
     {
         $nama = ['Anno'];
         $alamat = ['Madiun'];
-        $no_telp = ['09567876'];
+        $no_hp = ['09567876'];
 
         for ($i=0; $i < count($nama) ; $i++) {
             Nasabah::create([
                 'nama' => $nama[$i],
                 'alamat' => $alamat[$i],
-                'no_telp' => $no_telp[$i]
+                'no_hp' => $no_hp[$i]
             ]);
         }
 

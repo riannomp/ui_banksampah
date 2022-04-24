@@ -22,7 +22,7 @@ class User extends Authenticatable
         'password',
         'status',
         'level',
-        'id_karyawan',
+        'id_pegawai',
         'id_nasabah',
         'id_koor',
     ];

@@ -18,6 +18,7 @@
         id="app-stylesheet" />
 
 
+    <link href="{{ asset('template/dist') }}/assets/libs/select2/select2.min.css" rel="stylesheet" type="text/css" />
     <link href="{{ asset('template/dist') }}/assets/libs/datatables/dataTables.bootstrap4.min.css" rel="stylesheet"
         type="text/css" />
 
@@ -148,7 +149,7 @@
                     <ul class="metismenu" id="side-menu">
 
                         <li class="menu-title">{{ Auth::user()->level }}</li>
-                        
+
                         <li>
                             <a href="{{ url('dashboard') }}">
                                 <i class="mdi mdi-view-dashboard"></i>
@@ -388,6 +389,7 @@
 
     <!-- App js -->
     <script src="{{ asset('template/dist') }}/assets/js/app.min.js"></script>
+    <script src="{{ asset('template/dist') }}/assets/libs/select2/select2.min.js"></script>
     <script src="{{ asset('template/dist') }}/assets/libs/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="{{ asset('template/dist') }}/assets/libs/datatables/jquery.dataTables.min.js"></script>
 

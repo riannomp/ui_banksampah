@@ -35,30 +35,26 @@
                         <thead>
                             <tr>
                                 <th>Nama Nasabah</th>
-                                <th>Kode Nasabah</th>
+                                <th>NIK</th>
                                 <th>Alamat</th>
                                 <th>No Telp</th>
-                                <th>Saldo</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($nasabah as $nasabahs)
                             <tr>
-                                <td>Agus</td>
-                                <td>AG001</td>
-                                <td>Desa Nglanduk</td>
-                                <td>08923423</td>
-                                <td>Rp 200.000</td>
+                                <td>{{ $nasabahs->nama }}</td>
+                                <td>{{ $nasabahs->nik }}</td>
+                                <td>{{ $nasabahs->alamat }}</td>
+                                <td>{{ $nasabahs->no_telp }}</td>
                                 <td><a href="" class="btn btn-info waves-effect waves-light" data-toggle="modal"
                                         data-target="#edit">
                                         <i class="mdi mdi-information-variant"></i></a>
-                                    <a href="" class="btn btn-danger waves-effect waves-light" data-toggle="modal"
-                                        data-target="#hapus">
-                                        <i class="mdi mdi-cash-multiple"></i></a>
                                 </td>
                             </tr>
+                            @endforeach
 
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -93,7 +89,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="passWord2">Jumlah Yang Ingin Ditarik</label>
                                 <input type="text" required class="form-control" id="passWord2">

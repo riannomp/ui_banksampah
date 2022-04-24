@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Kepala;
+use App\Models\Pegawai;
 use Illuminate\Database\Seeder;
 
-class KepalaSeeder extends Seeder
+class PegawaiSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,17 +14,17 @@ class KepalaSeeder extends Seeder
      */
     public function run()
     {
-        $nama = ['Hari'];
-        $alamat = ['Madiun'];
-        $no_hp = ['0986789323'];
-        $id_user = [3];
+        $nama = ['Agus','Budi','Bambang'];
+        $no_hp = ['0823423','088856','08746467'];
+        $alamat = ['Taman', 'Kartoharjo', 'Demangan'];
+        $id_pegawai = [1,2,3];
 
         for ($i=0; $i < count($nama) ; $i++) {
-            Kepala::create([
+            Pegawai::create([
                 'nama' => $nama[$i],
                 'alamat' => $alamat[$i],
                 'no_hp' => $no_hp[$i],
-                'id_user' => $id_user[$i]
+                'id_pegawai' => $id_pegawai[$i],
             ]);
         }
     }

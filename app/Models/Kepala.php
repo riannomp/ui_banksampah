@@ -12,7 +12,7 @@ class Kepala extends Model
         'nama',
         'foto',
         'alamat',
-        'no_telp',
+        'no_hp',
         'id_user'
     ];
 

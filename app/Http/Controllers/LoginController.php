@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Dotenv\Validator;
+use Illuminate\Support\Str;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -52,26 +53,26 @@ class LoginController extends Controller
         $login2 = Auth::attempt(['email' => $request->email, 'password' => $request->password, 'status' => '2']);
 
         $user = Auth::user();
-        // Auth::attempt($data);
-        // if ($login === TRUE) {
-        //     return redirect()->route('dashboard');
-        // } else {
-        //     if ($login2 === TRUE) {
-        //         Auth::logout();
-        //         FacadesSession::flash('error', 'Akun Belum AKTIF, silhkan hubungi Admin');
-        //         return redirect()->route('login');
-        //     } else {
-        //         FacadesSession::flash('error', 'Email atau password salah');
-        //         return redirect()->route('login');
-        //     }
-        // }
-        if (Auth::attempt($request->only('email', 'password'))) {
-            $request->session()->regenerate();
-            return redirect()->intended('/dashboard');
+        Auth::attempt($data);
+        if ($login === TRUE) {
+            return redirect()->route('dashboard');
         } else {
-            FacadesSession::flash('error', 'Email atau password salah');
-            return redirect()->route('login');
+            if ($login2 === TRUE) {
+                Auth::logout();
+                FacadesSession::flash('error', 'Akun Belum AKTIF, silhkan hubungi Admin');
+                return redirect()->route('login');
+            } else {
+                FacadesSession::flash('error', 'Email atau password salah');
+                return redirect()->route('login');
+            }
         }
+        // if (Auth::attempt($request->only('email', 'password'))) {
+        //     $request->session()->regenerate();
+        //     return redirect()->intended('/dashboard');
+        // } else {
+        //     FacadesSession::flash('error', 'Email atau password salah');
+        //     return redirect()->route('login');
+        // }
     }
 
     public function showFormRegister()
@@ -105,7 +106,9 @@ class LoginController extends Controller
         $user->email = strtolower($request->email);
         $user->password = bcrypt($request->password);
         $user->email_verified_at = \Carbon\Carbon::now();
+        $user->level = 'nasabah';
         $user->status = '2';
+        $user->remember_token = Str::random(60);
         $simpan = $user->save();
 
         if ($simpan) {

@@ -31,7 +31,7 @@ class UserSeeder extends Seeder
         User::truncate();
         $admin = User::create([
             'email' => 'admin@admin.com',
-            'id_karyawan' => '1',
+            'id_pegawai' => '1',
             'password' => bcrypt('123456'),
             'level' => 'admin',
             'remember_token' => Str::random(60),
@@ -41,7 +41,7 @@ class UserSeeder extends Seeder
 
         $teller = User::create([
             'email' => 'teller@teller.com',
-            'id_karyawan' => '2',
+            'id_pegawai' => '2',
             'password' => bcrypt('123456'),
             'level' => 'teller',
             'remember_token' => Str::random(60),
@@ -51,7 +51,7 @@ class UserSeeder extends Seeder
 
         $kepala = User::create([
             'email' => 'kepala@kepala.com',
-            'id_karyawan' => '3',
+            'id_pegawai' => '3',
             'password' => bcrypt('123456'),
             'level' => 'kepala',
             'remember_token' => Str::random(60),

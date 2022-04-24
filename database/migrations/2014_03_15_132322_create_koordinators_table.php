@@ -18,7 +18,7 @@ class CreateKoordinatorsTable extends Migration
             $table->string('nama',50);
             $table->string('foto',15)->nullable();
             $table->text('alamat');
-            $table->string('no_telp',15);
+            $table->string('no_hp',15);
             $table->timestamps();
         });
         // Schema::table('koordinators', function (Blueprint $table) {

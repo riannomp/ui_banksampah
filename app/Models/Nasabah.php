@@ -10,9 +10,10 @@ class Nasabah extends Model
     use HasFactory;
     protected $fillable=[
         'nama',
+        'nik',
         'foto',
         'alamat',
-        'no_telp'
+        'no_hp'
     ];
 
     protected $dates=[
@@ -20,6 +21,7 @@ class Nasabah extends Model
         'updated_at',
         'deleted_at'
     ];
+    protected $primaryKey = 'id_nasabah';
 
     public function user()
     {

@@ -15,8 +15,8 @@ class CreateSetoransTable extends Migration
     {
         Schema::create('setorans', function (Blueprint $table) {
             $table->string('id_setoran',6)->primary();
-            $table->integer('id_nasabah')->unsigned();
-            $table->integer('id_koor')->unsigned();
+            $table->integer('id_nasabah')->unsigned()->nullable();
+            $table->integer('id_koor')->unsigned()->nullable();
             $table->integer('total_harga')->unsigned();
             $table->date('tanggal');
             $table->timestamps();

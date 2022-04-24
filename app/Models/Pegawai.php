@@ -5,16 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Kerajinan extends Model
+class Pegawai extends Model
 {
     use HasFactory;
     protected $fillable=[
-        'id_kerajinan',
-        'id_pengrajin',
         'nama',
-        'stok',
-        'gambar',
-        'harga'
+        'foto',
+        'alamat',
+        'no_hp',
     ];
 
     protected $dates=[
@@ -22,4 +20,10 @@ class Kerajinan extends Model
         'updated_at',
         'deleted_at'
     ];
+    protected $primaryKey = 'id_pegawai';
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id_pegawai');
+    }
 }

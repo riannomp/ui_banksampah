@@ -3,16 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\DataSampah;
+use App\Models\Jenis;
+use App\Models\Nasabah;
 use App\Models\Sampah;
+use App\Models\Setoran;
 use Illuminate\Http\Request;
 
 class TellerController extends Controller
 {
     public function dataSampah()
     {
-        $data_sampah = Sampah::all();
+        $sampah = Sampah::all();
+        $jenis = Jenis::all();
         // dd($data_sampah);
-        return view('teller.data_sampah', compact('data_sampah'));
+        return view('teller.data_sampah', compact('sampah','jenis'));
     }
 
     public function addSampah()
@@ -24,82 +28,72 @@ class TellerController extends Controller
     {
         if ($request->gambar) {
             $namaFile = time() . '.' . $request->gambar->extension();
-            $request->gambar->move(public_path('img'), $namaFile);
+            $request->gambar->move(public_path('img/logo'), $namaFile);
 
-
-            $kode = strtoupper(substr($request->nama_sampah, 0, 3));
-            $check = count(DataSampah::where('id_sampah', 'like', "%$kode%")->get()->toArray());
+            $kode = strtoupper(substr($request->nama, 0, 3));
+            $check = count(Sampah::where('id_sampah', 'like', "%$kode%")->get()->toArray());
             $angka = sprintf("%03d", (int)$check + 1);
             $id_sampah = $kode . "" . $angka;
 
-            DataSampah::create([
-
-                'nama_sampah' => $request->nama_sampah,
+            Sampah::create([
+                'nama'      => $request->nama,
                 'id_sampah' => $id_sampah,
-                'jenis' => $request->jenis_sampah,
+                'id_jenis' => $request->jenis,
                 'jumlah' => $request->jumlah,
                 'gambar' => $namaFile,
                 'harga' => $request->harga
             ]);
         } else {
 
-
-            $kode = strtoupper(substr($request->nama_sampah, 0, 3));
-            $check = count(DataSampah::where('id_sampah', 'like', "%$kode%")->get()->toArray());
+            $kode = strtoupper(substr($request->nama, 0, 3));
+            $check = count(Sampah::where('id_sampah', 'like', "%$kode%")->get()->toArray());
             $angka = sprintf("%03d", (int)$check + 1);
             $id_sampah = $kode . "" . $angka;
 
-            DataSampah::create([
-
-                'nama_sampah' => $request->nama_sampah,
+            Sampah::create([
+                'nama'      => $request->nama,
                 'id_sampah' => $id_sampah,
-                'jenis' => $request->jenis_sampah,
+                'gambar' => 'no_image.png',
+                'id_jenis' => $request->jenis,
                 'jumlah' => $request->jumlah,
                 'harga' => $request->harga
             ]);
+
         }
 
-        return redirect('teller/data_sampah');
+        return redirect()->back();
     }
 
-    public function editSampah($id)
-    {
-        $sampah = DataSampah::find($id);
-        return view('teller.edit_sampah',compact('sampah'));
-    }
+
     public function updateSampah(Request $request)
     {
-        if ($request->gambar) {
-            $namaFile = time() . '.' . $request->gambar->extension();
-            $request->gambar->move(public_path('img'), $namaFile);
+        if ($request->edit_gambar) {
+            $namaFile = time() . '.' . $request->edit_gambar->extension();
+            $request->edit_gambar->move(public_path('img/logo'), $namaFile);
 
-            DataSampah::where('id',$request->edit_id)
+            Sampah::where('id_sampah',$request->edit_id)
             ->update([
 
-                'nama_sampah' => $request->edit_nama_sampah,
-                'kode_sampah' => $request->edit_kode_sampah,
-                'jenis' => $request->edit_jenis_sampah,
+                'nama' => $request->edit_nama,
                 'jumlah' => $request->edit_jumlah,
                 'gambar' => $namaFile,
                 'harga' => $request->edit_harga
             ]);
         } else {
 
-            DataSampah::where('id', $request->edit_id)
+            Sampah::where('id_sampah', $request->edit_id)
             ->update([
-
-                'nama_sampah' => $request->edit_nama_sampah,
-                'kode_sampah' => $request->edit_kode_sampah,
-                'jenis' => $request->edit_jenis_sampah,
+                'nama' => $request->edit_nama,
                 'jumlah' => $request->edit_jumlah,
                 'harga' => $request->edit_harga
             ]);
         }
-        return redirect('teller/data_sampah');
+        return redirect()->back();
     }
     public function dataNasabah()
     {
-        return view('teller.data_nasabah');
+        $nasabah = Nasabah::all();
+        return view('teller.data_nasabah', compact('nasabah'));
     }
     public function addNasabah()
     {
@@ -112,7 +106,14 @@ class TellerController extends Controller
     }
     public function addSetoran()
     {
-        return view('teller.setoran_add');
+        $kode = strtoupper(substr("SET", 0, 3));
+        $check = count(Setoran::where('id_setoran', 'like', "%$kode%")->get()->toArray());
+        $angka = sprintf("%03d", (int)$check + 1);
+        $id_setoran = $kode . "" . $angka;
+
+        $nasabah = Nasabah::all();
+        $sampah = Sampah::all();
+        return view('teller.setoran_add', compact('nasabah','sampah','id_setoran'));
     }
     public function detailSetoran()
     {

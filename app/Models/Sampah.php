@@ -34,8 +34,5 @@ class Sampah extends Model
     {
         return $this->hasMany(DetailSetoran::class, 'id_sampah');
     }
-    public function detail_jual_sampah()
-    {
-        return $this->belongsTo(DetailJualsampah::class, 'id_sampah');
-    }
+    
 }
