@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('login', function () {
     return view('login');
 });
+
 Route::get('/', [LoginController::class, 'showFormLogin'])->name('login');
 Route::get('login', [LoginController::class, 'showFormLogin'])->name('login');
 Route::post('postlogin', [LoginController::class, 'postlogin'])->name('postlogin');
@@ -42,6 +43,9 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::post('addsampah', [AdminController::class, 'addSampah'])->name('addsampah');
 
+        Route::get('data_sampah/ubah/{id_sampah}', [AdminController::class, 'editSampah']);
+        Route::put('data_sampah/ubah/simpan', [AdminController::class, 'updateSampah'])->name('updatesampah2');
+
         Route::get('setoran_sampah', [AdminController::class, 'dataSetoran']);
         Route::get('detail_setoran', [AdminController::class, 'detailSetoran']);
         Route::get('addsetoran', [AdminController::class, 'addSetor']);
@@ -62,6 +66,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::post('addsampah', [TellerController::class, 'addSampah2'])->name('addsampah');
 
+
         Route::get('data_sampah/ubah/{id_sampah}', [TellerController::class, 'editSampah']);
         Route::put('data_sampah/ubah/simpan', [TellerController::class, 'updateSampah'])->name('updatesampah');
 
@@ -69,6 +74,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('addnasabah', [TellerController::class, 'addNasabah']);
         Route::get('supplier', [TellerController::class, 'dataSupplier']);
         Route::get('setoran_sampah', [TellerController::class, 'dataSetoran']);
+
+        Route::post('addsetor', [TellerController::class, 'addSetoran']);
+
         Route::get('detail_setoran', [TellerController::class, 'detailSetoran']);
         Route::get('addsetoran', [TellerController::class, 'addSetoran']);
         Route::get('kerajinan', [TellerController::class, 'dataKerajinan']);

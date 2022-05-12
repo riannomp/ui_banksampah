@@ -21,14 +21,14 @@
                         <input type="text" name="edit_jenis" parsley-trigger="change" readonly value="{{$sampah->jenis->nama}}"
                             class="form-control" id="userName">
                     </div>
+                   
                     <div class="form-group">
-                        <label for="jumlah">Jumlah</label>
-                        <input type="text" required placeholder="Jumlah" class="form-control" name="edit_jumlah"
-                            id="jumlah" value="{{$sampah->jumlah}}">
+                        <label for="harga">Harga Nasabah</label>
+                        <input type="text" required placeholder="Harga" class="form-control" name="edit_harga_nasabah" id="harga" value="{{$sampah->harga_nasabah}}">
                     </div>
                     <div class="form-group">
-                        <label for="harga">Harga</label>
-                        <input type="text" required placeholder="Harga" class="form-control" name="edit_harga" id="harga" value="{{$sampah->harga}}">
+                        <label for="harga">Harga Koordinator</label>
+                        <input type="text" required placeholder="Harga" class="form-control" name="edit_harga_koordinator" id="harga" value="{{$sampah->harga_koordinator}}">
                     </div>
                     <div class="form-group">
                         <label for="gambar">Gambar</label>

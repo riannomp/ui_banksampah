@@ -25,27 +25,35 @@
             <div class="col-8">
                 <div class="card-box">
                     <div class="row">
-                        <div class="col-5">
-                            <div class="form-group">
-                                <div class="text-center">
-                                    <h3>Foto Profile</h3>
-                                    <div class="">
-                                        <img src="{{ asset('template/dist') }}/assets/images/users/avatar-1.jpg"
-                                            class="rounded-circle" alt="" style="width: 300px; height: 300px;">
 
-
+                        @if (auth()->user()->level == 'admin' || auth()->user()->level == 'teller' || auth()->user()->level == 'kepala')
+                            <div class="col-5">
+                                <div class="form-group">
+                                    <div class="text-center">
+                                        <div class="">
+                                            <img src="{{ url('img/logo') }}/{{ $user->pegawai->foto }}"
+                                                class="rounded-circle" alt="" style="width: 300px; height: 300px;">
+                                        </div>
+                                        <h3>{{ $user->pegawai->nama }}</h3>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                            <style>
+                                .vl {
+                                    border-left: 2px solid green;
+                                    height: 400px;
+                                    margin-right: 30px;
+                                }
 
-                        @if (auth()->user()->level == 'admin' || auth()->user()->level == 'teller' || auth()->user()->level == 'kepala')
-                            <div class="col-7">
+                            </style>
+
+                            <div class="vl"></div>
+                            <div class="col-6">
                                 <h3>Personal info</h3>
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#profile" role="tab"
-                                            aria-controls="profile" aria-expanded="true">Profil</a>
+                                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#profile"
+                                            role="tab" aria-controls="profile" aria-expanded="true">Profil</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#auth" role="tab"
@@ -61,7 +69,7 @@
                                                 <label for="example-text-input" class="col-lg-2 col-form-label">Nama
                                                 </label>
                                                 <div class="col-lg-8">
-                                                    <input class="form-control" value="{{ $user->karyawan->nama }}"
+                                                    <input class="form-control" value="{{ $user->pegawai->nama }}"
                                                         type="text">
                                                 </div>
                                             </div>
@@ -69,7 +77,7 @@
                                                 <label for="example-search-input" class="col-lg-2 col-form-label">No
                                                     HP</label>
                                                 <div class="col-lg-8">
-                                                    <input class="form-control" value="{{ $user->karyawan->no_telp }}"
+                                                    <input class="form-control" value="{{ $user->pegawai->no_hp }}"
                                                         type="text">
                                                 </div>
                                             </div>
@@ -77,16 +85,14 @@
                                                 <label for="example-search-input"
                                                     class="col-lg-2 col-form-label">Alamat</label>
                                                 <div class="col-lg-8">
-                                                    <input class="form-control" value="{{ $user->karyawan->alamat }}"
-                                                        type="text">
+                                                    <textarea class="form-control" value="" type="text">{{ $user->pegawai->alamat }}</textarea>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="example-search-input"
                                                     class="col-lg-2 col-form-label">Foto</label>
                                                 <div class="col-lg-8">
-                                                    <input class="form-control" value=""
-                                                        type="file">
+                                                    <input class="form-control" value="" type="file">
                                                 </div>
                                             </div>
                                             <button type="submit" class="btn btn-primary">Simpan</button>
@@ -97,15 +103,17 @@
                                             <label for="example-text-input" class="col-lg-2 col-form-label">Email
                                             </label>
                                             <div class="col-lg-8">
-                                                <input class="form-control" value="{{ $user->email }}"
-                                                    type="text">
+                                                <input class="form-control" value="{{ $user->email }}" type="text">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="example-search-input" class="col-lg-2 col-form-label">Password</label>
+                                            <label for="example-search-input"
+                                                class="col-lg-2 col-form-label">Password</label>
                                             <div class="col-lg-8">
-                                                <input class="form-control" name="edit_password" type="password" id="inputPassword" value="">
-                                                <input class="form-control" name="password" type="hidden" id="inputPassword" value="{{ $user->password }}">
+                                                <input class="form-control" name="edit_password" type="password"
+                                                    id="inputPassword" value="">
+                                                <input class="form-control" name="password" type="hidden"
+                                                    id="inputPassword" value="{{ $user->password }}">
 
                                                 <input type="checkbox" onclick="shwoPassword()"> Show Password
                                             </div>

@@ -47,7 +47,7 @@
                                 <td>{{ $nasabahs->nama }}</td>
                                 <td>{{ $nasabahs->nik }}</td>
                                 <td>{{ $nasabahs->alamat }}</td>
-                                <td>{{ $nasabahs->no_telp }}</td>
+                                <td>{{ $nasabahs->no_hp }}</td>
                                 <td><a href="" class="btn btn-info waves-effect waves-light" data-toggle="modal"
                                         data-target="#edit">
                                         <i class="mdi mdi-information-variant"></i></a>

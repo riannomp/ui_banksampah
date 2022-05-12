@@ -22,7 +22,7 @@
         <!-- end page title -->
 
         <div class="row">
-            <div class="col-8">
+            <div class="col-10">
 
                 <div class="card-box">
                     <p>
@@ -39,8 +39,8 @@
                                 <th>Nama</th>
                                 <th width="30px">Kode Sampah</th>
                                 <th width="30px">Jenis</th>
-                                <th width="30px">Jumlah(Kg)</th>
-                                <th width="30px">Harga /Kg</th>
+                                <th width="30px">Harga Nasabah /Kg</th>
+                                <th width="30px">Harga Koordinator /Kg</th>
                                 <th>Gambar</th>
                                 <th width="20px">Aksi</th>
 
@@ -52,8 +52,8 @@
                                     <td>{{ $sampah->nama }}</td>
                                     <td>{{ $sampah->id_sampah }}</td>
                                     <td>{{ $sampah->jenis->nama }}</td>
-                                    <td>{{ $sampah->jumlah }}</td>
-                                    <td>Rp {{number_format($sampah->harga, 2, ',', '.')  }}</td>
+                                    <td>Rp {{number_format($sampah->harga_nasabah, 2, ',', '.')  }}</td>
+                                    <td>Rp {{number_format($sampah->harga_koordinator, 2, ',', '.')  }}</td>
                                     <td>
                                         <span class="logo-lg">
                                             @if ($sampah->gambar)
@@ -73,7 +73,7 @@
 
                                 @include('teller.update_sampah')
                             @endforeach
-                            @include('admin.add_sampah')
+                            @include('teller.add_sampah')
                         </tbody>
                     </table>
                 </div>

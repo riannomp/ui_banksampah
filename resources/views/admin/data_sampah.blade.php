@@ -39,8 +39,8 @@
                                 <th>Nama</th>
                                 <th width="30px">Kode Sampah</th>
                                 <th width="30px">Jenis</th>
-                                <th width="30px">Jumlah(Kg)</th>
-                                <th width="30px">Harga /Kg</th>
+                                <th width="30px">Harga Nasabah</th>
+                                <th width="30px">Harga Koordinator</th>
                                 <th>Gambar</th>
                                 <th width="20px">Aksi</th>
 
@@ -52,8 +52,8 @@
                                     <td>{{ $sampah->nama }}</td>
                                     <td>{{ $sampah->id_sampah }}</td>
                                     <td>{{ $sampah->jenis->nama }}</td>
-                                    <td>{{ $sampah->jumlah }}</td>
-                                    <td>Rp {{number_format($sampah->harga, 2, ',', '.')  }}</td>
+                                    <td>Rp {{number_format($sampah->harga_nasabah, 2, ',', '.')  }}</td>
+                                    <td>Rp {{number_format($sampah->harga_koordinator, 2, ',', '.')  }}</td>
                                     <td>
                                         <span class="logo-lg">
                                             @if ($sampah->gambar)

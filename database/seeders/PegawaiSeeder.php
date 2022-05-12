@@ -14,16 +14,18 @@ class PegawaiSeeder extends Seeder
      */
     public function run()
     {
-        $nama = ['Agus','Budi','Bambang'];
+        $nama = ['Agus Sukirman','Budi Sujatmiko','Bambang Harun'];
         $no_hp = ['0823423','088856','08746467'];
-        $alamat = ['Taman', 'Kartoharjo', 'Demangan'];
+        $alamat = ['Jl. Ciliwung 44 Kelurahan Taman', 'Jl. H.Agus Salim Kelurahan Kartoharjo', 'Jl. Kalimantan Kelurahan Demangan'];
         $id_pegawai = [1,2,3];
+        $foto = ['profile.png','profile.png','profile.png'];
 
         for ($i=0; $i < count($nama) ; $i++) {
             Pegawai::create([
                 'nama' => $nama[$i],
                 'alamat' => $alamat[$i],
                 'no_hp' => $no_hp[$i],
+                'foto' => $foto[$i],
                 'id_pegawai' => $id_pegawai[$i],
             ]);
         }

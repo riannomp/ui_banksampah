@@ -3,20 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\DataSampah;
+use App\Models\DetailSetoran;
 use App\Models\Jenis;
 use App\Models\Nasabah;
 use App\Models\Sampah;
 use App\Models\Setoran;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TellerController extends Controller
 {
     public function dataSampah()
     {
+        $user = Auth::user();
         $sampah = Sampah::all();
         $jenis = Jenis::all();
         // dd($data_sampah);
-        return view('teller.data_sampah', compact('sampah','jenis'));
+        return view('teller.data_sampah', compact('sampah', 'jenis', 'user'));
     }
 
     public function addSampah()
@@ -39,9 +42,9 @@ class TellerController extends Controller
                 'nama'      => $request->nama,
                 'id_sampah' => $id_sampah,
                 'id_jenis' => $request->jenis,
-                'jumlah' => $request->jumlah,
-                'gambar' => $namaFile,
-                'harga' => $request->harga
+                'harga_nasabah' => $request->harga_nasabah,
+                'harga_koordinator' => $request->harga_koordinator,
+                'gambar' => $namaFile
             ]);
         } else {
 
@@ -55,10 +58,9 @@ class TellerController extends Controller
                 'id_sampah' => $id_sampah,
                 'gambar' => 'no_image.png',
                 'id_jenis' => $request->jenis,
-                'jumlah' => $request->jumlah,
-                'harga' => $request->harga
+                'harga_nasabah' => $request->harga_nasabah,
+                'harga_koordinator' => $request->harga_koordinator
             ]);
-
         }
 
         return redirect()->back();
@@ -71,22 +73,22 @@ class TellerController extends Controller
             $namaFile = time() . '.' . $request->edit_gambar->extension();
             $request->edit_gambar->move(public_path('img/logo'), $namaFile);
 
-            Sampah::where('id_sampah',$request->edit_id)
-            ->update([
+            Sampah::where('id_sampah', $request->edit_id)
+                ->update([
 
-                'nama' => $request->edit_nama,
-                'jumlah' => $request->edit_jumlah,
-                'gambar' => $namaFile,
-                'harga' => $request->edit_harga
-            ]);
+                    'nama' => $request->edit_nama,
+                    'gambar' => $namaFile,
+                    'harga_nasabah' => $request->edit_harga_nasabah,
+                    'harga_koordinator' => $request->edit_harga_koordinator
+                ]);
         } else {
 
             Sampah::where('id_sampah', $request->edit_id)
-            ->update([
-                'nama' => $request->edit_nama,
-                'jumlah' => $request->edit_jumlah,
-                'harga' => $request->edit_harga
-            ]);
+                ->update([
+                    'nama' => $request->edit_nama,
+                    'harga_nasabah' => $request->edit_harga_nasabah,
+                    'harga_koordinator' => $request->edit_harga_koordinator
+                ]);
         }
         return redirect()->back();
     }
@@ -102,10 +104,12 @@ class TellerController extends Controller
 
     public function dataSetoran()
     {
-        return view('teller.setoran');
+        $user = Auth::user();
+        return view('teller.setoran', compact('user'));
     }
-    public function addSetoran()
+    public function addSetoran(Request $request)
     {
+        $user = Auth::user();
         $kode = strtoupper(substr("SET", 0, 3));
         $check = count(Setoran::where('id_setoran', 'like', "%$kode%")->get()->toArray());
         $angka = sprintf("%03d", (int)$check + 1);
@@ -113,7 +117,14 @@ class TellerController extends Controller
 
         $nasabah = Nasabah::all();
         $sampah = Sampah::all();
-        return view('teller.setoran_add', compact('nasabah','sampah','id_setoran'));
+
+        // foreach($request->nama as $key => $value)
+        // {
+        //     DetailSetoran::create([
+
+        //     ]);
+        // }
+        return view('teller.setoran_add', compact('nasabah', 'sampah', 'id_setoran','user'));
     }
     public function detailSetoran()
     {
@@ -135,5 +146,4 @@ class TellerController extends Controller
     {
         return view('teller.transaksi_produk');
     }
-
 }

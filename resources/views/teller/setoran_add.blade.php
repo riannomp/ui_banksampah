@@ -2,6 +2,8 @@
 @section('tittle', 'Tambah Setoran')
 @section('content')
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+</script>
 
     <div class="container-fluid">
 
@@ -58,7 +60,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-4">
+                            <div class="col-3">
                                 <div class="form-group">
                                     <label for="userName">Nama Sampah</label>
                                     <select name="nama" id="nama" class="form-control select2" data-toggle="select2">
@@ -69,18 +71,25 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-3">
                                 <div class="form-group">
                                     <label for="userName">Jumlah</label>
                                     <input type="text" name="jumlah" id="jumlah" parsley-trigger="change" class="form-control"
                                         id="userName">
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-3">
                                 <div class="form-group">
                                     <label for="userName">Harga</label>
                                     <input type="text" name="harga" id="harga" parsley-trigger="change" class="form-control"
                                         id="userName">
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label for="userName">Sub Total</label>
+                                    <input type="text" name="sub_total" id="harga" parsley-trigger="change" class="form-control"
+                                        id="userName" readonly>
                                 </div>
                             </div>
 
@@ -129,22 +138,19 @@
     <script type="text/javascript">
         function ambildata() {
 
-            // var tgl = document.getElementById("tgl_pinjam").value;
-            // var kebutuhan = document.getElementById("kebutuhan").value;
+            // var nama = document.getElementById("nama").value;
             // var jumlah = document.getElementById("jumlah").value;
-            // var nama_barang = document.getElementById("nama_barang").value;
+            // var harga = document.getElementById("harga").value;
 
-            // if (tgl == "") {
-            //     alert("Tanggal Pinjam tidak boleh kosong");
+
+            // if (nama == "") {
+            //     alert("Nama tidak boleh kosong");
             //     return false;
             // } else if (jumlah == "") {
             //     alert("Jumlah tidak boleh kosong");
             //     return false;
-            // } else if (kebutuhan == "") {
-            //     alert("Kebutuhan tidak boleh kosong");
-            //     return false;
-            // } else if (nama_barang == "") {
-            //     alert("nama barang tidak boleh kosong");
+            // } else if (harga == "") {
+            //     alert("Harga tidak boleh kosong");
             //     return false;
             // }
 

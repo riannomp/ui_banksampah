@@ -50,9 +50,9 @@ class User extends Authenticatable
     ];
 
 
-    public function karyawan()
+    public function pegawai()
     {
-        return $this->belongsTo(Karyawan::class, 'id_karyawan');
+        return $this->belongsTo(Pegawai::class, 'id_pegawai');
     }
 
     public function nasabah()

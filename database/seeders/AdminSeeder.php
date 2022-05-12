@@ -16,6 +16,7 @@ class AdminSeeder extends Seeder
     {
         $nama = ['Agus'];
         $alamat = ['Blitar'];
+        $foto = ['profile.png'];
         $no_hp = ['08912876354'];
         $id_user = [1];
 
@@ -23,6 +24,7 @@ class AdminSeeder extends Seeder
             Admin::create([
                 'nama' => $nama[$i],
                 'alamat' => $alamat[$i],
+                'foto' => $foto[$i],
                 'no_hp' => $no_hp[$i],
                 'id_user' => $id_user[$i]
             ]);

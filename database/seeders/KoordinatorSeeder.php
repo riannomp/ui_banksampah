@@ -16,12 +16,14 @@ class KoordinatorSeeder extends Seeder
     {
         $nama = ['Mamad'];
         $alamat = ['Nglanduk'];
+        $foto = ['profile.png'];
         $no_hp = ['087653456'];
 
         for ($i=0; $i < count($nama) ; $i++) {
             Koordinator::create([
                 'nama' => $nama[$i],
                 'alamat' => $alamat[$i],
+                'foto' => $foto[$i],
                 'no_hp' => $no_hp[$i]
             ]);
         }

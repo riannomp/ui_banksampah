@@ -35,7 +35,8 @@ class AdminController extends Controller
                 'id_jenis' => $request->jenis,
                 'jumlah' => $request->jumlah,
                 'gambar' => $namaFile,
-                'harga' => $request->harga
+                'harga_nasabah' => $request->harga_nasabah,
+                'harga_koordinator' => $request->harga_koordinator
             ]);
         } else {
 
@@ -50,13 +51,38 @@ class AdminController extends Controller
                 'gambar' => 'no_image.png',
                 'id_jenis' => $request->jenis,
                 'jumlah' => $request->jumlah,
-                'harga' => $request->harga
+                'harga_nasabah' => $request->harga_nasabah,
+                'harga_koordinator' => $request->harga_koordinator
             ]);
 
         }
         return redirect()->back();
     }
+    public function updateSampah(Request $request)
+    {
+        if ($request->edit_gambar) {
+            $namaFile = time() . '.' . $request->edit_gambar->extension();
+            $request->edit_gambar->move(public_path('img/logo'), $namaFile);
 
+            Sampah::where('id_sampah', $request->edit_id)
+                ->update([
+
+                    'nama' => $request->edit_nama,
+                    'gambar' => $namaFile,
+                    'harga_nasabah' => $request->edit_harga_nasabah,
+                    'harga_koordinator' => $request->edit_harga_koordinator
+                ]);
+        } else {
+
+            Sampah::where('id_sampah', $request->edit_id)
+                ->update([
+                    'nama' => $request->edit_nama,
+                    'harga_nasabah' => $request->edit_harga_nasabah,
+                    'harga_koordinator' => $request->edit_harga_koordinator
+                ]);
+        }
+        return redirect()->back();
+    }
     public function dataNasabah()
     {
         return view('admin.data_nasabah');
@@ -65,7 +91,8 @@ class AdminController extends Controller
 
     public function dataSetoran()
     {
-        return view('admin.setoran');
+        $user = Auth::user();
+        return view('admin.setoran', compact('user'));
     }
     public function detailSetoran()
     {
@@ -91,8 +118,9 @@ class AdminController extends Controller
     }
     public function dataJenis()
     {
+        $user = Auth::user();
         $jenis = Jenis::all();
-        return view('admin.jenis', compact('jenis'));
+        return view('admin.jenis', compact('jenis','user'));
     }
 
     public function addJenis(Request $request)
