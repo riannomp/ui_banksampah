@@ -44,18 +44,18 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($setoran as $str)
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>{{ $str->nasabah->nama }}</td>
+                            <td>{{ $str->id_setoran }}</td>
+                            <td>{{ date('d M Y',strtotime($str->tanggal)) }}</td>
+                            <td>{{ $str->total_harga }}</td>
                             <td><a href="{{ url('teller/detail_setoran') }}" class="btn btn-info waves-effect waves-light" >
                                 <i class="mdi mdi-information-variant"></i></a>
 
                             </td>
                         </tr>
-
-                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

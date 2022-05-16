@@ -21,6 +21,10 @@ class CreateTransaksisTable extends Migration
             $table->integer('saldo')->unsigned();
             $table->timestamps();
         });
+
+        Schema::table('transaksis', function (Blueprint $table) {
+            $table->foreign('id_nasabah', 'id_nasabah_fk01')->references('id_nasabah')->on('nasabahs')->onDelete('cascade')->onUpdate('cascade');
+        });
     }
 
     /**

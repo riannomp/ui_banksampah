@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KoordinatorController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NasabahController;
 use App\Http\Controllers\TellerController;
@@ -58,7 +59,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
         Route::get('data_user', [AdminController::class, 'dataUser']);
-        Route::post('updateStatus/{id}', [AdminController::class, 'updateStatus']);
+        Route::post('updateStatus/{id_user}', [AdminController::class, 'updateStatus']);
     });
 
     Route::group(['prefix' => 'teller/'], function () {
@@ -87,5 +88,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'nasabah/'], function () {
         Route::get('tabungan', [NasabahController::class, 'tabungan']);
         Route::get('profile', [NasabahController::class, 'profile'])->name('nasabah.profile');
+    });
+    Route::group(['prefix' => 'koor/'], function () {
+        Route::get('setoran_sampah', [KoordinatorController::class, 'dataSetoran']);
+        Route::get('addsetoran', [KoordinatorController::class, 'addSetoran']);
+        Route::get('data_nasabah', [KoordinatorController::class, 'dataNasabah']);
     });
 });

@@ -94,18 +94,21 @@ class TellerController extends Controller
     }
     public function dataNasabah()
     {
+        $user = Auth::user();
         $nasabah = Nasabah::all();
-        return view('teller.data_nasabah', compact('nasabah'));
+        return view('teller.data_nasabah', compact('nasabah','user'));
     }
     public function addNasabah()
     {
-        return view('teller.addnasabah');
+        $user = Auth::user();
+        return view('teller.addnasabah',compact('user'));
     }
 
     public function dataSetoran()
     {
+        $setoran = Setoran::all();
         $user = Auth::user();
-        return view('teller.setoran', compact('user'));
+        return view('teller.setoran', compact('user','setoran'));
     }
     public function addSetoran(Request $request)
     {
@@ -128,22 +131,7 @@ class TellerController extends Controller
     }
     public function detailSetoran()
     {
-        return view('teller.detailsetoran');
-    }
-    public function dataSupplier()
-    {
-        return view('teller.supplier');
-    }
-    public function dataKerajinan()
-    {
-        return view('teller.kerajinan');
-    }
-    public function dataTransaksiSampah()
-    {
-        return view('teller.transaksi_sampah');
-    }
-    public function dataTransaksiProduk()
-    {
-        return view('teller.transaksi_produk');
+        $user = Auth::user();
+        return view('teller.detailsetoran',compact('user'));
     }
 }

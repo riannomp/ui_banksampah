@@ -13,7 +13,8 @@ class Nasabah extends Model
         'nik',
         'foto',
         'alamat',
-        'no_hp'
+        'no_hp',
+        'id_koor'
     ];
 
     protected $dates=[
@@ -30,5 +31,13 @@ class Nasabah extends Model
     public function setoran()
     {
         return $this->hasOne(Setoran::class, 'id_nasabah');
+    }
+    public function transaksi()
+    {
+        return $this->hasOne(Transaksi::class, 'id_nasabah');
+    }
+    public function koordinator()
+    {
+        return $this->belongsTo(Koordinator::class, 'id_koor');
     }
 }

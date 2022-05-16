@@ -10,7 +10,8 @@ class NasabahController extends Controller
 {
     public function tabungan()
     {
-        return view('nasabah.data_tabungan');
+        $user = Auth::user();
+        return view('nasabah.data_tabungan',compact('user'));
     }
 
     public function profile()

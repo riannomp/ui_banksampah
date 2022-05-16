@@ -20,6 +20,7 @@ class Koordinator extends Model
         'updated_at',
         'deleted_at'
     ];
+    protected $primaryKey = 'id_koor';
     public function user()
     {
         return $this->hasMany(User::class, 'id_koor');
@@ -27,6 +28,10 @@ class Koordinator extends Model
     public function setoran()
     {
         return $this->hasOne(Setoran::class, 'id_koor');
+    }
+    public function nasabah()
+    {
+        return $this->hasOne(Nasabah::class, 'id_koor');
     }
 }
 

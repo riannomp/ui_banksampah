@@ -45,9 +45,30 @@
                     @if (auth()->user()->level == 'admin' || auth()->user()->level == 'teller' || auth()->user()->level == 'kepala')
                         <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown"
                             href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                            <img src="{{ url('img/logo') }}/{{  $user->pegawai->foto }}" alt="user-image"
+                            <img src="{{ url('img/logo') }}/{{ $user->pegawai->foto }}" alt="user-image"
                                 class="rounded-circle">
-                            <span class="d-none d-sm-inline-block ml-1 font-weight-medium">{{ $user->pegawai->nama }}</span>
+                            <span
+                                class="d-none d-sm-inline-block ml-1 font-weight-medium">{{ $user->pegawai->nama }}</span>
+                            <i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i>
+                        </a>
+                    @endif
+                    @if (auth()->user()->level == 'koor')
+                        <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown"
+                            href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                            <img src="{{ url('img/logo') }}/{{ $user->koordinator->foto }}" alt="user-image"
+                                class="rounded-circle">
+                            <span
+                                class="d-none d-sm-inline-block ml-1 font-weight-medium">{{ $user->koordinator->nama }}</span>
+                            <i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i>
+                        </a>
+                    @endif
+                    @if (auth()->user()->level == 'nasabah')
+                        <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light"
+                            data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                            <img src="{{ url('img/logo') }}/{{ $user->nasabah->foto }}" alt="user-image"
+                                class="rounded-circle">
+                            <span
+                                class="d-none d-sm-inline-block ml-1 font-weight-medium">{{ $user->nasabah->nama }}</span>
                             <i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i>
                         </a>
                     @endif
@@ -214,17 +235,18 @@
                             </li>
                         @endif
 
-                        @if (auth()->user()->level == 'kepala')
+                        @if (auth()->user()->level == 'koor')
                             <li>
-                                <a href="javascript: void(0);">
-                                    <i class="mdi mdi-format-underline"></i>
-                                    <span> Laporan</span>
-                                    <span class="menu-arrow"></span>
+                                <a href="{{ url('koor/setoran_sampah') }}">
+                                    <i class="mdi mdi-content-copy"></i>
+                                    <span>Setoran Sampah </span>
                                 </a>
-                                <ul class="nav-second-level" aria-expanded="false">
-                                    <li><a href="ui-buttons.html">Data Nasabah</a></li>
-                                    <li><a href="ui-cards.html">Data Sampah</a></li>
-                                </ul>
+                            </li>
+                            <li>
+                                <a href="{{ url('koor/data_nasabah') }}">
+                                    <i class="mdi mdi-content-copy"></i>
+                                    <span> Data Nasabah </span>
+                                </a>
                             </li>
                         @endif
                         @if (auth()->user()->level == 'nasabah')
@@ -232,19 +254,6 @@
                                 <a href="{{ url('nasabah/tabungan') }}">
                                     <i class="mdi mdi-format-underline"></i>
                                     <span> Tabungan</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <i class="mdi mdi-format-underline"></i>
-                                    <span> Transaksi</span>
-                                </a>
-                            </li>
-                            <li class="menu-title">Setting</li>
-                            <li>
-                                <a href="{{ url('nasabah/profile') }}">
-                                    <i class="mdi mdi-account"></i>
-                                    <span> Profile</span>
                                 </a>
                             </li>
                         @endif

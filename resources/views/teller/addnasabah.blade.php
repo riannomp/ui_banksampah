@@ -22,25 +22,32 @@
         <!-- end page title -->
 
         <div class="row">
-            <div class="col-12">
+            <div class="col-10">
                 <div class="card-box">
 
                     <form action="#" class="parsley-examples" data-parsley-validate novalidate>
                         <div class="row">
-                            <div class="col-4">
+                            <div class="col-3">
                                 <div class="form-group">
                                     <label for="userName">Nama Nasabah</label>
                                     <input type="text" class="form-control mb-3" placeholder="">
                                 </div>
 
                             </div>
-                            <div class="col-4">
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label for="userName">NIK</label>
+                                    <input type="text" class="form-control mb-3" placeholder="">
+                                </div>
+
+                            </div>
+                            <div class="col-3">
                                 <div class="form-group">
                                     <label for="userName">Alamat</label>
                                     <input type="text" class="form-control mb-3" placeholder="" >
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-3">
                                 <div class="form-group">
                                     <label for="userName">No Telp</label>
                                     <input type="text" class="form-control mb-3" placeholder="">

@@ -32,7 +32,7 @@
                             </span> Tambah Data</a>
                     </p>
 
-                     <table id="datatable" class="table table-bordered dt-responsive nowrap"
+                    <table id="datatable" class="table table-bordered dt-responsive nowrap"
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
@@ -52,8 +52,8 @@
                                     <td>{{ $sampah->nama }}</td>
                                     <td>{{ $sampah->id_sampah }}</td>
                                     <td>{{ $sampah->jenis->nama }}</td>
-                                    <td>Rp {{number_format($sampah->harga_nasabah, 2, ',', '.')  }}</td>
-                                    <td>Rp {{number_format($sampah->harga_koordinator, 2, ',', '.')  }}</td>
+                                    <td>Rp {{ number_format($sampah->harga_nasabah, 2, ',', '.') }}</td>
+                                    <td>Rp {{ number_format($sampah->harga_koordinator, 2, ',', '.') }}</td>
                                     <td>
                                         <span class="logo-lg">
                                             @if ($sampah->gambar)
@@ -63,7 +63,7 @@
                                         </span>
                                     </td>
                                     <td><a href="" class="btn btn-success waves-effect waves-light" data-toggle="modal"
-                                            data-target="#updatesampah{{$sampah->id_sampah}}">
+                                            data-target="#updatesampah{{ $sampah->id_sampah }}">
                                             <i class="mdi mdi-pencil"></i></a>
                                         <a href="" class="btn btn-danger waves-effect waves-light" data-toggle="modal"
                                             data-target="#hapus">
@@ -102,5 +102,5 @@
 
 
     </div> <!-- end container-fluid -->
-
 @endsection
+

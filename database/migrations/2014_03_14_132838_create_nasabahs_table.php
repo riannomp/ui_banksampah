@@ -15,7 +15,7 @@ class CreateNasabahsTable extends Migration
     {
         Schema::create('nasabahs', function (Blueprint $table) {
             $table->increments('id_nasabah');
-            $table->integer('id_koordinator')->nullable()->unsigned();
+            $table->integer('id_koor')->nullable()->unsigned();
             $table->string('nama',50);
             $table->string('nik',16)->nullable();
             $table->string('foto',15)->nullable();
@@ -24,9 +24,9 @@ class CreateNasabahsTable extends Migration
             $table->string('saldo',10)->nullable();
             $table->timestamps();
         });
-        // Schema::table('nasabahs', function (Blueprint $table) {
-        //     $table->foreign('id_user', 'id_user_nasabahs_fk01')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-        // });
+        Schema::table('nasabahs', function (Blueprint $table) {
+            $table->foreign('id_koor', 'id_koor_fk01')->references('id_koor')->on('koordinators')->onDelete('cascade')->onUpdate('cascade');
+        });
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Jenis;
+use App\Models\Nasabah;
 use App\Models\Sampah;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -85,7 +86,9 @@ class AdminController extends Controller
     }
     public function dataNasabah()
     {
-        return view('admin.data_nasabah');
+        $user = Auth::user();
+        $nasabah = Nasabah::all();
+        return view('admin.data_nasabah',compact('nasabah','user'));
     }
 
 
@@ -96,11 +99,13 @@ class AdminController extends Controller
     }
     public function detailSetoran()
     {
-        return view('admin.detailsetoran');
+        $user = Auth::user();
+        return view('admin.detailsetoran',compact('user'));
     }
     public function addSetor()
     {
-        return view('admin.setoran_add');
+        $user = Auth::user();
+        return view('admin.setoran_add',compact('user'));
     }
 
 
@@ -139,12 +144,13 @@ class AdminController extends Controller
     }
     public function dataUser()
     {
-        $user = User::all();
-        return view('admin.data_user', compact('user'));
+        $user = Auth::user();
+        $usr = User::all();
+        return view('admin.data_user', compact('user','usr'));
     }
     public function updateStatus(Request $request)
     {
-        User::where('id', $request->edit_id)
+        User::where('id_user', $request->edit_id)
         ->update([
             'status'    => $request->edit_status
         ]);

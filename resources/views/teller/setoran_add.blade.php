@@ -2,8 +2,6 @@
 @section('tittle', 'Tambah Setoran')
 @section('content')
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
-</script>
 
     <div class="container-fluid">
 
@@ -26,7 +24,6 @@
         <div class="row">
             <div class="col-12">
                 <div class="card-box">
-
                     <form action="#" class="parsley-examples" data-parsley-validate novalidate>
                         <div class="row">
                             <div class="col-4">
@@ -42,24 +39,26 @@
 
                             </div>
 
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <label for="id_setoran">Kode Setoran</label>
-                                        @foreach ((array) $id_setoran as $id_setorans)
-                                        <input type="hidden" id="id_setoran2" name="id_setoran2" value="{{ $id_setorans }}" class="form-control" placeholder="" readonly>
-                                        <input type="text" id="id_setoran" name="id_setoran" value="{{ $id_setorans }}" class="form-control" placeholder="" readonly>
-                                        @endforeach
-                                    </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="id_setoran">Kode Setoran</label>
+                                    @foreach ((array) $id_setoran as $id_setorans)
+                                        <input type="hidden" id="id_setoran2" name="id_setoran2"
+                                            value="{{ $id_setorans }}" class="form-control" placeholder="" readonly>
+                                        <input type="text" id="id_setoran" name="id_setoran" value="{{ $id_setorans }}"
+                                            class="form-control" placeholder="" readonly>
+                                    @endforeach
                                 </div>
+                            </div>
 
                             <div class="col-4">
                                 <div class="form-group">
-                                    <label for="userName">Tanggal Setor</label>
-                                    <input type="date" class="form-control mb-3" placeholder="">
+                                    <label for="tanggal">Tanggal Setor</label>
+                                    <input type="date" class="form-control mb-3" placeholder="" id="tanggal">
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row ">
                             <div class="col-3">
                                 <div class="form-group">
                                     <label for="userName">Nama Sampah</label>
@@ -74,22 +73,19 @@
                             <div class="col-3">
                                 <div class="form-group">
                                     <label for="userName">Jumlah</label>
-                                    <input type="text" name="jumlah" id="jumlah" parsley-trigger="change" class="form-control"
-                                        id="userName">
+                                    <input type="text" name="jumlah" id="jumlah" class="form-control a1">
                                 </div>
                             </div>
                             <div class="col-3">
                                 <div class="form-group">
                                     <label for="userName">Harga</label>
-                                    <input type="text" name="harga" id="harga" parsley-trigger="change" class="form-control"
-                                        id="userName">
+                                    <input type="text" name="harga" id="harga" class="form-control b1">
                                 </div>
                             </div>
                             <div class="col-3">
                                 <div class="form-group">
                                     <label for="userName">Sub Total</label>
-                                    <input type="text" name="sub_total" id="harga" parsley-trigger="change" class="form-control"
-                                        id="userName" readonly>
+                                    <input type="text" name="sub_total" id="sub_total" class="form-control" readonly>
                                 </div>
                             </div>
 
@@ -98,80 +94,143 @@
                         <div class="form-group" style="text-align:right;">
                             <button type="button" onclick="ambildata()" class="btn btn-primary ">Tambah Data</button>
                         </div>
-
-                        <div class="col-14">
-                            <div class="card-box">
-                                <div class="panel-heading">
-                                    <div class="pull-left">
-                                        <h6 class="panel-title txt-dark">Setoran Sampah</h6>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="panel-body">
-                                        <table class="table table-bordered dt-responsive nowrap">
-                                            <thead class="thead-light">
-                                                <tr>
-                                                    <th>No</th>
-                                                    <th>Nama Sampah</th>
-                                                    <th>Jumlah</th>
-                                                    <th>Harga</th>
-                                                    <th>Remove</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="TabelDinamis">
-                                            </tbody>
-                                        </table>
+                        <div class="card-box">
+                            <div style="overflow-y: auto">
+                                <div class="col-12" style="height: 300px">
+                                    <div>
+                                        <div class="panel-heading">
+                                            <div class="pull-left">
+                                                <h6 class="panel-title txt-dark">Setoran Sampah</h6>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="panel-body">
+                                                <table class="table table-bordered dt-responsive nowrap">
+                                                    <thead class="thead-light">
+                                                        <tr>
+                                                            <th>No</th>
+                                                            <th>Nama Sampah</th>
+                                                            <th>Jumlah</th>
+                                                            <th>Harga</th>
+                                                            <th>Sub Total</th>
+                                                            <th>Remove</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="TabelDinamis">
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td align="right" colspan="4"><strong>Total</strong></td>
+                                                            <td align="left" colspan="2">
+                                                                <p type="text" name="total" id="total">
+                                                            </td>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12" style="text-align:right;">
+
+                        <div class="col-12 mt-2" style="text-align:right;">
                             <button type="submit" class="btn btn-success ">Simpan</button>
                         </div>
                     </form>
                 </div>
+
             </div>
         </div>
     </div>
+
 @endsection
+
 @section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript">
+        setInterval(function() {
+            var jumlah = $('#jumlah').val();
+            var harga = $('#harga').val();
+
+            var sub_total = jumlah * harga;
+            $('#sub_total').val(sub_total);
+        }, 500);
+
+        setInterval(function() {
+            // total = (parseInt(total) - parseInt($('#sub_total' + row_id + '').val()));
+            // $("#total").val(pecah(total));
+            var sum = 0;
+            $('.sub_total').each(function() {
+                sum += parseFloat($(this).val());
+            });
+            $('#total').text(sum);
+        }, 1);
+
         function ambildata() {
 
-            // var nama = document.getElementById("nama").value;
-            // var jumlah = document.getElementById("jumlah").value;
-            // var harga = document.getElementById("harga").value;
+            var nasabah = document.getElementById("nasabah").value;
+            var tanggal = document.getElementById("tanggal").value;
+            var nama = document.getElementById("nama").value;
+            var jumlah = document.getElementById("jumlah").value;
+            var harga = document.getElementById("harga").value;
 
 
-            // if (nama == "") {
-            //     alert("Nama tidak boleh kosong");
-            //     return false;
-            // } else if (jumlah == "") {
-            //     alert("Jumlah tidak boleh kosong");
-            //     return false;
-            // } else if (harga == "") {
-            //     alert("Harga tidak boleh kosong");
-            //     return false;
-            // }
+            if (nasabah == "") {
+                alert("Nama Nasabah tidak boleh kosong");
+                return false;
+            } else if (tanggal == "") {
+                alert("Tanggal Setor tidak boleh kosong");
+                return false;
+            } else if (nama == "") {
+                alert("Nama Sampah tidak boleh kosong");
+                return false;
+            } else if (jumlah == "") {
+                alert("Jumlah Sampah tidak boleh kosong");
+                return false;
+            } else if (harga == "") {
+                alert("Harga Sampah tidak boleh kosong");
+                return false;
+            }
 
+
+            var id_setoran = document.getElementById('id_setoran').value;
             var nama = document.getElementById('nama').value;
             var jumlah = document.getElementById('jumlah').value;
             var harga = document.getElementById('harga').value;
-            addrow(nama, jumlah, harga);
+            var sub_total = document.getElementById('sub_total').value;
+            addrow(id_setoran, nama, jumlah, harga, sub_total);
         }
         var i = 0;
 
-        function addrow(nama, jumlah, harga) {
+        function addrow(id_setoran, nama, jumlah, harga, sub_total) {
             i++;
-            $('#TabelDinamis').append('<tr id="row' + i + '"><td><input type="text" style="outline:none;border:0;" readonly value="' + i +
-                '"><td><input type="text" style="outline:none;border:0;" readonly name="nama[]" id="nama" value="' + nama +
-                '"></td><td><input type="text" style="outline:none;border:0;" name="jumlah[]" id="jumlah" value="' + jumlah +
-                '"></td><td><input type="text" style="outline:none;border:0;" name="harga[]" id="harga" value="' + harga +
-                '"></td><td><button type="button" id="' + i + '" class="btn btn-danger btn-small remove_row">&times;</button></td></tr>');
+            $('#TabelDinamis').append('<tr id="row' + i +
+                '"><td><input type="text" style="outline:none;border:0;" readonly value="' + i +
+                '"><td style="display:none;"><input type="text" style="outline:none;border:0;" readonly name="id_setoran[]" id="id_setoran" value="' +
+                id_setoran +
+                '"><td><input type="text" style="outline:none;border:0;" readonly name="nama[]" id="nama" value="' +
+                nama +
+                '"></td><td><input type="text" style="outline:none;border:0;" name="jumlah[]" id="jumlah" value="' +
+                jumlah +
+                '"></td><td><input type="text" style="outline:none;border:0;" name="harga[]" id="harga" value="' +
+                harga +
+                '"><td><input class="sub_total" type="text" style="outline:none;border:0;" name="sub_total[]" id="sub_total" value="' +
+                sub_total +
+                '"></td><td><button type="button" id="' + i +
+                '" onclick="removed(' + i + ')" class="btn btn-danger btn-small remove_row">&times;</button></td></tr>');
+            total = (parseInt(total) + parseInt(sub_total));
+            $("#total").val(total);
         };
-        $(document).on('click', '.remove_row', function() {
-            var row_id = $(this).attr("id");
-            $('#row' + row_id + '').remove();
-        });
 
+        // $('.remove_row').each(function() {
+        // $('.remove_row').click(function() {
+        //     var row_id = $(this).attr("id");
+        //     console.log(row_id);
+        //     // $('#row' + row_id + '').remove();
+        // });
+        // });
+        function removed(param) {
+            $('#row' + param + '').remove();
+        }
     </script>
