@@ -24,15 +24,16 @@
         <div class="row">
             <div class="col-12">
                 <div class="card-box">
-                    <form action="#" class="parsley-examples" data-parsley-validate novalidate>
+                    <form action="{{ route('teller.setoran') }}"  class="parsley-examples" method="POST"  enctype="multipart/form-data">
+                        @csrf
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group">
                                     <label for="userName">Nama Nasabah</label>
-                                    <select name="nasabah" id="nasabah" class="form-control select2" data-toggle="select2">
+                                    <select name="nasabah" id="nasabah" class="form-control" data-toggle="select2">
                                         <option value="">Pilih Nama Nasabah</option>
                                         @foreach ($nasabah as $nsb)
-                                            <option value="{{ $nsb->nama }}">{{ $nsb->nama }} </option>
+                                            <option value="{{ $nsb->id_nasabah }}">{{ $nsb->nama }} </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -54,7 +55,7 @@
                             <div class="col-4">
                                 <div class="form-group">
                                     <label for="tanggal">Tanggal Setor</label>
-                                    <input type="date" class="form-control mb-3" placeholder="" id="tanggal">
+                                    <input type="date" class="form-control mb-3" placeholder="" name ="tanggal" id="tanggal">
                                 </div>
                             </div>
                         </div>
@@ -62,10 +63,10 @@
                             <div class="col-3">
                                 <div class="form-group">
                                     <label for="userName">Nama Sampah</label>
-                                    <select name="nama" id="nama" class="form-control select2" data-toggle="select2">
+                                    <select name="nama" id="nama" class="form-control" data-toggle="select2">
                                         <option value="">Pilih Nama Sampah</option>
                                         @foreach ($sampah as $sampahs)
-                                            <option value="{{ $sampahs->nama }}">{{ $sampahs->nama }} </option>
+                                            <option value="{{ $sampahs->id_sampah }}">{{ $sampahs->nama}} | {{ $sampahs->id_sampah }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -122,7 +123,7 @@
                                                         <tr>
                                                             <td align="right" colspan="4"><strong>Total</strong></td>
                                                             <td align="left" colspan="2">
-                                                                <p type="text" name="total" id="total">
+                                                                <input style="outline:none;border:0;" type="text" name="total" id="total">
                                                             </td>
                                                         </tr>
                                                     </tfoot>
@@ -164,34 +165,34 @@
             $('.sub_total').each(function() {
                 sum += parseFloat($(this).val());
             });
-            $('#total').text(sum);
+            $('#total').val(sum);
         }, 1);
 
         function ambildata() {
 
-            var nasabah = document.getElementById("nasabah").value;
-            var tanggal = document.getElementById("tanggal").value;
-            var nama = document.getElementById("nama").value;
-            var jumlah = document.getElementById("jumlah").value;
-            var harga = document.getElementById("harga").value;
+            // var nasabah = document.getElementById("nasabah").value;
+            // var tanggal = document.getElementById("tanggal").value;
+            // var nama = document.getElementById("nama").value;
+            // var jumlah = document.getElementById("jumlah").value;
+            // var harga = document.getElementById("harga").value;
 
 
-            if (nasabah == "") {
-                alert("Nama Nasabah tidak boleh kosong");
-                return false;
-            } else if (tanggal == "") {
-                alert("Tanggal Setor tidak boleh kosong");
-                return false;
-            } else if (nama == "") {
-                alert("Nama Sampah tidak boleh kosong");
-                return false;
-            } else if (jumlah == "") {
-                alert("Jumlah Sampah tidak boleh kosong");
-                return false;
-            } else if (harga == "") {
-                alert("Harga Sampah tidak boleh kosong");
-                return false;
-            }
+            // if (nasabah == "") {
+            //     alert("Nama Nasabah tidak boleh kosong");
+            //     return false;
+            // } else if (tanggal == "") {
+            //     alert("Tanggal Setor tidak boleh kosong");
+            //     return false;
+            // } else if (nama == "") {
+            //     alert("Nama Sampah tidak boleh kosong");
+            //     return false;
+            // } else if (jumlah == "") {
+            //     alert("Jumlah Sampah tidak boleh kosong");
+            //     return false;
+            // } else if (harga == "") {
+            //     alert("Harga Sampah tidak boleh kosong");
+            //     return false;
+            // }
 
 
             var id_setoran = document.getElementById('id_setoran').value;

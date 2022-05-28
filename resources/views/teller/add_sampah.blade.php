@@ -8,7 +8,7 @@
             <div class="modal-body">
                 <form action="{{ route('addsampah') }}" method="POST" class="parsley-examples"
                     enctype="multipart/form-data" data-parsley-validate novalidate>
-                    @csrf
+                    
                     <div class="form-group">
                         <div class="form-group row">
                             <label for="example-text-input" class="col-lg-4 col-form-label">Nama Sampah

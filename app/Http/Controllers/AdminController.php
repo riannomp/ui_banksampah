@@ -19,6 +19,15 @@ class AdminController extends Controller
         return view('admin.data_sampah', compact('user','sampah','jenis'));
     }
 
+    //view addsampah
+     public function addSampahView()
+     {
+        $user = Auth::user();
+        $jenis = Jenis::all();
+        return view('admin.tambah_sampah',compact('user','jenis'));
+     }
+
+    //action
     public function addSampah(Request $request)
     {
         if ($request->gambar) {

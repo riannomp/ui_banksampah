@@ -1,107 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<title>Register | Bank Sampah </title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" type="image/png" href="{{ asset('login') }}/images/icons/favicon.ico"/>
-	<link rel="stylesheet" type="text/css" href="{{ asset('login') }}/vendor/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="{{ asset('login') }}/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="{{ asset('login') }}/vendor/animate/animate.css">
-	<link rel="stylesheet" type="text/css" href="{{ asset('login') }}/vendor/css-hamburgers/hamburgers.min.css">
-	<link rel="stylesheet" type="text/css" href="{{ asset('login') }}/vendor/select2/select2.min.css">
-	<link rel="stylesheet" type="text/css" href="{{ asset('login') }}/css/util.css">
-	<link rel="stylesheet" type="text/css" href="{{ asset('login') }}/css/main.css">
+    <meta charset="utf-8" />
+    <title>Register | Bank Sampah </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Responsive bootstrap 4 admin template" name="description" />
+    <meta content="Coderthemes" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{{ asset('template/dist') }}/assets/images/favicon.ico">
+
+    <!-- App css -->
+    <link href="{{ asset('template/dist') }}/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"
+        id="bootstrap-stylesheet" />
+    <link href="{{ asset('template/dist') }}/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('template/dist') }}/assets/css/app.min.css" rel="stylesheet" type="text/css"
+        id="app-stylesheet" />
+
 </head>
-<body>
 
-	<div class="limiter">
-		<div class="container-login100">
-			<div class="wrap-login100">
-                <div class="login100-pic js-tilt" data-tilt>
-                    <img src="{{ asset('login') }}/images/banksampah.png" alt="IMG" height="300">
-                </div>
-				<form class="validate-form" action="{{ route('register') }}" method="post">
-                    @csrf
-					<span class="login100-form-title">
-						Register Nasabah
-					</span>
-                    @if(session('errors'))
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            Something it's wrong:
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                            <ul>
-                            @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                            @endforeach
-                            </ul>
+<body class="authentication-bg">
+
+    <div class="account-pages pt-5 my-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6 col-xl-8">
+                    <div class="account-card-box">
+                        <div class="card mb-0">
+                            <div class="card-body p-4">
+
+                                <div class="text-center">
+                                    <div class="my-3">
+                                        <a href="index.html">
+                                            <span><img src="{{ asset('login') }}/images/banksampah.png" alt=""
+                                                    height="100"></span>
+                                        </a>
+                                    </div>
+                                    <h5 class="text-muted text-uppercase py-3 font-20">Register</h5>
+                                </div>
+                                <form action="{{ route('register') }}" method="post">
+                                    @csrf
+                                    @if (session('errors'))
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            Something it's wrong:
+                                            <button type="button" class="close" data-dismiss="alert"
+                                                aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                                    <div class="row">
+                                        <div class="col-xl-6">
+                                            <div class="form-group mb-3">
+                                                <label for="">Nama</label>
+                                                <input class="form-control" type="text" required="" name="nama">
+                                            </div>
+                                            <div class="form-group mb-3">
+                                                <label for="">Alamat</label>
+                                                <textarea class="form-control" type="text area" required="" name="alamat"></textarea>
+                                            </div>
+                                            <div class="form-group mb-3">
+                                                <label for="">No. Handphone</label>
+                                                <input class="form-control" type="text" required="" name="no_hp">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6">
+                                            <div class="form-group mb-3">
+                                                <label for="">Email</label>
+                                                <input class="form-control" type="text"
+                                                    required="Valid email is required: ex@abc.xyz" name="email">
+                                            </div>
+
+                                            <div class="form-group mb-3">
+                                                <label for="">Password</label>
+                                                <input class="form-control" type="password" required=""
+                                                    name="password" id="myInput">
+                                            </div>
+                                            <div class="form-group mb-3">
+                                                <label for="">Konfirmasi Password</label>
+                                                <input class="form-control" type="password" required=""
+                                                    name="password_confirmation" id="myInput">
+                                            </div>
+
+                                            <div class="form-group mb-3">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" onclick="myFunction()"> Show Password
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group text-center">
+                                        <button class="btn btn-success btn-block waves-effect waves-light"
+                                            type="submit"> Register </button>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-12 text-center">
+                                            <p class="text-black-50">Kembali ke <a href="{{ route('login') }}"
+                                                    class="text-black ml-1"><b>Login</b></a></p>
+                                        </div> <!-- end col -->
+                                    </div>
+                                </form>
+
+
+
+                            </div> <!-- end card-body -->
                         </div>
-                    @endif
-
-                    {{-- <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="nama" placeholder="nama">
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<i class="fa fa-user" aria-hidden="true"></i>
-						</span>
-					</div> --}}
+                        <!-- end card -->
+                    </div>
 
 
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="email" placeholder="Email">
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<i class="fa fa-envelope" aria-hidden="true"></i>
-						</span>
-					</div>
+                    <!-- end row -->
 
-					<div class="wrap-input100 validate-input" data-validate = "Password is required">
-						<input class="input100" type="password" name="password" id="myInput" placeholder="Password">
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<i class="fa fa-lock" aria-hidden="true"></i>
-                            {{-- <span id="mybutton" onclick="change()"><i class="fa fa-eye"></i></span> --}}
-						</span>
-					</div>
-                    <div class="wrap-input100 validate-input" data-validate = "Password is required">
-						<input class="input100" type="password" name="password_confirmation" id="myInput" placeholder="Confirm Password">
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<i class="fa fa-lock" aria-hidden="true"></i>
-                            {{-- <span id="mybutton" onclick="change()"><i class="fa fa-eye"></i></span> --}}
-						</span>
-					</div>
-                    {{-- <div class="wrap-input100 validate-input">
-                        <input type="checkbox" onclick="myFunction()">Show Password
-                    </div> --}}
+                </div> <!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </div>
+    <!-- end page -->
 
-					<div>
-                        <button type="submit" class="btn btn-success btn-block">Register</button>
-					</div>
+    <!-- Vendor js -->
+    <script src="{{ asset('template/dist') }}/assets/js/vendor.min.js"></script>
 
-					<div class="text-center p-t-136">
-						<a class="txt2" href="{{ route('login') }}">
-							Back To Login
-							<i class="fa fa-long-arrow-left m-l-5" aria-hidden="true"></i>
-						</a>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+    <!-- App js -->
+    <script src="{{ asset('template/dist') }}/assets/js/app.min.js"></script>
+    <!--Form Wizard-->
+    <script src="{{ asset('template/dist') }}/assets/libs/jquery-steps/jquery.steps.min.js"></script>
 
-	<script src="{{ asset('login') }}/vendor/jquery/jquery-3.2.1.min.js"></script>
-	<script src="{{ asset('login') }}/vendor/bootstrap/js/popper.js"></script>
-	<script src="{{ asset('login') }}/vendor/bootstrap/js/bootstrap.min.js"></script>
-	<script src="{{ asset('login') }}/vendor/select2/select2.min.js"></script>
-	<script src="{{ asset('login') }}/vendor/tilt/tilt.jquery.min.js"></script>
-	<script >
-		$('.js-tilt').tilt({
-			scale: 1.1
-		})
-	</script>
+    <script src="{{ asset('template/dist') }}/assets/libs/jquery-validation/jquery.validate.min.js"></script>
+
+    <!-- Init js-->
+    <script src="{{ asset('template/dist') }}/assets/js/pages/form-wizard.init.js"></script>
+
     <script>
         function myFunction() {
             var x = document.getElementById("myInput");
@@ -112,8 +152,7 @@
             }
         }
     </script>
-<!--===============================================================================================-->
-	<script src="{{ asset('login') }}/js/main.js"></script>
 
 </body>
+
 </html>

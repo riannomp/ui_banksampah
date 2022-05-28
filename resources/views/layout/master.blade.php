@@ -16,9 +16,7 @@
     <link href="{{ asset('template/dist') }}/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="{{ asset('template/dist') }}/assets/css/app.min.css" rel="stylesheet" type="text/css"
         id="app-stylesheet" />
-
-
-    <link href="{{ asset('template/dist') }}/assets/libs/select2/select2.min.css" rel="stylesheet" type="text/css" />
+    <!-- Table datatable css -->
     <link href="{{ asset('template/dist') }}/assets/libs/datatables/dataTables.bootstrap4.min.css" rel="stylesheet"
         type="text/css" />
 
@@ -29,9 +27,15 @@
     <link href="{{ asset('template/dist') }}/assets/libs/datatables/select.bootstrap4.min.css" rel="stylesheet"
         type="text/css" />
 
+    <!-- Plugins css -->
+    <link href="{{ asset('template/dist') }}/assets/libs/bootstrap-tagsinput/bootstrap-tagsinput.css"
+        rel="stylesheet" />
+    <link href="{{ asset('template/dist') }}/assets/libs/switchery/switchery.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="{{ asset('template/dist') }}/assets/libs/multiselect/multi-select.css" rel="stylesheet"
+        type="text/css" />
+    <link href="{{ asset('template/dist') }}/assets/libs/select2/select2.min.css" rel="stylesheet" type="text/css" />
 
-
-</head>
 </head>
 
 <body>
@@ -376,9 +380,9 @@
 
     <!-- App js -->
     <script src="{{ asset('template/dist') }}/assets/js/app.min.js"></script>
-    <script src="{{ asset('template/dist') }}/assets/libs/select2/select2.min.js"></script>
-    <script src="{{ asset('template/dist') }}/assets/libs/datatables/dataTables.bootstrap4.min.js"></script>
+    <!-- Datatable plugin js -->
     <script src="{{ asset('template/dist') }}/assets/libs/datatables/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('template/dist') }}/assets/libs/datatables/dataTables.bootstrap4.min.js"></script>
 
     <script src="{{ asset('template/dist') }}/assets/libs/datatables/dataTables.responsive.min.js"></script>
     <script src="{{ asset('template/dist') }}/assets/libs/datatables/responsive.bootstrap4.min.js"></script>
@@ -386,6 +390,9 @@
     <script src="{{ asset('template/dist') }}/assets/libs/datatables/dataTables.buttons.min.js"></script>
     <script src="{{ asset('template/dist') }}/assets/libs/datatables/buttons.bootstrap4.min.js"></script>
 
+    <script src="{{ asset('template/dist') }}/assets/libs/jszip/jszip.min.js"></script>
+    <script src="{{ asset('template/dist') }}/assets/libs/pdfmake/pdfmake.min.js"></script>
+    <script src="{{ asset('template/dist') }}/assets/libs/pdfmake/vfs_fonts.js"></script>
 
     <script src="{{ asset('template/dist') }}/assets/libs/datatables/buttons.html5.min.js"></script>
     <script src="{{ asset('template/dist') }}/assets/libs/datatables/buttons.print.min.js"></script>
@@ -396,6 +403,25 @@
     <!-- Datatables init -->
     <script src="{{ asset('template/dist') }}/assets/js/pages/datatables.init.js"></script>
 
+    <!-- Plugins Js -->
+    <script src="{{ asset('template/dist') }}/assets/libs/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+    <script src="{{ asset('template/dist') }}/assets/libs/switchery/switchery.min.js"></script>
+    <script src="{{ asset('template/dist') }}/assets/libs/multiselect/jquery.multi-select.js"></script>
+    <script src="{{ asset('template/dist') }}/assets/libs/jquery-quicksearch/jquery.quicksearch.min.js"></script>
+    <script src="{{ asset('template/dist') }}/assets/libs/select2/select2.min.js"></script>
+    <script src="{{ asset('template/dist') }}/assets/libs/jquery-mockjax/jquery.mockjax.min.js"></script>
+    <script src="{{ asset('template/dist') }}/assets/libs/autocomplete/jquery.autocomplete.min.js"></script>
+    <script src="{{ asset('template/dist') }}/assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+
+    <!--Form Wizard-->
+    <script src="{{ asset('template/dist') }}/assets/libs/jquery-steps/jquery.steps.min.js"></script>
+
+    <script src="{{ asset('template/dist') }}/assets/libs/jquery-validation/jquery.validate.min.js"></script>
+
+    <!-- Init js-->
+    <script src="{{ asset('template/dist') }}/assets/js/pages/form-wizard.init.js"></script>
+    <!-- form advanced init -->
+    <script src="{{ asset('template/dist') }}/assets/js/pages/form-advanced.init.js"></script>
     @yield('script')
 </body>
 

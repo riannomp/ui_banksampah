@@ -21,6 +21,9 @@ class Setoran extends Model
         'updated_at',
         'deleted_at'
     ];
+    public $incrementing = false;
+    protected $primaryKey = 'id_setoran';
+
     public function nasabah()
     {
         return $this->belongsTo(Nasabah::class, 'id_nasabah');

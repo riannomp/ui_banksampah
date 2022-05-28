@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KoordinatorController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NasabahController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\TellerController;
 use Illuminate\Support\Facades\Route;
 
@@ -42,6 +43,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('data_nasabah', [AdminController::class, 'dataNasabah']);
         Route::get('supplier', [AdminController::class, 'dataSupplier']);
 
+        //view
+        Route::get('data_sampah/tambah_sampah',[ AdminController::class, 'addSampahView'])->name('addSampahView');
+        //modal
         Route::post('addsampah', [AdminController::class, 'addSampah'])->name('addsampah');
 
         Route::get('data_sampah/ubah/{id_sampah}', [AdminController::class, 'editSampah']);
@@ -77,12 +81,19 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('setoran_sampah', [TellerController::class, 'dataSetoran']);
 
         Route::post('addsetor', [TellerController::class, 'addSetoran']);
+        Route::post('addsetor/simpan', [TellerController::class, 'addSetoran2'])->name('teller.setoran');
 
-        Route::get('detail_setoran', [TellerController::class, 'detailSetoran']);
+        Route::get('detail_setoran/{id_setoran}', [TellerController::class, 'detailSetoran']);
+
+        // PDF
+        Route::get('detail_setoran/cetak_pdf={id_setoran}', [PDFController::class, 'cetakPDF'])->name('cetak_pdf');
+
+
+
         Route::get('addsetoran', [TellerController::class, 'addSetoran']);
-        Route::get('kerajinan', [TellerController::class, 'dataKerajinan']);
-        Route::get('transaksi_sampah', [TellerController::class, 'dataTransaksiSampah']);
-        Route::get('transaksi_produk', [TellerController::class, 'dataTransaksiProduk']);
+
+
+
     });
 
     Route::group(['prefix' => 'nasabah/'], function () {

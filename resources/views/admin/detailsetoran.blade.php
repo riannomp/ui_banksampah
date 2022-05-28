@@ -30,18 +30,18 @@
                             <div class="form-group">
                                 <table>
                                     <div class="text-left">
-                                        <h6 class="txt-dark"><strong>Kode Setoran  :</strong> </h6>
+                                        <h6 class="txt-dark"><strong>Kode Setoran :</strong> </h6>
                                         <p>SET001</p>
                                     </div>
                                     <div class="text-left">
                                         <h6 class="txt-dark"><strong>Tanggal Setor :</strong></h6>
                                         <p> 12 Februari 2022</p>
                                     </div>
-                                    
+
                                 </table>
                             </div>
                         </div>
-                    
+
                     </div>
                     <br>
                     <div class="table-responsive">
@@ -56,34 +56,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Kardus</td>
-                                    <td>2 kg</td>
-                                    <td>Rp 1.500</td>
-                                    <td>Rp 3.000</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Botol Plastik</td>
-                                    <td>5 buah</td>
-                                    <td>Rp 2.000</td>
-                                    <td>Rp 10.000</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Daun Kering</td>
-                                    <td>1 kg</td>
-                                    <td>Rp 1.500</td>
-                                    <td>Rp 1.500</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"></th>
-                                    <td></td>
-                                    <td></td>
-                                    <td><strong>Total</strong></td>
-                                    <td><strong>Rp 14.500</strong></td>
-                                </tr>
+                                
                             </tbody>
                         </table>
                     </div>

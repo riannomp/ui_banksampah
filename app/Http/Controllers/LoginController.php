@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Nasabah;
 use App\Models\User;
 use Dotenv\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session as FacadesSession;
 use Illuminate\Support\Facades\Validator as FacadesValidator;
 
 class LoginController extends Controller
 {
+
     public function showFormLogin()
     {
         if (Auth::check()) { // true sekalian session field di users nanti bisa dipanggil via Auth
@@ -102,12 +105,22 @@ class LoginController extends Controller
             return redirect()->back()->withErrors($validator)->withInput($request->all);
         }
 
+        Nasabah::create([
+            'nama' => $request->nama,
+            'alamat' => $request->alamat,
+            'no_hp' => $request->no_hp
+        ]);
+
+        $id = DB::getPdo()->lastInsertId();
+
+        // dd($id);
         $user = new User();
         $user->email = strtolower($request->email);
         $user->password = bcrypt($request->password);
         $user->email_verified_at = \Carbon\Carbon::now();
         $user->level = 'nasabah';
         $user->status = '2';
+        $user->id_nasabah = $id;
         $user->remember_token = Str::random(60);
         $simpan = $user->save();
 

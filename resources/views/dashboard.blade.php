@@ -26,33 +26,55 @@
         </div>
 
         <div class="row">
-
-            <div class="col-md-6 col-xl-4">
-                <div class="card-box tilebox-one">
-                    <i class="icon-layers float-right m-0 h2 text-muted"></i>
-                    <h6 class="text-muted text-uppercase mt-0">Sampah Terkumpul</h6>
-                    <h3 class="my-3"><span data-plugin="counterup">1,587</span> KG</h3>
+            <div class="col-xl-3 col-md-6">
+                <div class="card-box tilebox-three">
+                    <div class="avatar-lg rounded-circle bg-light border border float-left">
+                        <i class="icon-wallet font-22 avatar-title text-muted"></i>
+                    </div>
+                    <div class="text-right">
+                        <h6 class="text-success text-uppercase">Jumlah Sampah</h6>
+                        <h3><span data-plugin="counterup">2,562</span></h3>
+                    </div>
                 </div>
             </div>
 
-            <div class="col-md-6 col-xl-4">
-                <div class="card-box tilebox-one">
-                    <i class="icon-paypal float-right m-0 h2 text-muted"></i>
-                    <h6 class="text-muted text-uppercase mt-0">Jumlah Nasabah</h6>
-                    <h3 class="my-3"><span data-plugin="counterup">234 </span> Orang</h3>
+            <div class="col-xl-3 col-md-6">
+                <div class="card-box tilebox-three">
+                    <div class="avatar-lg rounded-circle bg-light border border float-left">
+                        <i class="icon-basket font-22 avatar-title text-muted"></i>
+                    </div>
+                    <div class="text-right">
+                        <h6 class="text-pink text-uppercase">Jumlah Nasabah</h6>
+                        <h3><span data-plugin="counterup">8,542</span></h3>
+                    </div>
                 </div>
             </div>
 
-            <div class="col-md-6 col-xl-4">
-                <div class="card-box tilebox-one">
-                    <i class="icon-chart float-right m-0 h2 text-muted"></i>
-                    <h6 class="text-muted text-uppercase mt-0">Produk Daur Ulang</h6>
-                    <h3 class="my-3"><span data-plugin="counterup">35 </span> Produk</h3>
+            <div class="col-xl-3 col-md-6">
+                <div class="card-box tilebox-three">
+                    <div class="avatar-lg rounded-circle bg-light border border float-left">
+                        <i class="icon-equalizer font-22 avatar-title text-muted"></i>
+                    </div>
+                    <div class="text-right">
+                        <h6 class="text-purple text-uppercase">Product Sold</h6>
+                        <h3><span data-plugin="counterup">6,254</span></h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6">
+                <div class="card-box tilebox-three">
+                    <div class="avatar-lg rounded-circle bg-light border border float-left">
+                        <i class="icon-cup font-22 avatar-title text-muted"></i>
+                    </div>
+                    <div class="text-right">
+                        <h6 class="text-warning text-uppercase">Product Sold</h6>
+                        <h3><span data-plugin="counterup">7,524</span></h3>
+                    </div>
                 </div>
             </div>
 
         </div>
-        <!-- end row -->
 
     </div> <!-- end container-fluid -->
 @endsection

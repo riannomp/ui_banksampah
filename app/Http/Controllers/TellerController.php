@@ -96,19 +96,19 @@ class TellerController extends Controller
     {
         $user = Auth::user();
         $nasabah = Nasabah::all();
-        return view('teller.data_nasabah', compact('nasabah','user'));
+        return view('teller.data_nasabah', compact('nasabah', 'user'));
     }
     public function addNasabah()
     {
         $user = Auth::user();
-        return view('teller.addnasabah',compact('user'));
+        return view('teller.addnasabah', compact('user'));
     }
 
     public function dataSetoran()
     {
         $setoran = Setoran::all();
         $user = Auth::user();
-        return view('teller.setoran', compact('user','setoran'));
+        return view('teller.setoran', compact('user', 'setoran'));
     }
     public function addSetoran(Request $request)
     {
@@ -127,11 +127,54 @@ class TellerController extends Controller
 
         //     ]);
         // }
-        return view('teller.setoran_add', compact('nasabah', 'sampah', 'id_setoran','user'));
+        return view('teller.setoran_add', compact('nasabah', 'sampah', 'id_setoran', 'user'));
     }
-    public function detailSetoran()
+
+    public function addSetoran2(Request $request)
+    {
+        // dd($request);
+        // $user = Auth::user();
+        Setoran::create([
+            'id_setoran' => $request->id_setoran2,
+            'id_nasabah' => $request->nasabah,
+            'total_harga' => $request->total,
+            'tanggal'    =>  $request->tanggal
+        ]);
+
+        // $jumlah_data = count($request->id_sampah);
+        // for ($i = 0; $i < $jumlah_data; $i++) {
+        //     DetailSetoran::create(
+        //         [
+        //             'id_setoran' => $request->id_setoran[$i],
+        //             'id_sampah'  => $request->nama[$i],
+        //             'jumlah' => $request->jumlah[$i],
+        //             'harga' => $request->harga[$i],
+        //             'subtotal' => $request->sub_total[$i]
+        //         ]
+        //     );
+        // }
+        foreach ($request->nama as $key => $value) {
+            DetailSetoran::create(
+                [
+                    'id_setoran' => $request->id_setoran[$key],
+                    'id_sampah'  => $request->nama[$key],
+                    'jumlah' => $request->jumlah[$key],
+                    'harga' => $request->harga[$key],
+                    'subtotal' => $request->sub_total[$key]
+                ]
+            );
+        }
+
+        return redirect('teller/setoran_sampah');
+    }
+
+    public function detailSetoran($id_setoran)
     {
         $user = Auth::user();
-        return view('teller.detailsetoran',compact('user'));
+        $data_setor = Setoran::where('id_setoran', $id_setoran)->get();
+        $detail_setor = DetailSetoran::where('id_setoran', $id_setoran)->get();
+        $total = DetailSetoran::where('id_setoran', $id_setoran)->sum('subtotal');
+
+        return view('teller.detailsetoran', compact('user','data_setor','detail_setor','total', 'id_setoran'));
     }
 }

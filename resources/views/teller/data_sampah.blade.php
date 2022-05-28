@@ -1,5 +1,6 @@
 @extends('layout.master')
 @section('tittle', 'Data Sampah')
+
 @section('content')
 
 

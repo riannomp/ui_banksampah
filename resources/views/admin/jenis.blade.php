@@ -56,6 +56,26 @@
                 </table>
             </div>
         </div>
+        {{-- <div class="col-4">
+            <div class="card-box">
+                <h2>Tambah Data Jenis</h2>
+                <form class="form-horizontal" method="post" action="{{ url('admin/addjenis') }}" enctype="multipart/form-data">
+                    @csrf
+                     <div class="form-group">
+                         <input name="edit_id" type="hidden" class="form-control" value="{{ $usr->id }}">
+                         <label class="control-label mb-10 text-left">Jenis</label>
+                         <input name="nama" type="text" class="form-control" value="">
+                     </div>
+
+                     <div class="form-group">
+                         <div class="col-md-6">
+                             <input type="submit" class="btn btn-primary" value="Simpan">
+                         </div>
+                     </div>
+
+                 </form>
+            </div>
+        </div> --}}
     </div>
     <!-- end row -->
     @include('admin.add_jenis')

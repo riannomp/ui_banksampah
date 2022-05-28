@@ -13,6 +13,7 @@ class DetailSetoran extends Model
         'id_setoran',
         'id_sampah',
         'jumlah',
+        'harga',
         'subtotal',
         'total'
     ];
@@ -22,6 +23,8 @@ class DetailSetoran extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    protected $primaryKey = 'id_detail';
     public function setoran()
     {
         return $this->belongsTo(Setoran::class, 'id_setoran');
