@@ -22,23 +22,26 @@
         <!-- end page title -->
 
         <div class="row">
-            <div class="col-12">
+            <div class="col-8">
                 <div class="card-box">
                     {{-- <h4 class="header-title">Basic example</h4> --}}
                     <div class="row">
                         <div class="col-5">
                             <div class="form-group">
-                                <table>
-                                    <div class="text-left">
-                                        <h6 class="txt-dark"><strong>Kode Setoran :</strong> </h6>
-                                        <p>SET001</p>
-                                    </div>
-                                    <div class="text-left">
-                                        <h6 class="txt-dark"><strong>Tanggal Setor :</strong></h6>
-                                        <p> 12 Februari 2022</p>
-                                    </div>
+                                @foreach ($data_setor as $data_setor)
+                                    <table>
+                                        <div class="text-left">
+                                            <h6 class="txt-dark"><strong>Kode Setoran :</strong> </h6>
+                                            <p>{{ $data_setor->id_setoran }}</p>
+                                        </div>
+                                        <div class="text-left">
+                                            <h6 class="txt-dark"><strong>Tanggal Setor :</strong></h6>
+                                            <p> {{ date('d M Y', strtotime($data_setor->tanggal)) }}</p>
+                                        </div>
 
-                                </table>
+                                    </table>
+                                @endforeach
+
                             </div>
                         </div>
 
@@ -56,12 +59,37 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
+                                <?php $no = 1; ?>
+                                @foreach ($detail_setor as $detail)
+                                    <tr>
+                                        <th scope="row">{{ $no++ }}</th>
+                                        <td>{{ $detail->sampah->nama }}</td>
+                                        <td>{{ $detail->jumlah }}</td>
+                                        <td>Rp {{ number_format($detail->harga), 2 }}</td>
+                                        <td>Rp {{ number_format($detail->subtotal), 2 }}</td>
+                                    </tr>
+                                @endforeach
+
+                                <tr>
+                                    <th scope="row"></th>
+                                    <td></td>
+                                    <td></td>
+                                    <td><strong>Total</strong></td>
+                                    <td><strong>RP {{ number_format($total), 2 }} </strong></td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
+                    <div class="form-group" style="text-align:right;">
+                        <a href="{{ route('cetak_pdf', $id_setoran) }}" ><button type="button" class="btn btn-success btn-icon right-icon">
+                                <i class="fa fa-print"></i><span> Print</span></button></a>
+                    </div>
                 </div>
+
             </div>
         </div>
+
     </div>
+
+
 @endsection

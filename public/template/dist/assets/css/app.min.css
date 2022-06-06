@@ -3751,7 +3751,10 @@ ul.ColVis_collection li {
         display: none
     }
 }
-
+.tulisan{
+    color:red;
+  }
+  
 .authentication-bg {
     background-color: #00ff00
 }

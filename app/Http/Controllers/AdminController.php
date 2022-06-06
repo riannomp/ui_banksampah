@@ -2,12 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DetailSetoran;
 use App\Models\Jenis;
 use App\Models\Nasabah;
+use App\Models\Pegawai;
 use App\Models\Sampah;
+use App\Models\Setoran;
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+
+use Illuminate\Support\Facades\Session as FacadesSession;
+use Illuminate\Support\Facades\Validator as FacadesValidator;
+use Illuminate\Validation\Rules\Unique;
 
 class AdminController extends Controller
 {
@@ -99,17 +109,149 @@ class AdminController extends Controller
         $nasabah = Nasabah::all();
         return view('admin.data_nasabah',compact('nasabah','user'));
     }
+    public function addNasabah()
+    {
+        $user = Auth::user();
+        return view('admin.tambah_nasabah', compact('user'));
+    }
 
+    public function addNasabah2(Request $request)
+    {
+        $rules = [
+            'nama'                  => 'required',
+            'alamat'                => 'required',
+            'nik'                   => 'required|min:16',
+            'email'                 => 'required|email|unique:users,email',
+            'no_hp'                 => 'required'
+        ];
+
+        $messages = [
+            'nama.required'         => 'Nama wajib diisi',
+            'alamat.required'       => 'Alamat wajib diisi',
+            'nik.required'          => 'NIK wajib diisi',
+            'nik.min'               => 'Minimal 16 karakter ',
+            'no_hp.required'        => 'Nomor HP wajib diisi',
+            'email.required'        => 'Email wajib diisi',
+            'email.email'           => 'Email tidak valid',
+            'email.unique'          => 'Email sudah terdaftar'
+        ];
+
+        // $this->validate($request, $rules, $messages);
+
+        $validator = FacadesValidator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput($request->all);
+        }
+
+        Nasabah::create([
+            'nama' => $request->nama,
+            'alamat' => $request->alamat,
+            'foto' => 'profile.png',
+            'nik' => $request->nik,
+            'no_hp' => $request->no_hp
+        ]);
+
+        $id = DB::getPdo()->lastInsertId();
+
+        User::create([
+            'email' => strtolower($request->email),
+            'password' => bcrypt('12345678'),
+            'email_verified_at' =>  \Carbon\Carbon::now(),
+            'level' => 'nasabah',
+            'status' => '1',
+            'id_nasabah' => $id,
+            'remember_token' => Str::random(60)
+        ]);
+
+        return redirect('admin/data_nasabah')->with(['success' => 'Data berhasil ditambahkan']);
+    }
+
+    public function dataPegawai()
+    {
+        $user = Auth::user();
+        $pegawai = Pegawai::all();
+
+        return view('admin.data_pegawai', compact('user', 'pegawai'));
+    }
+
+    public function addPegawai()
+    {
+        $user = Auth::user();
+        return view('admin.tambah_pegawai', compact('user'));
+    }
+
+    public function addPegawai2(Request $request)
+    {
+        $rules = [
+            'nama'                  => 'required',
+            'alamat'                => 'required',
+            'email'                 => 'required|email|unique:users,email',
+            'no_hp'                 => 'required'
+        ];
+
+        $messages = [
+            'nama.required'         => 'Nama Lengkap wajib diisi',
+            'alamat.required'       => 'Alamat wajib diisi',
+            'no_hp.required'        => 'Nomor HP wajib diisi',
+            'email.required'        => 'Email wajib diisi',
+            'email.email'           => 'Email tidak valid',
+            'email.unique'          => 'Email sudah terdaftar'
+        ];
+
+        // $this->validate($request, $rules, $messages);
+
+        $validator = FacadesValidator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput($request->all);
+        }
+        Pegawai::create([
+            'nama' => $request->nama,
+            'alamat' => $request->alamat,
+            'foto' => 'profile.png',
+            'no_hp' => $request->no_hp
+        ]);
+
+        $id = DB::getPdo()->lastInsertId();
+
+        User::create([
+            'email' => strtolower($request->email),
+            'password' => bcrypt('12345678'),
+            'email_verified_at' =>  \Carbon\Carbon::now(),
+            'level' => $request->level,
+            'status' => '1',
+            'id_pegawai' => $id,
+            'remember_token' => Str::random(60)
+        ]);
+
+        // $user = new User();
+        // $user->email = strtolower($request->email);
+        // $user->password = bcrypt('12345678');
+        // $user->email_verified_at = \Carbon\Carbon::now();
+        // $user->level = $request->level;
+        // $user->status = '1';
+        // $user->id_pegawai= $id;
+        // $user->remember_token = Str::random(60);
+       // $simpan = $user->save();
+        // dd($request);
+        return redirect('admin/data_pegawai')->with(['success' => 'Data berhasil ditambahkan']);
+    }
 
     public function dataSetoran()
     {
         $user = Auth::user();
-        return view('admin.setoran', compact('user'));
+        $setoran = Setoran::all();
+        return view('admin.setoran', compact('user', 'setoran'));
     }
-    public function detailSetoran()
+    public function detailSetoran($id_setoran)
     {
         $user = Auth::user();
-        return view('admin.detailsetoran',compact('user'));
+        $data_setor = Setoran::where('id_setoran', $id_setoran)->get();
+        $detail_setor = DetailSetoran::where('id_setoran', $id_setoran)->get();
+        $total = DetailSetoran::where('id_setoran', $id_setoran)->sum('subtotal');
+
+        return view('admin.detailsetoran',compact('user','data_setor','detail_setor','total', 'id_setoran'));
     }
     public function addSetor()
     {
@@ -117,19 +259,6 @@ class AdminController extends Controller
         return view('admin.setoran_add',compact('user'));
     }
 
-
-    public function dataSupplier()
-    {
-        return view('admin.supplier');
-    }
-    public function dataKerajinan()
-    {
-        return view('admin.kerajinan');
-    }
-    public function dataPenjualan()
-    {
-        return view('admin.penjualan');
-    }
     public function dataJenis()
     {
         $user = Auth::user();

@@ -22,10 +22,16 @@
         <!-- end page title -->
         <div class="row">
             <div class="col-10">
-
                 <div class="card-box">
+                    @if ($message = Session::get('success'))
+                        <div class="alert alert-success">
+                            {{ session()->get('success') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                        </div>
+                    @endif
                     <p>
-                        <a href="{{ url('teller/addnasabah') }}" class="btn btn-success waves-effect waves-light">
+                        <a href="{{ route('addnasabah') }}" class="btn btn-success waves-effect waves-light">
                             <span class="btn-label"><i class="mdi mdi-plus"></i>
                             </span> Tambah Data</a>
                     </p>
@@ -43,16 +49,16 @@
                         </thead>
                         <tbody>
                             @foreach ($nasabah as $nasabahs)
-                            <tr>
-                                <td>{{ $nasabahs->nama }}</td>
-                                <td>{{ $nasabahs->nik }}</td>
-                                <td>{{ $nasabahs->alamat }}</td>
-                                <td>{{ $nasabahs->no_hp }}</td>
-                                <td><a href="" class="btn btn-info waves-effect waves-light" data-toggle="modal"
-                                        data-target="#edit">
-                                        <i class="mdi mdi-information-variant"></i></a>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>{{ $nasabahs->nama }}</td>
+                                    <td>{{ $nasabahs->nik }}</td>
+                                    <td>{{ $nasabahs->alamat }}</td>
+                                    <td>{{ $nasabahs->no_hp }}</td>
+                                    <td><a href="" class="btn btn-info waves-effect waves-light" data-toggle="modal"
+                                            data-target="#edit">
+                                            <i class="mdi mdi-information-variant"></i></a>
+                                    </td>
+                                </tr>
                             @endforeach
 
                         </tbody>
@@ -85,7 +91,8 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <input id="pass1" type="text" placeholder="Rp 200.000" required class="form-control" readonly>
+                                        <input id="pass1" type="text" placeholder="Rp 200.000" required
+                                            class="form-control" readonly>
                                     </div>
                                 </div>
                             </div>

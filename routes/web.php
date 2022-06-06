@@ -41,7 +41,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'admin/'], function () {
         Route::get('data_sampah', [AdminController::class, 'dataSampah']);
         Route::get('data_nasabah', [AdminController::class, 'dataNasabah']);
-        Route::get('supplier', [AdminController::class, 'dataSupplier']);
+        Route::get('data_nasabah/tambah_nasabah', [AdminController::class, 'addNasabah'])->name('tambah_nasabah');
+        Route::post('data_nasabah/tambah_nasabah/simpan', [AdminController::class, 'addNasabah2'])->name('tambahNasabah');
+
+        Route::get('data_pegawai', [AdminController::class, 'dataPegawai']);
+        Route::get('tambah_pegawai', [AdminController::class, 'addPegawai'])->name('addPegawai');
+        Route::post('tambah_pegawai/simpan', [AdminController::class, 'addPegawai2'])->name('addPegawai2');
 
         //view
         Route::get('data_sampah/tambah_sampah',[ AdminController::class, 'addSampahView'])->name('addSampahView');
@@ -52,12 +57,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('data_sampah/ubah/simpan', [AdminController::class, 'updateSampah'])->name('updatesampah2');
 
         Route::get('setoran_sampah', [AdminController::class, 'dataSetoran']);
-        Route::get('detail_setoran', [AdminController::class, 'detailSetoran']);
+        Route::get('detail_setoran/{id_setoran}', [AdminController::class, 'detailSetoran']);
         Route::get('addsetoran', [AdminController::class, 'addSetor']);
 
 
-        Route::get('kerajinan', [AdminController::class, 'dataKerajinan']);
-        Route::get('penjualan', [AdminController::class, 'dataPenjualan']);
+
         Route::get('jenis_sampah', [AdminController::class, 'dataJenis']);
         Route::post('addjenis', [AdminController::class, 'addJenis']);
 
@@ -76,7 +80,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('data_sampah/ubah/simpan', [TellerController::class, 'updateSampah'])->name('updatesampah');
 
         Route::get('data_nasabah', [TellerController::class, 'dataNasabah']);
-        Route::get('addnasabah', [TellerController::class, 'addNasabah']);
+        Route::get('data_nasabah/tambah_nasabah', [TellerController::class, 'addNasabah'])->name('addnasabah');
+        Route::post('data_nasabah/tambah_nasabah/simpan', [TellerController::class, 'addNasabah2'])->name('tambahNasabah');
+
         Route::get('supplier', [TellerController::class, 'dataSupplier']);
         Route::get('setoran_sampah', [TellerController::class, 'dataSetoran']);
 

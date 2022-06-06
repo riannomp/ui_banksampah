@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('tittle', 'home')
+@section('tittle', 'Dashboard')
 @section('content')
 
 
@@ -11,7 +11,7 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="javascript: void(0);">Uplon</a></li>
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Bank Sampah</a></li>
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
                     </div>
@@ -20,10 +20,24 @@
             </div>
         </div>
         <!-- end page title -->
+        @if (auth()->user()->level == 'admin' || auth()->user()->level == 'teller' || auth()->user()->level == 'kepala')
         <div class="alert alert-success alert-dismissable">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            Selamat Datang, <strong></strong>
+            Selamat Datang, <strong>{{ $user->pegawai->nama }}</strong>
         </div>
+        @endif
+        @if (auth()->user()->level == 'nasabah')
+        <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            Selamat Datang, <strong>{{ $user->nasabah->nama }}</strong>
+        </div>
+        @endif
+        @if (auth()->user()->level == 'koor')
+        <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            Selamat Datang, <strong>{{ $user->koordinator->nama }}</strong>
+        </div>
+        @endif
 
         <div class="row">
             <div class="col-xl-3 col-md-6">
@@ -45,7 +59,7 @@
                     </div>
                     <div class="text-right">
                         <h6 class="text-pink text-uppercase">Jumlah Nasabah</h6>
-                        <h3><span data-plugin="counterup">8,542</span></h3>
+                        <h3><span data-plugin="counterup">{{ $nasabah }}</span></h3>
                     </div>
                 </div>
             </div>

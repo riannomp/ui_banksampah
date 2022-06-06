@@ -44,7 +44,7 @@
     <div id="wrapper">
         <!-- Topbar Start -->
         <div class="navbar-custom">
-            <ul class="list-unstyled topnav-menu float-right mb-0">
+            <ul class="list-unstyled topnav-menu float-right mb-0 mr-10">
                 <li class="dropdown notification-list">
                     @if (auth()->user()->level == 'admin' || auth()->user()->level == 'teller' || auth()->user()->level == 'kepala')
                         <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown"
@@ -78,9 +78,9 @@
                     @endif
                     <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                         <!-- item-->
-                        <div class="dropdown-header noti-title">
+                        {{-- <div class="dropdown-header noti-title">
                             <h6 class="text-overflow text-white m-0">Welcome !</h6>
-                        </div>
+                        </div> --}}
 
                         <!-- item-->
                         <a href="{{ route('profile') }}" class="dropdown-item notify-item">
@@ -88,11 +88,6 @@
                             <span>Profile</span>
                         </a>
 
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <i class="mdi mdi-settings-outline"></i>
-                            <span>Settings</span>
-                        </a>
 
                         <div class="dropdown-divider"></div>
 
@@ -104,13 +99,6 @@
 
                     </div>
                 </li>
-
-                <li class="dropdown notification-list">
-                    <a href="javascript:void(0);" class="nav-link right-bar-toggle waves-effect waves-light">
-                        <i class="mdi mdi-settings-outline noti-icon"></i>
-                    </a>
-                </li>
-
             </ul>
 
             <!-- LOGO -->
@@ -179,41 +167,47 @@
 
                         <li>
                             <a href="{{ url('dashboard') }}">
-                                <i class="mdi mdi-view-dashboard"></i>
+                                <i class="mdi mdi-home"></i>
                                 <span> Dashboard </span>
                             </a>
                         </li>
                         @if (auth()->user()->level == 'admin')
                             <li>
                                 <a href="{{ url('admin/data_sampah') }}">
-                                    <i class="mdi mdi-content-copy"></i>
+                                    <i class="mdi mdi-trash-can"></i>
                                     <span>Data Sampah</span>
                                 </a>
                             </li>
 
                             <li>
                                 <a href="{{ url('admin/setoran_sampah') }}">
-                                    <i class="mdi mdi-content-copy"></i>
+                                    <i class="mdi mdi-book-open"></i>
                                     <span>Setoran Sampah</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ url('admin/data_nasabah') }}">
-                                    <i class="mdi mdi-content-copy"></i>
+                                    <i class="mdi mdi-account-multiple"></i>
                                     <span> Data Nasabah </span>
                                 </a>
 
                             </li>
+                            <li>
+                                <a href="{{ url('admin/data_pegawai') }}">
+                                    <i class="mdi mdi-account-multiple"></i>
+                                    <span> Data Pegawai </span>
+                                </a>
+                            </li>
 
                             <li>
                                 <a href="{{ url('admin/jenis_sampah') }}">
-                                    <i class="mdi mdi-content-copy"></i>
+                                    <i class="mdi mdi-library-books"></i>
                                     <span> Jenis Sampah </span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ url('admin/data_user') }}">
-                                    <i class="mdi mdi-content-copy"></i>
+                                    <i class="mdi mdi-shield-account"></i>
                                     <span> Data User </span>
                                 </a>
                             </li>
@@ -221,19 +215,19 @@
                         @if (auth()->user()->level == 'teller')
                             <li>
                                 <a href="{{ url('teller/data_sampah') }}">
-                                    <i class="mdi mdi-content-copy"></i>
+                                    <i class="mdi mdi-trash-can"></i>
                                     <span>Data Sampah </span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ url('teller/setoran_sampah') }}">
-                                    <i class="mdi mdi-content-copy"></i>
+                                    <i class="mdi mdi-book-open"></i>
                                     <span>Setoran Sampah </span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ url('teller/data_nasabah') }}">
-                                    <i class="mdi mdi-content-copy"></i>
+                                    <i class="mdi mdi-account-multiple"></i>
                                     <span> Data Nasabah </span>
                                 </a>
                             </li>
@@ -242,13 +236,13 @@
                         @if (auth()->user()->level == 'koor')
                             <li>
                                 <a href="{{ url('koor/setoran_sampah') }}">
-                                    <i class="mdi mdi-content-copy"></i>
+                                    <i class="mdi mdi-book-open"></i>
                                     <span>Setoran Sampah </span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ url('koor/data_nasabah') }}">
-                                    <i class="mdi mdi-content-copy"></i>
+                                    <i class="mdi mdi-account-multiple"></i>
                                     <span> Data Nasabah </span>
                                 </a>
                             </li>
@@ -256,7 +250,7 @@
                         @if (auth()->user()->level == 'nasabah')
                             <li>
                                 <a href="{{ url('nasabah/tabungan') }}">
-                                    <i class="mdi mdi-format-underline"></i>
+                                    <i class="mdi mdi-cash"></i>
                                     <span> Tabungan</span>
                                 </a>
                             </li>
@@ -364,9 +358,7 @@
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>
 
-    <a href="javascript:void(0);" class="right-bar-toggle demos-show-btn">
-        <i class="mdi mdi-settings-outline mdi-spin"></i> &nbsp;Choose Demos
-    </a>
+
 
     <!-- Vendor js -->
     <script src="{{ asset('template/dist') }}/assets/js/vendor.min.js"></script>

@@ -22,14 +22,19 @@
         <!-- end page title -->
         <div class="row">
             <div class="col-8">
-
                 <div class="card-box">
+                    @if ($message = Session::get('success'))
+                        <div class="alert alert-success">
+                            {{ session()->get('success') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                        </div>
+                    @endif
                     <p>
-                        <a href="{{ url('admin/addsetoran') }}" class="btn btn-success waves-effect waves-light" >
+                        <a href="{{ route('tambah_nasabah') }}" class="btn btn-success waves-effect waves-light">
                             <span class="btn-label"><i class="mdi mdi-plus"></i>
-                        </span> Tambah Data</a>
+                            </span> Tambah Nasabah</a>
                     </p>
-
                     <table id="datatable" class="table table-bordered dt-responsive nowrap"
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
@@ -43,17 +48,19 @@
                         </thead>
                         <tbody>
                             @foreach ($nasabah as $nasabahs)
-                            <tr>
-                                <td>{{ $nasabahs->nama }}</td>
-                                <td>{{ $nasabahs->nik }}</td>
-                                <td>{{ $nasabahs->alamat }}</td>
-                                <td>{{ $nasabahs->no_hp }}</td>
-                                <td><a href="" class="btn btn-info waves-effect waves-light"  data-toggle="modal" data-target="#edit">
-                                    <i class="mdi mdi-information-variant"></i></a>
-                                    <a href="" class="btn btn-danger waves-effect waves-light"   data-toggle="modal" data-target="#hapus">
-                                        <i class="mdi mdi-delete"></i></a>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>{{ $nasabahs->nama }}</td>
+                                    <td>{{ $nasabahs->nik }}</td>
+                                    <td>{{ $nasabahs->alamat }}</td>
+                                    <td>{{ $nasabahs->no_hp }}</td>
+                                    <td><a href="" class="btn btn-info waves-effect waves-light" data-toggle="modal"
+                                            data-target="#edit">
+                                            <i class="mdi mdi-information-variant"></i></a>
+                                        <a href="" class="btn btn-danger waves-effect waves-light" data-toggle="modal"
+                                            data-target="#hapus">
+                                            <i class="mdi mdi-delete"></i></a>
+                                    </td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>

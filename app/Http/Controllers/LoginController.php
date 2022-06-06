@@ -62,7 +62,7 @@ class LoginController extends Controller
         } else {
             if ($login2 === TRUE) {
                 Auth::logout();
-                FacadesSession::flash('error', 'Akun Belum AKTIF, silhkan hubungi Admin');
+                FacadesSession::flash('error', 'Akun Belum AKTIF, silahkan hubungi Admin');
                 return redirect()->route('login');
             } else {
                 FacadesSession::flash('error', 'Email atau password salah');

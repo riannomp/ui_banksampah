@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('tittle', 'Data User')
+@section('tittle', 'Data Pegawai')
 @section('content')
 
 
@@ -15,7 +15,7 @@
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Data User</h4>
+                    <h4 class="page-title">Data Pegawai</h4>
                 </div>
             </div>
         </div>
@@ -23,46 +23,43 @@
         <div class="row">
             <div class="col-10">
                 <div class="card-box">
+                    @if ($message = Session::get('success'))
+                        <div class="alert alert-success">
+                            {{ session()->get('success') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                        </div>
+                    @endif
+                    <p>
+                        <a href="{{ route('addPegawai') }}" class="btn btn-success waves-effect waves-light">
+                            <span class="btn-label"><i class="mdi mdi-plus"></i>
+                            </span> Tambah Pegawai</a>
+                    </p>
                     <table id="datatable" class="table table-bordered dt-responsive nowrap"
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Email</th>
+                                <th>Nama</th>
+                                <th>Alamat</th>
+                                <th>No HP</th>
                                 <th>Role</th>
-                                <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $no = 1; ?>
-                            @foreach ($usr as $usr)
+                            @foreach ($pegawai as $pegawais)
                                 <tr>
-                                    <td>{{ $no++ }}</td>
-                                    <td>{{ $usr->email }}</td>
-                                    <td>
-                                        <span>{{ $usr->level }}</span>
-                                    </td>
-                                    <td>
-                                        @if ($usr->status == '1')
-                                            <button class="btn btn-success btn-rounded waves-effect waves-light"
-                                                data-toggle="modal"
-                                                data-target="#aktivasi{{ $usr->id_user }}">Aktif</button>
-                                        @else
-                                            <button class="btn btn-danger btn-rounded waves-effect waves-light"
-                                                data-toggle="modal" data-target="#aktivasi{{ $usr->id_user }}">Non
-                                                Aktif</button>
-                                        @endif
-                                    </td>
+                                    <td>{{ $pegawais->nama }}</td>
+                                    <td>{{ $pegawais->alamat }}</td>
+                                    <td>{{ $pegawais->no_hp }}</td>
+                                    <td>{{ $pegawais->user != null ? $pegawais->user->level : 'belum ada' }}</td>
                                     <td>
                                         <a href="" class="btn btn-danger waves-effect waves-light" data-toggle="modal"
                                             data-target="#hapus">
                                             <i class="mdi mdi-delete"></i></a>
                                     </td>
                                 </tr>
-                                @include('admin.aktivasi_user')
                             @endforeach
-
                         </tbody>
                     </table>
                 </div>
