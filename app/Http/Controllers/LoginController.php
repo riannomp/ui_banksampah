@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session as FacadesSession;
 use Illuminate\Support\Facades\Validator as FacadesValidator;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LoginController extends Controller
 {
@@ -58,6 +59,7 @@ class LoginController extends Controller
         $user = Auth::user();
         Auth::attempt($data);
         if ($login === TRUE) {
+            Alert::success('Success', 'Berhasil Login');
             return redirect()->route('dashboard');
         } else {
             if ($login2 === TRUE) {

@@ -25,7 +25,7 @@
 
                 <div class="card-box">
                     <p>
-                        <a href="{{ url('koor/addsetoran') }}" class="btn btn-success waves-effect waves-light" >
+                        <a href="{{ route('koor.addNasabah') }}" class="btn btn-success waves-effect waves-light" >
                             <span class="btn-label"><i class="mdi mdi-plus"></i>
                         </span> Tambah Data</a>
                     </p>

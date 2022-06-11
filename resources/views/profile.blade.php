@@ -26,7 +26,7 @@
                 <div class="card-box">
                     <div class="row">
 
-                        @if (auth()->user()->level == 'admin' || auth()->user()->level == 'teller' || auth()->user()->level == 'kepala')
+                        @if (auth()->user()->level == 'admin' || auth()->user()->level == 'teller')
                             <div class="col-5">
                                 <div class="form-group">
                                     <div class="text-center">
@@ -44,7 +44,6 @@
                                     height: 400px;
                                     margin-right: 30px;
                                 }
-
                             </style>
 
                             <div class="vl"></div>
@@ -123,7 +122,6 @@
                                     </div>
                                 </div>
                         @endif
-
                         @if (auth()->user()->level == 'koor')
                             <div class="col-5">
                                 <div class="form-group">

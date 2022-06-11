@@ -271,7 +271,6 @@
         <!-- ============================================================== -->
         <!-- Start Page Content here -->
         <!-- ============================================================== -->
-
         <div class="content-page">
             <div class="content">
 
@@ -414,6 +413,7 @@
     <script src="{{ asset('template/dist') }}/assets/js/pages/form-wizard.init.js"></script>
     <!-- form advanced init -->
     <script src="{{ asset('template/dist') }}/assets/js/pages/form-advanced.init.js"></script>
+    
     @yield('script')
 </body>
 

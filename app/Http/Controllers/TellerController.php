@@ -188,7 +188,7 @@ class TellerController extends Controller
         // }
         return view('teller.setoran_add', compact('nasabah', 'sampah', 'id_setoran', 'user'));
     }
-    
+
     //action
     public function addSetoran2(Request $request)
     {
@@ -225,7 +225,7 @@ class TellerController extends Controller
             );
         }
 
-        return redirect('teller/setoran_sampah');
+        return redirect('teller/setoran_sampah')->with(['success' => 'Data berhasil ditambahkan']);
     }
 
     public function detailSetoran($id_setoran)

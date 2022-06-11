@@ -19,25 +19,33 @@
                 </div>
             </div>
         </div>
+        @include('sweetalert::alert')
         <!-- end page title -->
-        @if (auth()->user()->level == 'admin' || auth()->user()->level == 'teller' || auth()->user()->level == 'kepala')
-        <div class="alert alert-success alert-dismissable">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            Selamat Datang, <strong>{{ $user->pegawai->nama }}</strong>
-        </div>
+        {{-- @if ($message = Session::get('success'))
+            <div class="alert alert-success">
+                {{ session()->get('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+            </div>
+        @endif --}}
+        {{-- @if (auth()->user()->level == 'admin' || auth()->user()->level == 'teller' || auth()->user()->level == 'kepala')
+            <div class="alert alert-success alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                Selamat Datang, <strong>{{ $user->pegawai->nama }}</strong>
+            </div>
         @endif
         @if (auth()->user()->level == 'nasabah')
-        <div class="alert alert-success alert-dismissable">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            Selamat Datang, <strong>{{ $user->nasabah->nama }}</strong>
-        </div>
+            <div class="alert alert-success alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                Selamat Datang, <strong>{{ $user->nasabah->nama }}</strong>
+            </div>
         @endif
         @if (auth()->user()->level == 'koor')
-        <div class="alert alert-success alert-dismissable">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            Selamat Datang, <strong>{{ $user->koordinator->nama }}</strong>
-        </div>
-        @endif
+            <div class="alert alert-success alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                Selamat Datang, <strong>{{ $user->koordinator->nama }}</strong>
+            </div>
+        @endif --}}
 
         <div class="row">
             <div class="col-xl-3 col-md-6">

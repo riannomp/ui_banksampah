@@ -94,21 +94,28 @@ Route::group(['middleware' => 'auth'], function () {
         // PDF
         Route::get('detail_setoran/cetak_pdf={id_setoran}', [PDFController::class, 'cetakPDF'])->name('cetak_pdf');
 
-
-
         Route::get('addsetoran', [TellerController::class, 'addSetoran']);
-
-
 
     });
 
     Route::group(['prefix' => 'nasabah/'], function () {
         Route::get('tabungan', [NasabahController::class, 'tabungan']);
+        Route::get('detail_setoran/{id_setoran}', [NasabahController::class, 'detailSetoran']);
+
         Route::get('profile', [NasabahController::class, 'profile'])->name('nasabah.profile');
     });
+
+
     Route::group(['prefix' => 'koor/'], function () {
         Route::get('setoran_sampah', [KoordinatorController::class, 'dataSetoran']);
         Route::get('addsetoran', [KoordinatorController::class, 'addSetoran']);
+        Route::post('addsetor/simpan', [KoordinatorController::class, 'addSetoran2'])->name('koor.setoran');
+        Route::get('detail_setoran/{id_setoran}', [KoordinatorController::class, 'detailSetoran']);
+
+
         Route::get('data_nasabah', [KoordinatorController::class, 'dataNasabah']);
+        Route::get('data_nasabah/tambah_nasabah', [KoordinatorController::class, 'addNasabah'])->name('koor.addNasabah');
+        Route::post('data_nasabah/tambah_nasabah/simpan', [KoordinatorController::class, 'addNasabah2'])->name('tambahNasabah2');
+
     });
 });

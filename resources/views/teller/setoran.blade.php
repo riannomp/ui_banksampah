@@ -25,12 +25,18 @@
             <div class="col-12">
 
                 <div class="card-box">
+                    @if ($message = Session::get('success'))
+                        <div class="alert alert-success">
+                            {{ session()->get('success') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                        </div>
+                    @endif
                     <p>
                         <a href="{{ url('teller/addsetoran') }}" class="btn btn-success waves-effect waves-light">
                             <span class="btn-label"><i class="mdi mdi-plus"></i>
                             </span> Tambah Data</a>
                     </p>
-
                     <table id="datatable" class="table table-bordered dt-responsive nowrap"
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>

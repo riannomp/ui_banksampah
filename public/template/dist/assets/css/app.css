@@ -1193,10 +1193,10 @@ body.boxed-layout {
 
 /*!
  * Waves v0.7.6
- * http://fian.my.id/Waves 
- * 
- * Copyright 2014-2018 Alfiana E. Sibuea and other contributors 
- * Released under the MIT license 
+ * http://fian.my.id/Waves
+ *
+ * Copyright 2014-2018 Alfiana E. Sibuea and other contributors
+ * Released under the MIT license
  * https://github.com/fians/Waves/blob/master/LICENSE */
 .waves-effect {
   position: relative;
@@ -2131,7 +2131,7 @@ div.hopscotch-bubble {
     margin: 0 0 0 1em; }
 
 /*
-  Common 
+  Common
 */
 .wizard, .tabcontrol {
   display: block;
@@ -3507,3 +3507,5 @@ h3.timeline-title {
 .coming-box {
   float: left;
   width: 25%; }
+
+

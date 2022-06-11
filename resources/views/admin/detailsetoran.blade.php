@@ -22,11 +22,12 @@
         <!-- end page title -->
 
         <div class="row">
-            <div class="col-8">
+            <div class="col-12">
                 <div class="card-box">
                     {{-- <h4 class="header-title">Basic example</h4> --}}
                     <div class="row">
-                        <div class="col-5">
+
+                        <div class="col-7">
                             <div class="form-group">
                                 @foreach ($data_setor as $data_setor)
                                     <table>
@@ -41,7 +42,6 @@
 
                                     </table>
                                 @endforeach
-
                             </div>
                         </div>
 
@@ -80,16 +80,30 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="form-group" style="text-align:right;">
+                    {{-- <div class="form-group" style="text-align:right;">
                         <a href="{{ route('cetak_pdf', $id_setoran) }}" ><button type="button" class="btn btn-success btn-icon right-icon">
                                 <i class="fa fa-print"></i><span> Print</span></button></a>
+                    </div> --}}
+                    <div class="pull-right mr-30" style="text-align:right;">
+                        <button type="button" class="btn btn-success btn-icon left-icon" onclick="cetak()" id="print">
+                            <i class="fa fa-print"></i><span> Print</span>
+                        </button>
                     </div>
+
                 </div>
 
             </div>
+
         </div>
 
     </div>
 
-
 @endsection
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous"></script>
+    <script>
+        function cetak() {
+            $('#print').addClass('d-none');
+            window.print();
+        };
+</script>

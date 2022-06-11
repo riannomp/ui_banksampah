@@ -170,29 +170,29 @@
 
         function ambildata() {
 
-            // var nasabah = document.getElementById("nasabah").value;
-            // var tanggal = document.getElementById("tanggal").value;
-            // var nama = document.getElementById("nama").value;
-            // var jumlah = document.getElementById("jumlah").value;
-            // var harga = document.getElementById("harga").value;
+            var nasabah = document.getElementById("nasabah").value;
+            var tanggal = document.getElementById("tanggal").value;
+            var nama = document.getElementById("nama").value;
+            var jumlah = document.getElementById("jumlah").value;
+            var harga = document.getElementById("harga").value;
 
 
-            // if (nasabah == "") {
-            //     alert("Nama Nasabah tidak boleh kosong");
-            //     return false;
-            // } else if (tanggal == "") {
-            //     alert("Tanggal Setor tidak boleh kosong");
-            //     return false;
-            // } else if (nama == "") {
-            //     alert("Nama Sampah tidak boleh kosong");
-            //     return false;
-            // } else if (jumlah == "") {
-            //     alert("Jumlah Sampah tidak boleh kosong");
-            //     return false;
-            // } else if (harga == "") {
-            //     alert("Harga Sampah tidak boleh kosong");
-            //     return false;
-            // }
+            if (nasabah == "") {
+                alert("Nama Nasabah tidak boleh kosong");
+                return false;
+            } else if (tanggal == "") {
+                alert("Tanggal Setor tidak boleh kosong");
+                return false;
+            } else if (nama == "") {
+                alert("Nama Sampah tidak boleh kosong");
+                return false;
+            } else if (jumlah == "") {
+                alert("Jumlah Sampah tidak boleh kosong");
+                return false;
+            } else if (harga == "") {
+                alert("Harga Sampah tidak boleh kosong");
+                return false;
+            }
 
 
             var id_setoran = document.getElementById('id_setoran').value;
@@ -235,3 +235,4 @@
             $('#row' + param + '').remove();
         }
     </script>
+

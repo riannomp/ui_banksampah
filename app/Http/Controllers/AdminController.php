@@ -26,16 +26,16 @@ class AdminController extends Controller
         $user = Auth::user();
         $sampah = Sampah::all();
         $jenis = Jenis::all();
-        return view('admin.data_sampah', compact('user','sampah','jenis'));
+        return view('admin.data_sampah', compact('user', 'sampah', 'jenis'));
     }
 
     //view addsampah
-     public function addSampahView()
-     {
+    public function addSampahView()
+    {
         $user = Auth::user();
         $jenis = Jenis::all();
-        return view('admin.tambah_sampah',compact('user','jenis'));
-     }
+        return view('admin.tambah_sampah', compact('user', 'jenis'));
+    }
 
     //action
     public function addSampah(Request $request)
@@ -66,15 +66,14 @@ class AdminController extends Controller
             $id_sampah = $kode . "" . $angka;
 
             Sampah::create([
-                'nama'      => $request->nama,
-                'id_sampah' => $id_sampah,
-                'gambar' => 'no_image.png',
-                'id_jenis' => $request->jenis,
-                'jumlah' => $request->jumlah,
+                'nama'          => $request->nama,
+                'id_sampah'     => $id_sampah,
+                'gambar'        => 'no_image.png',
+                'id_jenis'      => $request->jenis,
+                'jumlah'        => $request->jumlah,
                 'harga_nasabah' => $request->harga_nasabah,
                 'harga_koordinator' => $request->harga_koordinator
             ]);
-
         }
         return redirect()->back();
     }
@@ -83,21 +82,20 @@ class AdminController extends Controller
         if ($request->edit_gambar) {
             $namaFile = time() . '.' . $request->edit_gambar->extension();
             $request->edit_gambar->move(public_path('img/logo'), $namaFile);
-
             Sampah::where('id_sampah', $request->edit_id)
                 ->update([
 
-                    'nama' => $request->edit_nama,
-                    'gambar' => $namaFile,
-                    'harga_nasabah' => $request->edit_harga_nasabah,
+                    'nama'              => $request->edit_nama,
+                    'gambar'            => $namaFile,
+                    'harga_nasabah'     => $request->edit_harga_nasabah,
                     'harga_koordinator' => $request->edit_harga_koordinator
                 ]);
         } else {
 
             Sampah::where('id_sampah', $request->edit_id)
                 ->update([
-                    'nama' => $request->edit_nama,
-                    'harga_nasabah' => $request->edit_harga_nasabah,
+                    'nama'              => $request->edit_nama,
+                    'harga_nasabah'     => $request->edit_harga_nasabah,
                     'harga_koordinator' => $request->edit_harga_koordinator
                 ]);
         }
@@ -107,7 +105,7 @@ class AdminController extends Controller
     {
         $user = Auth::user();
         $nasabah = Nasabah::all();
-        return view('admin.data_nasabah',compact('nasabah','user'));
+        return view('admin.data_nasabah', compact('nasabah', 'user'));
     }
     public function addNasabah()
     {
@@ -233,7 +231,7 @@ class AdminController extends Controller
         // $user->status = '1';
         // $user->id_pegawai= $id;
         // $user->remember_token = Str::random(60);
-       // $simpan = $user->save();
+        // $simpan = $user->save();
         // dd($request);
         return redirect('admin/data_pegawai')->with(['success' => 'Data berhasil ditambahkan']);
     }
@@ -251,19 +249,19 @@ class AdminController extends Controller
         $detail_setor = DetailSetoran::where('id_setoran', $id_setoran)->get();
         $total = DetailSetoran::where('id_setoran', $id_setoran)->sum('subtotal');
 
-        return view('admin.detailsetoran',compact('user','data_setor','detail_setor','total', 'id_setoran'));
+        return view('admin.detailsetoran', compact('user', 'data_setor', 'detail_setor', 'total', 'id_setoran'));
     }
     public function addSetor()
     {
         $user = Auth::user();
-        return view('admin.setoran_add',compact('user'));
+        return view('admin.setoran_add', compact('user'));
     }
 
     public function dataJenis()
     {
         $user = Auth::user();
         $jenis = Jenis::all();
-        return view('admin.jenis', compact('jenis','user'));
+        return view('admin.jenis', compact('jenis', 'user'));
     }
 
     public function addJenis(Request $request)
@@ -278,21 +276,19 @@ class AdminController extends Controller
             'nama' => $request->nama
         ]);
         return redirect()->back();
-
     }
     public function dataUser()
     {
         $user = Auth::user();
         $usr = User::all();
-        return view('admin.data_user', compact('user','usr'));
+        return view('admin.data_user', compact('user', 'usr'));
     }
     public function updateStatus(Request $request)
     {
         User::where('id_user', $request->edit_id)
-        ->update([
-            'status'    => $request->edit_status
-        ]);
+            ->update([
+                'status'    => $request->edit_status
+            ]);
         return redirect('admin/data_user');
     }
 }
-
