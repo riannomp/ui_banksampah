@@ -46,7 +46,7 @@
         <div class="navbar-custom">
             <ul class="list-unstyled topnav-menu float-right mb-0 mr-10">
                 <li class="dropdown notification-list">
-                    @if (auth()->user()->level == 'admin' || auth()->user()->level == 'teller' || auth()->user()->level == 'kepala')
+                    @if (auth()->user()->level == 'admin' || auth()->user()->level == 'teller' || auth()->user()->level == 'superadmin')
                         <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown"
                             href="#" role="button" aria-haspopup="false" aria-expanded="false">
                             <img src="{{ url('img/logo') }}/{{ $user->pegawai->foto }}" alt="user-image"
@@ -173,19 +173,43 @@
                         </li>
                         @if (auth()->user()->level == 'admin')
                             <li>
+                                <a href="javascript: void(0);">
+                                    <i class="mdi mdi-collage"></i>
+                                    <span> Master Data </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{ url('admin/data_sampah') }}">Data Sampah</a></li>
+                                    <li><a href="{{ url('admin/data_nasabah') }}">Data Nasabah</a></li>
+                                    <li><a href="{{ url('admin/data_pegawai') }}">Data Pegawai</a></li>
+                                    <li><a href="{{ url('admin/jenis_sampah') }}">Data Jenis</a></li>
+                                </ul>
+                            </li>
+                            {{-- <li>
                                 <a href="{{ url('admin/data_sampah') }}">
                                     <i class="mdi mdi-trash-can"></i>
                                     <span>Data Sampah</span>
                                 </a>
-                            </li>
+                            </li> --}}
 
                             <li>
+                                <a href="javascript: void(0);">
+                                    <i class="mdi mdi-book-open"></i>
+                                    <span> Transaksi </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{ url('admin/setoran_sampah') }}">Setoran Sampah</a></li>
+
+                                </ul>
+                            </li>
+                            {{-- <li>
                                 <a href="{{ url('admin/setoran_sampah') }}">
                                     <i class="mdi mdi-book-open"></i>
                                     <span>Setoran Sampah</span>
                                 </a>
-                            </li>
-                            <li>
+                            </li> --}}
+                            {{-- <li>
                                 <a href="{{ url('admin/data_nasabah') }}">
                                     <i class="mdi mdi-account-multiple"></i>
                                     <span> Data Nasabah </span>
@@ -204,12 +228,27 @@
                                     <i class="mdi mdi-library-books"></i>
                                     <span> Jenis Sampah </span>
                                 </a>
-                            </li>
+                            </li> --}}
                             <li>
                                 <a href="{{ url('admin/data_user') }}">
                                     <i class="mdi mdi-shield-account"></i>
-                                    <span> Data User </span>
+                                    <span>User </span>
                                 </a>
+                            </li>
+                        @endif
+                        @if (auth()->user()->level == 'superadmin')
+                            <li>
+                                <a href="javascript: void(0);">
+                                    <i class="mdi mdi-collage"></i>
+                                    <span> Master Data </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{ url('admin/data_sampah') }}">Data Sampah</a></li>
+                                    <li><a href="{{ url('admin/data_nasabah') }}">Data Nasabah</a></li>
+                                    <li><a href="{{ url('admin/data_pegawai') }}">Data Pegawai</a></li>
+                                    <li><a href="{{ url('admin/jenis_sampah') }}">Data Jenis</a></li>
+                                </ul>
                             </li>
                         @endif
                         @if (auth()->user()->level == 'teller')
@@ -252,6 +291,12 @@
                                 <a href="{{ url('nasabah/tabungan') }}">
                                     <i class="mdi mdi-cash"></i>
                                     <span> Tabungan</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url('nasabah/profile') }}">
+                                    <i class="mdi mdi-cash"></i>
+                                    <span>Profil</span>
                                 </a>
                             </li>
                         @endif
@@ -413,7 +458,7 @@
     <script src="{{ asset('template/dist') }}/assets/js/pages/form-wizard.init.js"></script>
     <!-- form advanced init -->
     <script src="{{ asset('template/dist') }}/assets/js/pages/form-advanced.init.js"></script>
-    
+
     @yield('script')
 </body>
 

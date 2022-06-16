@@ -20,18 +20,12 @@
         </div>
     </div>
     <!-- end page title -->
-
+    @include('sweetalert::alert')
     <div class="row">
         <div class="col-12">
 
             <div class="card-box">
-                @if ($message = Session::get('success'))
-                    <div class="alert alert-success">
-                        {{ session()->get('success') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                    </div>
-                @endif
+                
                 <p>
                     <a href="{{ url('koor/addsetoran') }}" class="btn btn-success waves-effect waves-light">
                         <span class="btn-label"><i class="mdi mdi-plus"></i>
@@ -43,6 +37,7 @@
                         <tr>
                             <th>Kode Setoran</th>
                             <th>Nama Nasabah</th>
+                            <th>Nama Koordinator</th>
                             <th>Tanggal Setor</th>
                             <th>Total Harga</th>
                             <th>Aksi</th>
@@ -54,6 +49,7 @@
                             <tr>
                                 <td>{{ $str->id_setoran }}</td>
                                 <td>{{ $str->nasabah->nama }}</td>
+                                <td>{{ $str->koor->nama }}</td>
                                 <td>{{ date('d M Y', strtotime($str->tanggal)) }}</td>
                                 <td>Rp {{ number_format($str->total_harga), 2 }}</td>
                                 <td><a href="{{ url('koor/detail_setoran') }}/{{ $str->id_setoran }}"

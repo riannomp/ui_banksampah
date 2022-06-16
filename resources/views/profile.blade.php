@@ -26,7 +26,7 @@
                 <div class="card-box">
                     <div class="row">
 
-                        @if (auth()->user()->level == 'admin' || auth()->user()->level == 'teller')
+                        @if (auth()->user()->level == 'admin' || auth()->user()->level == 'teller' || auth()->user()->level == 'superadmin')
                             <div class="col-5">
                                 <div class="form-group">
                                     <div class="text-center">
@@ -62,42 +62,49 @@
                                 <div class="tab-content text-muted" id="myTabContent">
                                     <div role="tabpanel" class="tab-pane fade in active show" id="profile"
                                         aria-labelledby="home-tab">
-                                        <div class="form-group">
-
-                                            <div class="form-group row">
-                                                <label for="example-text-input" class="col-lg-2 col-form-label">Nama
-                                                </label>
-                                                <div class="col-lg-8">
-                                                    <input class="form-control" value="{{ $user->pegawai->nama }}"
-                                                        type="text">
+                                        <form action="{{ route('updatePegawai') }}" method="POST"
+                                            enctype="multipart/form-data">
+                                            {{ csrf_field() }}
+                                            <div class="form-group">
+                                                <div class="form-group row">
+                                                    <label for="example-text-input" class="col-lg-2 col-form-label">Nama
+                                                    </label>
+                                                    <div class="col-lg-8">
+                                                        <input name="edit_id" type="hidden" class="form-control"
+                                                            value="{{ $user->pegawai->id_pegawai }}">
+                                                        <input class="form-control" name="edit_nama"
+                                                            value="{{ $user->pegawai->nama }}" type="text">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="example-search-input" class="col-lg-2 col-form-label">No
-                                                    HP</label>
-                                                <div class="col-lg-8">
-                                                    <input class="form-control" value="{{ $user->pegawai->no_hp }}"
-                                                        type="text">
+                                                <div class="form-group row">
+                                                    <label for="example-search-input" class="col-lg-2 col-form-label">No
+                                                        HP</label>
+                                                    <div class="col-lg-8">
+                                                        <input class="form-control" name="edit_no_hp"
+                                                            value="{{ $user->pegawai->no_hp }}" type="text">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="example-search-input"
-                                                    class="col-lg-2 col-form-label">Alamat</label>
-                                                <div class="col-lg-8">
-                                                    <textarea class="form-control" value="" type="text">{{ $user->pegawai->alamat }}</textarea>
+                                                <div class="form-group row">
+                                                    <label for="example-search-input"
+                                                        class="col-lg-2 col-form-label">Alamat</label>
+                                                    <div class="col-lg-8">
+                                                        <textarea class="form-control" name="edit_alamat" value="" type="text">{{ $user->pegawai->alamat }}</textarea>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="example-search-input"
-                                                    class="col-lg-2 col-form-label">Foto</label>
-                                                <div class="col-lg-8">
-                                                    <input class="form-control" value="" type="file">
+                                                <div class="form-group row">
+                                                    <label for="example-search-input"
+                                                        class="col-lg-2 col-form-label">Foto</label>
+                                                    <div class="col-lg-8">
+                                                        <input type="file" name="edit_foto" class="form-control"
+                                                            id="foto">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <button type="submit" class="btn btn-primary">Simpan</button>
-                                        </div>
+                                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                        </form>
                                     </div>
-                                    <div class="tab-pane fade" id="auth" role="tabpanel" aria-labelledby="profile-tab">
+                                </div>
+                                <div class="tab-pane fade" id="auth" role="tabpanel" aria-labelledby="profile-tab">
+                                    <form action="">
                                         <div class="form-group row">
                                             <label for="example-text-input" class="col-lg-2 col-form-label">Email
                                             </label>
@@ -119,8 +126,9 @@
                                         </div>
 
                                         <button type="submit" class="btn btn-primary">Simpan</button>
-                                    </div>
+                                    </form>
                                 </div>
+                            </div>
                         @endif
                         @if (auth()->user()->level == 'koor')
                             <div class="col-5">
@@ -140,7 +148,6 @@
                                     height: 400px;
                                     margin-right: 30px;
                                 }
-
                             </style>
 
                             <div class="vl"></div>
@@ -160,38 +167,44 @@
                                     <div role="tabpanel" class="tab-pane fade in active show" id="profile"
                                         aria-labelledby="home-tab">
                                         <div class="form-group">
-
-                                            <div class="form-group row">
-                                                <label for="example-text-input" class="col-lg-2 col-form-label">Nama
-                                                </label>
-                                                <div class="col-lg-8">
-                                                    <input class="form-control" value="{{ $user->koordinator->nama }}"
-                                                        type="text">
+                                            <form action="{{ route('updateKoor') }}" method="POST"
+                                                enctype="multipart/form-data">
+                                                {{ csrf_field() }}
+                                                <div class="form-group row">
+                                                    <label for="example-text-input" class="col-lg-2 col-form-label">Nama
+                                                    </label>
+                                                    <div class="col-lg-8">
+                                                        <input name="edit_id" type="hidden" class="form-control"
+                                                            value="{{ $user->koordinator->id_koor }}">
+                                                        <input class="form-control" name="edit_nama"
+                                                            value="{{ $user->koordinator->nama }}" type="text">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="example-search-input" class="col-lg-2 col-form-label">No
-                                                    HP</label>
-                                                <div class="col-lg-8">
-                                                    <input class="form-control" value="{{ $user->koordinator->no_hp }}"
-                                                        type="text">
+                                                <div class="form-group row">
+                                                    <label for="example-search-input" class="col-lg-2 col-form-label">No
+                                                        HP</label>
+                                                    <div class="col-lg-8">
+                                                        <input class="form-control" name="edit_no_hp"
+                                                            value="{{ $user->koordinator->no_hp }}" type="text">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="example-search-input"
-                                                    class="col-lg-2 col-form-label">Alamat</label>
-                                                <div class="col-lg-8">
-                                                    <textarea class="form-control" value="" type="text">{{ $user->koordinator->alamat }}</textarea>
+                                                <div class="form-group row">
+                                                    <label for="example-search-input"
+                                                        class="col-lg-2 col-form-label">Alamat</label>
+                                                    <div class="col-lg-8">
+                                                        <textarea class="form-control" value="" name="edit_alamat" type="text">{{ $user->koordinator->alamat }}</textarea>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="example-search-input"
-                                                    class="col-lg-2 col-form-label">Foto</label>
-                                                <div class="col-lg-8">
-                                                    <input class="form-control" value="" type="file">
+                                                <div class="form-group row">
+                                                    <label for="example-search-input"
+                                                        class="col-lg-2 col-form-label">Foto</label>
+                                                    <div class="col-lg-8">
+                                                        <input type="file" name="edit_foto" class="form-control"
+                                                            id="foto">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                            </form>
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="auth" role="tabpanel" aria-labelledby="profile-tab">
@@ -237,7 +250,6 @@
                                     height: 400px;
                                     margin-right: 30px;
                                 }
-
                             </style>
 
                             <div class="vl"></div>
@@ -249,46 +261,53 @@
                                             role="tab" aria-controls="profile" aria-expanded="true">Profil</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#auth" role="tab"
-                                            aria-controls="auth">Auth</a>
+                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#auth"
+                                            role="tab" aria-controls="auth">Auth</a>
                                     </li>
                                 </ul>
+
                                 <div class="tab-content text-muted" id="myTabContent">
                                     <div role="tabpanel" class="tab-pane fade in active show" id="profile"
                                         aria-labelledby="home-tab">
                                         <div class="form-group">
-
-                                            <div class="form-group row">
-                                                <label for="example-text-input" class="col-lg-2 col-form-label">Nama
-                                                </label>
-                                                <div class="col-lg-8">
-                                                    <input class="form-control" value="{{ $user->nasabah->nama }}"
-                                                        type="text">
+                                            <form action="{{ route('updateNasabah') }}" method="POST"
+                                                enctype="multipart/form-data">
+                                                {{ csrf_field() }}
+                                                <div class="form-group row">
+                                                    <label for="example-text-input" class="col-lg-2 col-form-label">Nama
+                                                    </label>
+                                                    <div class="col-lg-8">
+                                                        <input name="edit_id" type="hidden" class="form-control"
+                                                            value="{{ $user->nasabah->id_nasabah }}">
+                                                        <input class="form-control" value="{{ $user->nasabah->nama }}"
+                                                            name="edit_nama" type="text">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="example-search-input" class="col-lg-2 col-form-label">No
-                                                    HP</label>
-                                                <div class="col-lg-8">
-                                                    <input class="form-control" value="{{ $user->nasabah->no_hp }}"
-                                                        type="text">
+                                                <div class="form-group row">
+                                                    <label for="example-search-input" class="col-lg-2 col-form-label">No
+                                                        HP</label>
+                                                    <div class="col-lg-8">
+                                                        <input class="form-control" name="edit_no_hp"
+                                                            value="{{ $user->nasabah->no_hp }}" type="text">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="example-search-input"
-                                                    class="col-lg-2 col-form-label">Alamat</label>
-                                                <div class="col-lg-8">
-                                                    <textarea class="form-control" value="" type="text">{{ $user->nasabah->alamat }}</textarea>
+                                                <div class="form-group row">
+                                                    <label for="example-search-input"
+                                                        class="col-lg-2 col-form-label">Alamat</label>
+                                                    <div class="col-lg-8">
+                                                        <textarea class="form-control" name="edit_alamat" value="" type="text">{{ $user->nasabah->alamat }}</textarea>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="example-search-input"
-                                                    class="col-lg-2 col-form-label">Foto</label>
-                                                <div class="col-lg-8">
-                                                    <input class="form-control" value="" type="file">
+                                                <div class="form-group row">
+                                                    <label for="example-search-input"
+                                                        class="col-lg-2 col-form-label">Foto</label>
+                                                    <div class="col-lg-8">
+                                                        <input type="file" name="edit_foto" class="form-control"
+                                                            id="foto">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                            </form>
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="auth" role="tabpanel" aria-labelledby="profile-tab">

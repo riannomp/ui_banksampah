@@ -22,6 +22,11 @@
 
 <body class="authentication-bg">
 
+    @include('sweetalert::alert')
+
+    <div class="">
+
+    </div>
     <div class="account-pages pt-5 my-5">
         <div class="container">
             <div class="row justify-content-center">
@@ -33,8 +38,8 @@
                                 <div class="text-center">
                                     <div class="my-3">
                                         <a href="index.html">
-                                            <span><img src="{{ asset('login') }}/images/banksampah.png"
-                                                    alt="" height="100"></span>
+                                            <span><img src="{{ asset('login') }}/images/banksampah.png" alt=""
+                                                    height="100"></span>
                                         </a>
                                     </div>
                                     <h5 class="text-muted text-uppercase py-3 font-20">Login</h5>
@@ -70,18 +75,26 @@
                                     @endif
 
                                     <div class="form-group mb-3">
-                                        <input class="form-control" type="text" required="Valid email is required: ex@abc.xyz" name="email"
+                                        <label for="">Email</label>
+                                        <input class="form-control" type="text"
+                                            required="Valid email is required: ex@abc.xyz" name="email"
                                             placeholder="Masukkan Email">
                                     </div>
 
                                     <div class="form-group mb-3">
-                                        <input class="form-control" type="password" required="" name="password" id="myInput"
-                                            placeholder="Masukkan password">
+                                        <label for="">Password</label>
+                                        <div class="float-right">
+                                            <a href="" class="text-small">
+                                                Forgot Password?
+                                            </a>
+                                        </div>
+                                        <input class="form-control" type="password" required="" name="password"
+                                            id="myInput" placeholder="Masukkan password">
                                     </div>
 
                                     <div class="form-group mb-3">
                                         <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" onclick="myFunction()">  Show Password
+                                            <input type="checkbox" onclick="myFunction()"> Show Password
 
                                         </div>
 
@@ -93,13 +106,11 @@
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col-12 text-center">
-                                            <p class="text-black-50">Belum Punya Akun? <a href="{{ route('register') }}"
+                                            <p class="text-black-50">Belum Punya Akun? <a
+                                                    href="{{ route('register') }}"
                                                     class="text-black ml-1"><b>Register</b></a></p>
                                         </div> <!-- end col -->
                                     </div>
-                                    {{-- <a href="pages-recoverpw.html" class="text-muted"><i
-                                            class="mdi mdi-lock mr-1"></i> Forgot your password?</a> --}}
-
                                 </form>
 
                             </div> <!-- end card-body -->
@@ -116,6 +127,7 @@
         </div>
         <!-- end container -->
     </div>
+
     <!-- end page -->
 
     <!-- Vendor js -->

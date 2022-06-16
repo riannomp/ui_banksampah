@@ -15,7 +15,11 @@
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Sistem Informasi Bank Sampah</h4>
+                    <marquee width="300" height="60">
+                        <h4 class="page-title">Sistem Informasi Bank Sampah</h4>
+                    </marquee>
+
+
                 </div>
             </div>
         </div>

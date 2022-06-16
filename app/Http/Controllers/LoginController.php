@@ -64,10 +64,12 @@ class LoginController extends Controller
         } else {
             if ($login2 === TRUE) {
                 Auth::logout();
-                FacadesSession::flash('error', 'Akun Belum AKTIF, silahkan hubungi Admin');
+                Alert::warning('Warning', 'Akun Belum AKTIF, silahkan hubungi Admin');
+                // FacadesSession::flash('error', 'Akun Belum AKTIF, silahkan hubungi Admin');
                 return redirect()->route('login');
             } else {
-                FacadesSession::flash('error', 'Email atau password salah');
+                Alert::error('Error', 'Email atau password salah');
+                // FacadesSession::flash('error', 'Email atau password salah');
                 return redirect()->route('login');
             }
         }
@@ -108,8 +110,9 @@ class LoginController extends Controller
         }
 
         Nasabah::create([
-            'nama' => $request->nama,
-            'alamat' => $request->alamat,
+            'nama'  => $request->nama,
+            'alamat'=> $request->alamat,
+            'foto'  => 'profile.png',
             'no_hp' => $request->no_hp
         ]);
 
@@ -127,7 +130,8 @@ class LoginController extends Controller
         $simpan = $user->save();
 
         if ($simpan) {
-            FacadesSession::flash('success', 'Register berhasil! Silahkan login untuk mengakses data');
+            Alert::success('Success', 'Register berhasil! Silahkan login untuk mengakses data');
+            // FacadesSession::flash('success', 'Register berhasil! Silahkan login untuk mengakses data');
             return redirect()->route('login');
         } else {
             FacadesSession::flash('errors', ['' => 'Register gagal! Silahkan ulangi beberapa saat lagi']);

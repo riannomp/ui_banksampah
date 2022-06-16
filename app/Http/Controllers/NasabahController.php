@@ -17,6 +17,11 @@ class NasabahController extends Controller
         return view('nasabah.data_tabungan',compact('user','setoran'));
     }
 
+    public function saldo()
+    {
+        # code...
+    }
+
     public function detailSetoran($id_setoran)
     {
         $user = Auth::user();

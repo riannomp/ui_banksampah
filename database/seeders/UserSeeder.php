@@ -59,6 +59,16 @@ class UserSeeder extends Seeder
             ]);
         $kepala->save();
 
+        $superadmin = User::create([
+            'email' => 'superadmin@superadmin.com',
+            'id_pegawai' => '4',
+            'password' => bcrypt('123456'),
+            'level' => 'superadmin',
+            'remember_token' => Str::random(60),
+            'status' => '1',
+            ]);
+        $superadmin->save();
+
         $nasabah = User::create([
             'email' => 'nasabah@nasabah.com',
             'id_nasabah' => '1',

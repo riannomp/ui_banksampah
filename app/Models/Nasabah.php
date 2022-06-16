@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Nasabah extends Model
 {
     use HasFactory;
-    protected $fillable=[
+    protected $fillable = [
         'nama',
         'nik',
         'foto',
@@ -17,7 +17,7 @@ class Nasabah extends Model
         'id_koor'
     ];
 
-    protected $dates=[
+    protected $dates = [
         'created_at',
         'updated_at',
         'deleted_at'
@@ -39,5 +39,14 @@ class Nasabah extends Model
     public function koordinator()
     {
         return $this->belongsTo(Koordinator::class, 'id_koor');
+    }
+    public function total($id)
+    {
+        $setoran = Setoran::where('id_nasabah', $id)->get();
+        $total = 0;
+        foreach ($setoran as $key => $value) {
+            $total = $total + $value->total_harga;
+        }
+        return $total;
     }
 }

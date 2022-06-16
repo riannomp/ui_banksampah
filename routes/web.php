@@ -6,6 +6,7 @@ use App\Http\Controllers\KoordinatorController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NasabahController;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TellerController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +38,10 @@ Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('profile', [DashboardController::class, 'profile'])->name('profile');
+    Route::post('profile/pegawai/edit', [ProfileController::class, 'updatePegawai'])->name('updatePegawai');
+    Route::post('profile/koor/edit', [ProfileController::class, 'updateKoor'])->name('updateKoor');
+    Route::post('profile/nasabah/edit', [ProfileController::class, 'updateNasabah'])->name('updateNasabah');
+
 
     Route::group(['prefix' => 'admin/'], function () {
         Route::get('data_sampah', [AdminController::class, 'dataSampah']);
@@ -103,6 +108,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('detail_setoran/{id_setoran}', [NasabahController::class, 'detailSetoran']);
 
         Route::get('profile', [NasabahController::class, 'profile'])->name('nasabah.profile');
+
+        
     });
 
 

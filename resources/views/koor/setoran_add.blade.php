@@ -30,7 +30,7 @@
                             <div class="col-4">
                                 <div class="form-group">
                                     <label for="userName">Nama Nasabah</label>
-                                    <select name="nasabah" id="nasabah" class="form-control" data-toggle="select2">
+                                    <select name="nasabah" id="nasabah" class="form-control">
                                         <option value="">Pilih Nama Nasabah</option>
                                         @foreach ($nasabah as $nsb)
                                             <option value="{{ $nsb->id_nasabah }}">{{ $nsb->nama }} </option>
@@ -58,12 +58,10 @@
                                     <input type="date" class="form-control mb-3" placeholder="" name ="tanggal" id="tanggal">
                                 </div>
                             </div>
-                        </div>
-                        <div class="row ">
                             <div class="col-3">
                                 <div class="form-group">
                                     <label for="userName">Nama Sampah</label>
-                                    <select name="nama" id="nama" class="form-control" data-toggle="select2">
+                                    <select name="nama" id="nama" class="form-control">
                                         <option value="">Pilih Nama Sampah</option>
                                         @foreach ($sampah as $sampahs)
                                             <option value="{{ $sampahs->id_sampah }}">{{ $sampahs->nama}} | {{ $sampahs->id_sampah }}</option>
@@ -89,7 +87,6 @@
                                     <input type="text" name="sub_total" id="sub_total" class="form-control" readonly>
                                 </div>
                             </div>
-
                         </div>
 
                         <div class="form-group" style="text-align:right;">
@@ -110,7 +107,7 @@
                                                     <thead class="thead-light">
                                                         <tr>
                                                             <th>No</th>
-                                                            <th>Nama Sampah</th>
+                                                            <th>Kode Sampah</th>
                                                             <th>Jumlah</th>
                                                             <th>Harga</th>
                                                             <th>Sub Total</th>

@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->integer('id_pegawai')->nullable()->unsigned();
             $table->integer('id_nasabah')->nullable()->unsigned();
             $table->integer('id_koor')->nullable()->unsigned();
-            $table->string('level');
+            $table->string('level',10);
             $table->string('email',50)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password',64);

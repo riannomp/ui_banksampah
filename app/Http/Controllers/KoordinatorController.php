@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator as FacadesValidator;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class KoordinatorController extends Controller
 {
@@ -32,7 +33,7 @@ class KoordinatorController extends Controller
         $nasabah = Nasabah::all();
         $sampah = Sampah::all();
 
-        return view('koor.setoran_add', compact('nasabah', 'sampah', 'id_setoran','user'));
+        return view('koor.setoran_add', compact('nasabah', 'sampah', 'id_setoran', 'user'));
     }
     public function addSetoran2(Request $request)
     {
@@ -46,18 +47,12 @@ class KoordinatorController extends Controller
             'id_koor'       =>  $user->id_koor
         ]);
 
-        // $jumlah_data = count($request->id_sampah);
-        // for ($i = 0; $i < $jumlah_data; $i++) {
-        //     DetailSetoran::create(
-        //         [
-        //             'id_setoran' => $request->id_setoran[$i],
-        //             'id_sampah'  => $request->nama[$i],
-        //             'jumlah' => $request->jumlah[$i],
-        //             'harga' => $request->harga[$i],
-        //             'subtotal' => $request->sub_total[$i]
-        //         ]
-        //     );
-        // }
+        $total = Nasabah::total($request->nasabah);
+
+        $nasabah = Nasabah::find($request->nasabah);
+        $nasabah->saldo = $total;
+        $nasabah->save();
+
         foreach ($request->nama as $key => $value) {
             DetailSetoran::create(
                 [
@@ -70,7 +65,9 @@ class KoordinatorController extends Controller
             );
         }
 
-        return redirect('koor/setoran_sampah')->with(['success' => 'Data berhasil ditambahkan']);
+
+        Alert::success('Success', 'Setoran Berhasil Ditambahkan');
+        return redirect('koor/setoran_sampah');
     }
 
     public function detailSetoran($id_setoran)
@@ -87,7 +84,7 @@ class KoordinatorController extends Controller
     {
         $user = Auth::user();
         $nasabah = Nasabah::all();
-        return view('koor.data_nasabah', compact('nasabah','user'));
+        return view('koor.data_nasabah', compact('nasabah', 'user'));
     }
 
     public function addNasabah()
@@ -147,5 +144,4 @@ class KoordinatorController extends Controller
 
         return redirect('koor/data_nasabah')->with(['success' => 'Data berhasil ditambahkan']);
     }
-
 }

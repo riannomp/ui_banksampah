@@ -40,6 +40,18 @@
                                         </div>
 
                                     </table>
+
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="form-group">
+
+                                    <table>
+                                        <div class="text-left">
+                                            <h6 class="txt-dark"><strong>Koordinator :</strong> </h6>
+                                            <p>{{ $data_setor->koor->nama }}</p>
+                                        </div>
+                                    </table>
                                 @endforeach
 
                             </div>
