@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Koordinator;
 use App\Models\Nasabah;
 use App\Models\Pegawai;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator as FacadesValidator;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -36,6 +38,9 @@ class ProfileController extends Controller
         Alert::success('Success', 'Data Berhasil Diubah');
         return redirect('dashboard');
     }
+
+
+
     public function updateKoor(Request $request)
     {
         if ($request->edit_foto) {
@@ -62,7 +67,7 @@ class ProfileController extends Controller
     }
     public function updateNasabah(Request $request)
     {
-        
+
         if ($request->edit_foto) {
             $namaFile = time() . '.' . $request->edit_foto->extension();
             $request->edit_foto->move(public_path('img/logo'), $namaFile);
@@ -82,6 +87,26 @@ class ProfileController extends Controller
                     'alamat'            => $request->edit_alamat
                 ]);
         }
+        Alert::success('Success', 'Data Berhasil Diubah');
+        return redirect('dashboard');
+    }
+
+    public function updateAuth(Request $request)
+    {
+        if ($request->edit_email) {
+            User::where('id_user', $request->edit_id)
+                ->update([
+                    'email'     => $request->edit_email,
+                    'password' => $request->password
+                ]);
+        } else {
+            User::where('id_user', $request->edit_id)
+                ->update([
+                    'email'    => $request->edit_email,
+                    'password' => bcrypt($request->edit_password)
+                ]);
+        }
+        dd($request);
         Alert::success('Success', 'Data Berhasil Diubah');
         return redirect('dashboard');
     }

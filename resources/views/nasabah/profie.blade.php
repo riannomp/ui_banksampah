@@ -25,7 +25,7 @@
             <div class="col-12">
                 <div class="card-box">
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-3">
                             <div class="form-group">
                                 <div class="text-center">
                                     <div class="">
@@ -33,6 +33,8 @@
                                             class="rounded-circle" alt="" style="width: 300px; height: 300px;">
                                     </div>
                                     <h3>{{ $user->nasabah->nama }}</h3>
+
+                                    <h4>Rp {{ number_format($user->nasabah->saldo, 2, ',', '.') }}</h4>
                                 </div>
                             </div>
                         </div>
@@ -45,102 +47,49 @@
                         </style>
 
                         <div class="vl"></div>
-                        <div class="col-6">
-                            <h3>Personal info</h3>
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#profile" role="tab"
-                                        aria-controls="profile" aria-expanded="true">Profil</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#auth" role="tab"
-                                        aria-controls="auth">Auth</a>
-                                </li>
-                            </ul>
-                            <div class="tab-content text-muted" id="myTabContent">
-                                <div role="tabpanel" class="tab-pane fade in active show" id="profile"
-                                    aria-labelledby="home-tab">
-                                        <div class="form-group">
-                                            <div class="form-group row">
-                                                <label for="example-text-input" class="col-lg-2 col-form-label">Nama
-                                                </label>
-                                                <div class="col-lg-8">
-                                                    <p>{{ $user->nasabah->nama }}</p>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="example-search-input" class="col-lg-2 col-form-label">No
-                                                    HP</label>
-                                                <div class="col-lg-8">
-                                                    <input class="form-control" name="edit_no_hp"
-                                                        value="" type="text">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="example-search-input"
-                                                    class="col-lg-2 col-form-label">Alamat</label>
-                                                <div class="col-lg-8">
-                                                    <textarea class="form-control" name="edit_alamat" value="" type="text"></textarea>
-                                                </div>
-                                            </div>
+                        <div class="col-8">
+                            <h3>Riwayat Setoran</h3>
+                            <div class="card-box">
+                                <table id="datatable" class="table table-bordered dt-responsive nowrap"
+                                    style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>Kode Setoran</th>
+                                            <th>Tanggal Setor</th>
+                                            <th>Total Harga</th>
+                                            <th>Aksi</th>
 
-                                </div>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($setoran as $str)
+                                            <tr>
+                                                <td>{{ $str->id_setoran }}</td>
+                                                <td>{{ date('d M Y', strtotime($str->tanggal)) }}</td>
+                                                <td>Rp {{ number_format($str->total_harga), 2 }}</td>
+                                                <td><a href="{{ url('admin/detail_setoran') }}/{{ $str->id_setoran }}"
+                                                        class="btn btn-info waves-effect waves-light">
+                                                        Detail</i></a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+
+
+                                    </tbody>
+                                </table>
                             </div>
-                            <div class="tab-pane fade" id="auth" role="tabpanel" aria-labelledby="profile-tab">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
 
-                                    <div class="form-group row">
-                                        <label for="example-text-input" class="col-lg-2 col-form-label">Email
-                                        </label>
-                                        <div class="col-lg-8">
-                                            <input class="form-control" value="" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="example-search-input" class="col-lg-2 col-form-label">Password</label>
-                                        <div class="col-lg-8">
-                                            <input class="form-control" name="edit_password" type="password"
-                                                id="inputPassword" value="">
-                                            <input class="form-control" name="password" type="hidden" id="inputPassword"
-                                                value="">
-                                        </div>
-                                    </div>
-
-
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-14">
-
-                <div class="card-box">
-                    <table id="datatable" class="table table-bordered dt-responsive nowrap"
-                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                        <thead>
-                            <tr>
-                                <th>Nama Nasabah</th>
-                                <th>Kode Setoran</th>
-                                <th>Tanggal Setor</th>
-                                <th>Total Harga</th>
-                                <th>Aksi</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+            <div class="col-12">
 
 
-
-                        </tbody>
-                    </table>
-                </div>
             </div>
         </div>
         <!-- end row -->

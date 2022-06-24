@@ -6,6 +6,7 @@ use App\Models\DetailSetoran;
 use App\Models\Nasabah;
 use App\Models\Sampah;
 use App\Models\Setoran;
+use App\Models\Transaksi;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,7 +38,7 @@ class KoordinatorController extends Controller
     }
     public function addSetoran2(Request $request)
     {
-        // dd($request);
+        dd($request);
         $user = Auth::user();
         Setoran::create([
             'id_setoran'    => $request->id_setoran2,
@@ -64,6 +65,15 @@ class KoordinatorController extends Controller
                 ]
             );
         }
+        Transaksi::create([
+            'id_nasabah' => $request->nasabah,
+            'setoran' => $request->total,
+        ]);
+        // $saldo = Transaksi::saldo($request->nasabah);
+
+        // $nasabah = Transaksi::find($request->nasabah);
+        // $nasabah->saldo = $saldo;
+        // $nasabah->save();
 
 
         Alert::success('Success', 'Setoran Berhasil Ditambahkan');
@@ -79,6 +89,19 @@ class KoordinatorController extends Controller
 
         return view('koor.detail_setoran', compact('user', 'data_setor', 'detail_setor', 'total', 'id_setoran'));
     }
+
+    public function penarikan()
+    {
+        $user           = Auth::user();
+        $nasabah        = Nasabah::all();
+
+        return view('koor.penarikan', compact('nasabah', 'user'));
+    }
+
+    public function addPenarikan()
+    {
+    }
+
 
     public function dataNasabah()
     {

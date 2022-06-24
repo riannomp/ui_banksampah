@@ -52,22 +52,22 @@
         @endif --}}
 
         <div class="row">
-            <div class="col-xl-3 col-md-6">
+            <div class="col-xl-4 col-md-6">
                 <div class="card-box tilebox-three">
                     <div class="avatar-lg rounded-circle bg-light border border float-left">
-                        <i class="icon-wallet font-22 avatar-title text-muted"></i>
+                        <i class="icon-trash font-22 avatar-title text-muted"></i>
                     </div>
                     <div class="text-right">
                         <h6 class="text-success text-uppercase">Jumlah Sampah</h6>
-                        <h3><span data-plugin="counterup">2,562</span></h3>
+                        <h3><span data-plugin="counterup">{{ $sampah }}</span></h3>
                     </div>
                 </div>
             </div>
 
-            <div class="col-xl-3 col-md-6">
+            <div class="col-xl-4 col-md-6">
                 <div class="card-box tilebox-three">
                     <div class="avatar-lg rounded-circle bg-light border border float-left">
-                        <i class="icon-basket font-22 avatar-title text-muted"></i>
+                        <i class="icon-user font-22 avatar-title text-muted"></i>
                     </div>
                     <div class="text-right">
                         <h6 class="text-pink text-uppercase">Jumlah Nasabah</h6>
@@ -76,29 +76,19 @@
                 </div>
             </div>
 
-            <div class="col-xl-3 col-md-6">
+            <div class="col-xl-4 col-md-6">
                 <div class="card-box tilebox-three">
                     <div class="avatar-lg rounded-circle bg-light border border float-left">
-                        <i class="icon-equalizer font-22 avatar-title text-muted"></i>
+                        <i class="icon-wallet font-22 avatar-title text-muted"></i>
                     </div>
                     <div class="text-right">
-                        <h6 class="text-purple text-uppercase">Product Sold</h6>
-                        <h3><span data-plugin="counterup">6,254</span></h3>
+                        <h6 class="text-purple text-uppercase">Jumlah Transaksi</h6>
+                        <h3><span data-plugin="counterup">{{ $transaksi }}</span></h3>
                     </div>
                 </div>
             </div>
 
-            <div class="col-xl-3 col-md-6">
-                <div class="card-box tilebox-three">
-                    <div class="avatar-lg rounded-circle bg-light border border float-left">
-                        <i class="icon-cup font-22 avatar-title text-muted"></i>
-                    </div>
-                    <div class="text-right">
-                        <h6 class="text-warning text-uppercase">Product Sold</h6>
-                        <h3><span data-plugin="counterup">7,524</span></h3>
-                    </div>
-                </div>
-            </div>
+
 
         </div>
 

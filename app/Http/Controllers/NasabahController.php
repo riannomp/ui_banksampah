@@ -35,6 +35,7 @@ class NasabahController extends Controller
     public function profile()
     {
         $user = Auth::user();
-        return view('nasabah.profie', compact('user'));
+        $setoran = Setoran::all()->where('id_nasabah', '', $user->id_nasabah);
+        return view('nasabah.profie', compact('user', 'setoran'));
     }
 }

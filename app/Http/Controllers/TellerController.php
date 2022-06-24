@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DataSampah;
 use App\Models\DetailSetoran;
 use App\Models\Jenis;
+use App\Models\Koordinator;
 use App\Models\Nasabah;
 use App\Models\Sampah;
 use App\Models\Setoran;
@@ -159,6 +160,13 @@ class TellerController extends Controller
         ]);
 
         return redirect('teller/data_nasabah')->with(['success' => 'Data berhasil ditambahkan']);
+    }
+
+    public function dataKoor()
+    {
+        $user = Auth::user();
+        $koordinator = Koordinator::all();
+        return view('teller.data_koor', compact('user', 'koordinator'));
     }
 
     public function dataSetoran()

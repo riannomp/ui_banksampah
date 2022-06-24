@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ResetPassword;
 use App\Models\Nasabah;
 use App\Models\User;
 use Dotenv\Validator;
@@ -10,6 +11,8 @@ use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session as FacadesSession;
 use Illuminate\Support\Facades\Validator as FacadesValidator;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -144,4 +147,68 @@ class LoginController extends Controller
         Auth::logout(); // menghapus session yang aktif
         return redirect()->route('login');
     }
+
+    public function forgotPassword()
+    {
+        return view('forget_password');
+    }
+    public function forgotPasswordValidate($token)
+    {
+        $user = User::where('token', $token)->where('is_verified', 0)->first();
+        if ($user) {
+            $email = $user->email;
+            return view('change-password', compact('email'));
+        }
+        Alert::error('Failed', 'Link Reset Password Kadaluarsa !!');
+        return redirect()->route('forgot-password');
+    }
+    public function resetPassword(Request $request)
+    {
+        $this->validate($request, [
+            'email' => 'required|email',
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+        if (!$user) {
+            Alert::error('Failed', 'Email anda tidak terdaftar !!');
+            return back();
+        }
+
+        $token = Str::random(60);
+
+        $user['token'] = $token;
+        $user['is_verified'] = 0;
+        $user->save();
+
+        Mail::to($request->email)->send(new ResetPassword($user->name, $token));
+
+        if(Mail::failures() != 0) {
+            Alert::success('Success', 'Link reset password sudah dikirim ke email anda !');
+            return back();
+        }
+        Alert::error('Failed', 'Ada beberapa masalah dengan penyedia email');
+        return back();
+    }
+    public function updatePassword(Request $request) {
+        $this->validate($request, [
+            'email' => 'required',
+            'password' => 'required|min:6',
+            'confirm_password' => 'required|same:password'
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+        if ($user) {
+            $user['is_verified'] = 0;
+            $user['token'] = '';
+            $user['password'] = bcrypt($request->password);
+            $user->save();
+
+            Alert::success('Success', 'Password berhasil diubah');
+            return redirect()->route('login');
+        }
+
+        Alert::error('Failed', 'Ada sesuatu yang salah, silahkan coba lagi');
+        return redirect()->route('forgot-password');
+    }
+
 }

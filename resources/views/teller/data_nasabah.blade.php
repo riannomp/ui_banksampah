@@ -21,7 +21,7 @@
         </div>
         <!-- end page title -->
         <div class="row">
-            <div class="col-10">
+            <div class="col-12">
                 <div class="card-box">
                     @if ($message = Session::get('success'))
                         <div class="alert alert-success">

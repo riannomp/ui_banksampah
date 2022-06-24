@@ -22,7 +22,7 @@
         <!-- end page title -->
 
         <div class="row">
-            <div class="col-6">
+            <div class="col-12">
                 <div class="card-box">
                     @if (session('errors'))
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -60,7 +60,7 @@
                         <div class="form-group">
                             <label for="nama">Role</label>
                             <select class="form-control" name="level">
-                                <option value="admin">Admin</option>
+                                {{-- <option value="admin">Admin</option> --}}
                                 <option value="teller">Teller</option>
                             </select>
                         </div>

@@ -8,6 +8,7 @@ use App\Http\Controllers\NasabahController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TellerController;
+use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +32,12 @@ Route::post('postlogin', [LoginController::class, 'postlogin'])->name('postlogin
 Route::get('register', [LoginController::class, 'showFormRegister'])->name('register');
 Route::post('register', [LoginController::class, 'register']);
 
+// Lupa password
+Route::get('forgot-password', [LoginController::class, 'forgotPassword'])->name('forgot-password');
+Route::get('forgot-password/{token}', [LoginController::class, 'forgotPasswordValidate']);
+Route::post('forgot-password', [LoginController::class, 'resetPassword'])->name('forgot-password');
+Route::put('reset-password', [LoginController::class, 'updatePassword'])->name('reset-password');
+
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
 // Route::group(['middleware' => 'auth', 'ceklevel:admin,teller,kepala,nasabah,koor'], function () {
@@ -41,6 +48,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('profile/pegawai/edit', [ProfileController::class, 'updatePegawai'])->name('updatePegawai');
     Route::post('profile/koor/edit', [ProfileController::class, 'updateKoor'])->name('updateKoor');
     Route::post('profile/nasabah/edit', [ProfileController::class, 'updateNasabah'])->name('updateNasabah');
+    Route::post('profile/auth/edit', [ProfileController::class, 'updateAuth'])->name('updateAuth');
 
 
     Route::group(['prefix' => 'admin/'], function () {
@@ -52,6 +60,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('data_pegawai', [AdminController::class, 'dataPegawai']);
         Route::get('tambah_pegawai', [AdminController::class, 'addPegawai'])->name('addPegawai');
         Route::post('tambah_pegawai/simpan', [AdminController::class, 'addPegawai2'])->name('addPegawai2');
+
+        Route::get('data_koordinator', [AdminController::class, 'dataKoor'])->name('datakoor');
+        Route::get('data_koordinator/tambah_koor', [AdminController::class, 'addKoor'])->name('addKoor');
+        Route::post('data_koordinator/tambah_koor/simpan', [AdminController::class, 'addKoor2'])->name('addKoor2');
 
         //view
         Route::get('data_sampah/tambah_sampah',[ AdminController::class, 'addSampahView'])->name('addSampahView');
@@ -73,6 +85,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('data_user', [AdminController::class, 'dataUser']);
         Route::post('updateStatus/{id_user}', [AdminController::class, 'updateStatus']);
+        Route::post('resetpassword', [AdminController::class, 'resetPassword'])->name('resetPassword');
     });
 
     Route::group(['prefix' => 'teller/'], function () {
@@ -88,13 +101,15 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('data_nasabah/tambah_nasabah', [TellerController::class, 'addNasabah'])->name('addnasabah');
         Route::post('data_nasabah/tambah_nasabah/simpan', [TellerController::class, 'addNasabah2'])->name('tambahNasabah');
 
-        Route::get('supplier', [TellerController::class, 'dataSupplier']);
+        Route::get('data_koordinator', [TellerController::class, 'dataKoor']);
         Route::get('setoran_sampah', [TellerController::class, 'dataSetoran']);
 
         Route::post('addsetor', [TellerController::class, 'addSetoran']);
         Route::post('addsetor/simpan', [TellerController::class, 'addSetoran2'])->name('teller.setoran');
 
         Route::get('detail_setoran/{id_setoran}', [TellerController::class, 'detailSetoran']);
+
+
 
         // PDF
         Route::get('detail_setoran/cetak_pdf={id_setoran}', [PDFController::class, 'cetakPDF'])->name('cetak_pdf');
@@ -109,7 +124,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('profile', [NasabahController::class, 'profile'])->name('nasabah.profile');
 
-        
+
     });
 
 
@@ -119,6 +134,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('addsetor/simpan', [KoordinatorController::class, 'addSetoran2'])->name('koor.setoran');
         Route::get('detail_setoran/{id_setoran}', [KoordinatorController::class, 'detailSetoran']);
 
+        Route::get('penarikan', [KoordinatorController::class, 'penarikan']);
 
         Route::get('data_nasabah', [KoordinatorController::class, 'dataNasabah']);
         Route::get('data_nasabah/tambah_nasabah', [KoordinatorController::class, 'addNasabah'])->name('koor.addNasabah');

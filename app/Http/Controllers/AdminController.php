@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DetailSetoran;
 use App\Models\Jenis;
+use App\Models\Koordinator;
 use App\Models\Nasabah;
 use App\Models\Pegawai;
 use App\Models\Sampah;
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session as FacadesSession;
 use Illuminate\Support\Facades\Validator as FacadesValidator;
 use Illuminate\Validation\Rules\Unique;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AdminController extends Controller
 {
@@ -75,7 +77,8 @@ class AdminController extends Controller
                 'harga_koordinator' => $request->harga_koordinator
             ]);
         }
-        return redirect()->back();
+        Alert::success('Success', 'Data Berhasil Ditambahkan');
+        return view('admin.data_sampah');
     }
     public function updateSampah(Request $request)
     {
@@ -161,8 +164,8 @@ class AdminController extends Controller
             'id_nasabah' => $id,
             'remember_token' => Str::random(60)
         ]);
-
-        return redirect('admin/data_nasabah')->with(['success' => 'Data berhasil ditambahkan']);
+        Alert::success('Success', 'Berhasil Menambahkan Nasabah');
+        return redirect('admin/data_nasabah');
     }
 
     public function dataPegawai()
@@ -214,13 +217,13 @@ class AdminController extends Controller
         $id = DB::getPdo()->lastInsertId();
 
         User::create([
-            'email' => strtolower($request->email),
-            'password' => bcrypt('12345678'),
+            'email'             => strtolower($request->email),
+            'password'          => bcrypt('12345678'),
             'email_verified_at' =>  \Carbon\Carbon::now(),
-            'level' => $request->level,
-            'status' => '1',
-            'id_pegawai' => $id,
-            'remember_token' => Str::random(60)
+            'level'             => $request->level,
+            'status'            => '1',
+            'id_pegawai'        => $id,
+            'remember_token'    => Str::random(60)
         ]);
 
         // $user = new User();
@@ -236,18 +239,79 @@ class AdminController extends Controller
         return redirect('admin/data_pegawai')->with(['success' => 'Data berhasil ditambahkan']);
     }
 
-    public function dataSetoran()
+    public function dataKoor()
+    {
+        $user        = Auth::user();
+        $koordinator = Koordinator::all();
+        return view('admin/data_koor', compact('user', 'koordinator'));
+    }
+
+    public function addKoor()
     {
         $user = Auth::user();
-        $setoran = Setoran::all();
+        return view('admin.tambah_koor', compact('user'));
+    }
+    public function addKoor2(Request $request)
+    {
+
+        $rules = [
+            'nama'                  => 'required',
+            'alamat'                => 'required',
+            'email'                 => 'required|email|unique:users,email',
+            'no_hp'                 => 'required'
+        ];
+
+        $messages = [
+            'nama.required'         => 'Nama Lengkap wajib diisi',
+            'alamat.required'       => 'Alamat wajib diisi',
+            'no_hp.required'        => 'Nomor HP wajib diisi',
+            'email.required'        => 'Email wajib diisi',
+            'email.email'           => 'Email tidak valid',
+            'email.unique'          => 'Email sudah terdaftar'
+        ];
+
+        // $this->validate($request, $rules, $messages);
+
+        $validator = FacadesValidator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput($request->all);
+        }
+        Koordinator::create([
+            'nama'      => $request->nama,
+            'alamat'    => $request->alamat,
+            'foto'      => 'profile.png',
+            'no_hp'     => $request->no_hp
+        ]);
+
+        $id = DB::getPdo()->lastInsertId();
+
+        User::create([
+            'email' => strtolower($request->email),
+            'password' => bcrypt('12345678'),
+            'email_verified_at' =>  \Carbon\Carbon::now(),
+            'level' => 'koor',
+            'status' => '1',
+            'id_koor' => $id,
+            'remember_token' => Str::random(60)
+        ]);
+        // dd($request);
+        Alert::success('Success', 'Berhasil Menambahkan Koordinator');
+        return redirect('admin/data_koordinator');
+    }
+
+    public function dataSetoran()
+    {
+        $user       = Auth::user();
+        $setoran    = Setoran::all();
         return view('admin.setoran', compact('user', 'setoran'));
     }
     public function detailSetoran($id_setoran)
     {
-        $user = Auth::user();
-        $data_setor = Setoran::where('id_setoran', $id_setoran)->get();
-        $detail_setor = DetailSetoran::where('id_setoran', $id_setoran)->get();
-        $total = DetailSetoran::where('id_setoran', $id_setoran)->sum('subtotal');
+        $user           = Auth::user();
+        $data_setor     = Setoran::where('id_setoran', $id_setoran)->get();
+        $detail_setor   = DetailSetoran::where('id_setoran', $id_setoran)->get();
+        $total          = DetailSetoran::where('id_setoran', $id_setoran)->sum('subtotal');
 
         return view('admin.detailsetoran', compact('user', 'data_setor', 'detail_setor', 'total', 'id_setoran'));
     }
@@ -272,8 +336,8 @@ class AdminController extends Controller
         $id_jenis = $kode . "" . $angka;
 
         Jenis::create([
-            'id_jenis' => $id_jenis,
-            'nama' => $request->nama
+            'id_jenis'  => $id_jenis,
+            'nama'      => $request->nama
         ]);
         return redirect()->back();
     }
@@ -289,6 +353,17 @@ class AdminController extends Controller
             ->update([
                 'status'    => $request->edit_status
             ]);
+        Alert::success('Success', 'Status Berhasil di Ubah');
+        return redirect('admin/data_user');
+    }
+
+    public function resetPassword(Request $request)
+    {
+        User::where('id_user', $request->edit_id)
+            ->update([
+                'password' =>  bcrypt('12345678')
+            ]);
+        Alert::success('Success', 'Password Berhasil di Reset');
         return redirect('admin/data_user');
     }
 }

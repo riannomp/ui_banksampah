@@ -1,4 +1,4 @@
-<div class="modal fade" id="aktivasi{{ $usr->id_user }}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+<div class="modal fade bs-example-modal-sm" id="aktivasi{{ $usr->id_user }}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
     aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">

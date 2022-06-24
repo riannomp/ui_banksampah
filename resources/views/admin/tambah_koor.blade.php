@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('tittle', 'Tambah Nasabah')
+@section('tittle', 'Tambah Koordinator')
 @section('content')
 
 
@@ -15,14 +15,14 @@
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Tambah Nasabah</h4>
+                    <h4 class="page-title">Tambah Koordinator</h4>
                 </div>
             </div>
         </div>
         <!-- end page title -->
 
         <div class="row">
-            <div class="col-8">
+            <div class="col-12">
                 <div class="card-box">
                     @if (session('errors'))
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -37,7 +37,7 @@
                             </ul>
                         </div>
                     @endif
-                    <form action="{{ route('tambahNasabah2') }}" method="POST" class="parsley-examples"
+                    <form action="{{ route('addKoor2') }}" method="POST" class="parsley-examples"
                         enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
@@ -47,10 +47,6 @@
                         <div class="form-group">
                             <label for="nama">Alamat</label>
                             <textarea type="text" class="form-control" id="alamat" name="alamat"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="nama">NIK</label>
-                            <input type="text" class="form-control" id="nik" name="nik">
                         </div>
                         <div class="form-group">
                             <label for="nama">No HP</label>

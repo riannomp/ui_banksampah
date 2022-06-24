@@ -34,6 +34,7 @@
                     <div class="">
                         <div class="card mb-0">
                             <div class="card-body p-4">
+                                @include('sweetalert::alert')
 
                                 <div class="text-center">
                                     <div class="my-3">
@@ -42,10 +43,10 @@
                                                     height="100"></span>
                                         </a>
                                     </div>
-                                    <h5 class="text-muted text-uppercase py-3 font-20">Login</h5>
+                                    <h5 class="text-muted text-uppercase py-3 font-20">Forget Password</h5>
                                 </div>
 
-                                <form class="mt-2" action="{{ route('postlogin') }}" method="post">
+                                <form class="mt-2" action="" method="post">
                                     @csrf
                                     @if (session('errors'))
                                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -81,33 +82,17 @@
                                             placeholder="Masukkan Email">
                                     </div>
 
-                                    <div class="form-group mb-3">
-                                        <label for="">Password</label>
-                                        <div class="float-right">
-                                            <a href="{{ route('forgot-password') }}" class="text-small">
-                                                Forgot Password?
-                                            </a>
-                                        </div>
 
-                                        <input class="form-control" type="password" required="" name="password"
-                                            id="myInput" placeholder="Masukkan password">
-                                    </div>
-
-                                    <div class="form-group mb-3">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" onclick="myFunction()"> Show Password
-                                        </div>
-                                    </div>
 
                                     <div class="form-group text-center">
                                         <button class="btn btn-success btn-block waves-effect waves-light"
-                                            type="submit"> Log In </button>
+                                            type="submit">Reset Password</button>
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col-12 text-center">
-                                            <p class="text-black-50">Belum Punya Akun? <a
-                                                    href="{{ route('register') }}"
-                                                    class="text-black ml-1"><b>Register</b></a></p>
+                                            <p class="text-black-50">Kembali ke <a
+                                                    href="{{ route('login') }}"
+                                                    class="text-black ml-1"><b>Login</b></a></p>
                                         </div> <!-- end col -->
                                     </div>
                                 </form>

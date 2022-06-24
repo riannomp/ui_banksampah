@@ -22,7 +22,7 @@
         <!-- end page title -->
 
         <div class="row">
-            <div class="col-6">
+            <div class="col-8">
                 <div class="card-box">
                     @if (session('errors'))
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">

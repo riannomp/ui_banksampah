@@ -21,15 +21,9 @@
         </div>
         <!-- end page title -->
         <div class="row">
-            <div class="col-8">
+            <div class="col-12">
                 <div class="card-box">
-                    @if ($message = Session::get('success'))
-                        <div class="alert alert-success">
-                            {{ session()->get('success') }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                        </div>
-                    @endif
+                    @include('sweetalert::alert')
                     <p>
                         <a href="{{ route('tambah_nasabah') }}" class="btn btn-success waves-effect waves-light">
                             <span class="btn-label"><i class="mdi mdi-plus"></i>

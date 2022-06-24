@@ -27,10 +27,10 @@
                     <form action="{{ route('teller.setoran') }}"  class="parsley-examples" method="POST"  enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                            <div class="col-4">
+                            <div class="col-12 col-md-4 col-lg-4">
                                 <div class="form-group">
                                     <label for="userName">Nama Nasabah</label>
-                                    <select name="nasabah" id="nasabah" class="form-control" data-toggle="select2">
+                                    <select name="nasabah" id="nasabah" class="form-control">
                                         <option value="">Pilih Nama Nasabah</option>
                                         @foreach ($nasabah as $nsb)
                                             <option value="{{ $nsb->id_nasabah }}">{{ $nsb->nama }} </option>
@@ -40,7 +40,7 @@
 
                             </div>
 
-                            <div class="col-4">
+                            <div class="col-12 col-md-4 col-lg-4">
                                 <div class="form-group">
                                     <label for="id_setoran">Kode Setoran</label>
                                     @foreach ((array) $id_setoran as $id_setorans)
@@ -52,7 +52,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-4">
+                            <div class="col-12 col-md-4 col-lg-4">
                                 <div class="form-group">
                                     <label for="tanggal">Tanggal Setor</label>
                                     <input type="date" class="form-control mb-3" placeholder="" name ="tanggal" id="tanggal">
@@ -60,10 +60,10 @@
                             </div>
                         </div>
                         <div class="row ">
-                            <div class="col-3">
+                            <div class="col-12 col-md-3 col-lg-3">
                                 <div class="form-group">
                                     <label for="userName">Nama Sampah</label>
-                                    <select name="nama" id="nama" class="form-control" data-toggle="select2">
+                                    <select name="nama" id="nama" class="form-control">
                                         <option value="">Pilih Nama Sampah</option>
                                         @foreach ($sampah as $sampahs)
                                             <option value="{{ $sampahs->id_sampah }}">{{ $sampahs->nama}} | {{ $sampahs->id_sampah }}</option>
@@ -71,19 +71,19 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-3">
+                            <div class="col-4 col-md-3 col-lg-3">
                                 <div class="form-group">
                                     <label for="userName">Jumlah</label>
                                     <input type="text" name="jumlah" id="jumlah" class="form-control a1">
                                 </div>
                             </div>
-                            <div class="col-3">
+                            <div class="col-4 col-md-3 col-lg-3">
                                 <div class="form-group">
                                     <label for="userName">Harga</label>
                                     <input type="text" name="harga" id="harga" class="form-control b1">
                                 </div>
                             </div>
-                            <div class="col-3">
+                            <div class="col-4 col-md-3 col-lg-3">
                                 <div class="form-group">
                                     <label for="userName">Sub Total</label>
                                     <input type="text" name="sub_total" id="sub_total" class="form-control" readonly>

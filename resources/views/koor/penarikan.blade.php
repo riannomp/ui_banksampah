@@ -1,8 +1,6 @@
 @extends('layout.master')
-@section('tittle', 'Data Pegawai')
+@section('tittle', 'Penarikan Nasabah')
 @section('content')
-
-
     <div class="container-fluid">
 
         <!-- start page title -->
@@ -15,7 +13,7 @@
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Data Pegawai</h4>
+                    <h4 class="page-title">Penarikan Nasabah</h4>
                 </div>
             </div>
         </div>
@@ -30,38 +28,35 @@
                                 <span aria-hidden="true">&times;</span>
                         </div>
                     @endif
-                    <p>
-                        <a href="{{ route('addPegawai') }}" class="btn btn-success waves-effect waves-light">
-                            <span class="btn-label"><i class="mdi mdi-plus"></i>
-                            </span> Tambah Pegawai</a>
-                    </p>
+
                     <table id="datatable" class="table table-bordered dt-responsive nowrap"
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
-                                <th>Nama</th>
-                                <th>Alamat</th>
-                                <th>No HP</th>
-                                <th>Role</th>
+                                <th>Nasabah</th>
+                                <th>Total Saldo</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($pegawai as $pegawais)
+                            @foreach ($nasabah as $nsb)
                                 <tr>
-                                    <td>{{ $pegawais->nama }}</td>
-                                    <td>{{ $pegawais->alamat }}</td>
-                                    <td>{{ $pegawais->no_hp }}</td>
-                                    <td>{{ $pegawais->user != null ? $pegawais->user->level : 'belum ada' }}</td>
+                                    <td>{{ $nsb->nama }}</td>
+                                    <td>Rp {{ number_format($nsb->saldo, 2, ',', '.') }}</td>
                                     <td>
-                                        <a href="" class="btn btn-danger waves-effect waves-light" data-toggle="modal"
-                                            data-target="#hapus">
-                                            <i class="mdi mdi-delete"></i></a>
+                                        @if ($nsb->saldo >= 50000)
+                                            <a href="" class="btn btn-primary waves-effect waves-light"
+                                                data-toggle="modal" data-target="#penarikan{{$nsb->id_nasabah}}">
+                                                Penarikan</a>
+                                        @endif
+
                                     </td>
                                 </tr>
+                                @include('koor.tambah_penarikan')
                             @endforeach
                         </tbody>
                     </table>
+
                 </div>
             </div>
         </div>

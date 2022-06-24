@@ -49,4 +49,5 @@ class Nasabah extends Model
         }
         return $total;
     }
+
 }

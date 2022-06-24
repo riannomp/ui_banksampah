@@ -104,12 +104,15 @@
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="auth" role="tabpanel" aria-labelledby="profile-tab">
-                                    <form action="">
+                                    <form action="{{ route('updateAuth') }}" method="POST" enctype="multipart/form-data">
+                                        {{ csrf_field() }}
                                         <div class="form-group row">
                                             <label for="example-text-input" class="col-lg-2 col-form-label">Email
                                             </label>
                                             <div class="col-lg-8">
-                                                <input class="form-control" value="{{ $user->email }}" type="text">
+                                                <input class="form-control" value="{{ $user->id_user }}"
+                                                    type="hidden">
+                                                <input class="form-control" value="{{ $user->email }}" type="text" name="edit_email">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -120,11 +123,9 @@
                                                     id="inputPassword" value="">
                                                 <input class="form-control" name="password" type="hidden"
                                                     id="inputPassword" value="{{ $user->password }}">
-
                                                 <input type="checkbox" onclick="shwoPassword()"> Show Password
                                             </div>
                                         </div>
-
                                         <button type="submit" class="btn btn-primary">Simpan</button>
                                     </form>
                                 </div>
@@ -136,7 +137,8 @@
                                     <div class="text-center">
                                         <div class="">
                                             <img src="{{ url('img/logo') }}/{{ $user->koordinator->foto }}"
-                                                class="rounded-circle" alt="" style="width: 300px; height: 300px;">
+                                                class="rounded-circle" alt=""
+                                                style="width: 300px; height: 300px;">
                                         </div>
                                         <h3>{{ $user->koordinator->nama }}</h3>
                                     </div>
@@ -159,8 +161,8 @@
                                             role="tab" aria-controls="profile" aria-expanded="true">Profil</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#auth" role="tab"
-                                            aria-controls="auth">Auth</a>
+                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#auth"
+                                            role="tab" aria-controls="auth">Auth</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content text-muted" id="myTabContent">
@@ -207,7 +209,8 @@
                                             </form>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="auth" role="tabpanel" aria-labelledby="profile-tab">
+                                    <div class="tab-pane fade" id="auth" role="tabpanel"
+                                        aria-labelledby="profile-tab">
                                         <div class="form-group row">
                                             <label for="example-text-input" class="col-lg-2 col-form-label">Email
                                             </label>
@@ -238,7 +241,8 @@
                                     <div class="text-center">
                                         <div class="">
                                             <img src="{{ url('img/logo') }}/{{ $user->nasabah->foto }}"
-                                                class="rounded-circle" alt="" style="width: 300px; height: 300px;">
+                                                class="rounded-circle" alt=""
+                                                style="width: 300px; height: 300px;">
                                         </div>
                                         <h3>{{ $user->nasabah->nama }}</h3>
                                     </div>
@@ -310,7 +314,8 @@
                                             </form>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="auth" role="tabpanel" aria-labelledby="profile-tab">
+                                    <div class="tab-pane fade" id="auth" role="tabpanel"
+                                        aria-labelledby="profile-tab">
                                         <div class="form-group row">
                                             <label for="example-text-input" class="col-lg-2 col-form-label">Email
                                             </label>

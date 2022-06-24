@@ -32,6 +32,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-6 col-xl-5">
                     <div class="">
+                        @include('sweetalert::alert')
                         <div class="card mb-0">
                             <div class="card-body p-4">
 
@@ -42,74 +43,51 @@
                                                     height="100"></span>
                                         </a>
                                     </div>
-                                    <h5 class="text-muted text-uppercase py-3 font-20">Login</h5>
+                                    <h5 class="text-muted text-uppercase py-3 font-20">Change Password</h5>
                                 </div>
 
-                                <form class="mt-2" action="{{ route('postlogin') }}" method="post">
+                                <form action="{{ route('reset-password') }}" method="post" autocomplete="off">
                                     @csrf
-                                    @if (session('errors'))
-                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                            Something it's wrong:
-                                            <button type="button" class="close" data-dismiss="alert"
-                                                aria-label="Close">
-                                                <span aria-hidden="true">×</span>
-                                            </button>
-                                            <ul>
-                                                @foreach ($errors->all() as $error)
-                                                    <li>{{ $error }}</li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    @endif
+                                    @method('PUT')
                                     @if (Session::has('success'))
-                                        <div class="alert alert-success">
+                                        <div class="alert alert-success alert-dismissible fade show">
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
                                             {{ Session::get('success') }}
                                         </div>
-                                    @endif
-                                    @if (Session::has('error'))
-                                        <div class="alert alert-danger alert-dismissable">
-                                            <button type="button" class="close" data-dismiss="alert"
-                                                aria-hidden="true">&times;</button>
-                                            {{ Session::get('error') }}
+                                    @elseif (Session::has('failed'))
+                                        <div class="alert alert-danger alert-dismissible fade show">
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
+                                            {{ Session::get('failed') }}
                                         </div>
                                     @endif
-
-                                    <div class="form-group mb-3">
-                                        <label for="">Email</label>
-                                        <input class="form-control" type="text"
-                                            required="Valid email is required: ex@abc.xyz" name="email"
-                                            placeholder="Masukkan Email">
-                                    </div>
+                                    <input type="hidden" name="email" value="{{ $email }} " />
 
                                     <div class="form-group mb-3">
                                         <label for="">Password</label>
-                                        <div class="float-right">
-                                            <a href="{{ route('forgot-password') }}" class="text-small">
-                                                Forgot Password?
-                                            </a>
-                                        </div>
 
-                                        <input class="form-control" type="password" required="" name="password"
-                                            id="myInput" placeholder="Masukkan password">
+                                        <input type="password" name="password"
+                                            class="form-control {{ $errors->first('password') ? 'is-invalid' : '' }}"
+                                            value="{{ old('password') }}" placeholder="New Password">
+                                        {!! $errors->first('password', '<div class="invalid-feedback">:message</div>') !!}
                                     </div>
-
                                     <div class="form-group mb-3">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" onclick="myFunction()"> Show Password
-                                        </div>
+                                        <label for="">Confirm Password</label>
+                                        <input type="password" name="confirm_password"
+                                            class="form-control {{ $errors->first('confirm_password') ? 'is-invalid' : '' }}"
+                                            value="{{ old('confirm_password') }}" placeholder="Confirm Password">
+                                        {!! $errors->first('confirm_password', '<div class="invalid-feedback">:message</div>') !!}
+
                                     </div>
+
+
 
                                     <div class="form-group text-center">
                                         <button class="btn btn-success btn-block waves-effect waves-light"
-                                            type="submit"> Log In </button>
+                                            type="submit">Change Password</button>
                                     </div>
-                                    <div class="row mt-3">
-                                        <div class="col-12 text-center">
-                                            <p class="text-black-50">Belum Punya Akun? <a
-                                                    href="{{ route('register') }}"
-                                                    class="text-black ml-1"><b>Register</b></a></p>
-                                        </div> <!-- end col -->
-                                    </div>
+
                                 </form>
 
                             </div> <!-- end card-body -->

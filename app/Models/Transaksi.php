@@ -26,4 +26,14 @@ class Transaksi extends Model
     {
         return $this->belongsTo(Nasabah::class, 'id_nasabah');
     }
+
+    // public function saldo($id)
+    // {
+    //     $setoran = Transaksi::where('id_nasabah', $id)->get();
+    //     $saldo = 0;
+    //     foreach ($setoran as $key => $value) {
+    //         $saldo = $saldo + $value->setoran;
+    //     }
+    //     return $saldo;
+    // }
 }

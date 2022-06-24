@@ -19,9 +19,10 @@
                 </div>
             </div>
         </div>
+        @include('sweetalert::alert')
         <!-- end page title -->
         <div class="row">
-            <div class="col-10">
+            <div class="col-12">
                 <div class="card-box">
                     <table id="datatable" class="table table-bordered dt-responsive nowrap"
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -55,9 +56,13 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="" class="btn btn-danger waves-effect waves-light" data-toggle="modal"
-                                            data-target="#hapus">
+                                        <a href="" class="btn btn-primary waves-effect waves-light"
+                                            data-toggle="modal" data-target="#resetpassword{{ $usr->id_user }}">Reset
+                                            Password</i></a>
+                                        <a href="" class="btn btn-danger waves-effect waves-light"
+                                            data-toggle="modal" data-target="#hapus">
                                             <i class="mdi mdi-delete"></i></a>
+                                        @include('admin.resetpassword')
                                     </td>
                                 </tr>
                                 @include('admin.aktivasi_user')
@@ -68,7 +73,7 @@
                 </div>
             </div>
         </div>
-        <!-- end row -->
+
 
     </div> <!-- end container-fluid -->
 

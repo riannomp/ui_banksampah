@@ -47,8 +47,9 @@
             <ul class="list-unstyled topnav-menu float-right mb-0 mr-10">
                 <li class="dropdown notification-list">
                     @if (auth()->user()->level == 'admin' || auth()->user()->level == 'teller' || auth()->user()->level == 'superadmin')
-                        <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown"
-                            href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light"
+                            data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
+                            aria-expanded="false">
                             <img src="{{ url('img/logo') }}/{{ $user->pegawai->foto }}" alt="user-image"
                                 class="rounded-circle">
                             <span
@@ -57,8 +58,9 @@
                         </a>
                     @endif
                     @if (auth()->user()->level == 'koor')
-                        <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown"
-                            href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light"
+                            data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
+                            aria-expanded="false">
                             <img src="{{ url('img/logo') }}/{{ $user->koordinator->foto }}" alt="user-image"
                                 class="rounded-circle">
                             <span
@@ -68,7 +70,8 @@
                     @endif
                     @if (auth()->user()->level == 'nasabah')
                         <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light"
-                            data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                            data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
+                            aria-expanded="false">
                             <img src="{{ url('img/logo') }}/{{ $user->nasabah->foto }}" alt="user-image"
                                 class="rounded-circle">
                             <span
@@ -95,6 +98,7 @@
                         <a href="{{ route('logout') }}" class="dropdown-item notify-item">
                             <i class="mdi mdi-logout-variant"></i>
                             <span>Logout</span>
+
                         </a>
 
                     </div>
@@ -105,25 +109,27 @@
             <div class="logo-box">
                 <a href="{{ url('dashboard') }}" class="logo text-center logo-dark">
                     <span class="logo-lg">
-                        <img src="{{ asset('template/dist') }}/assets/images/sampah/banksampah_logo.png" alt=""
-                            height="50">
+                        <img src="{{ asset('template/dist') }}/assets/images/sampah/banksampah_logo.png"
+                            alt="" height="50">
                         <!-- <span class="logo-lg-text-dark">Uplon</span> -->
                     </span>
                     <span class="logo-sm">
                         <!-- <span class="logo-lg-text-dark">U</span> -->
-                        <img src="{{ asset('template/dist') }}/assets/images/sampah/banksampah_logo.png" alt=""
-                            height="50">
+                        <img src="{{ asset('template/dist') }}/assets/images/sampah/banksampah_logo.png"
+                            alt="" height="50">
                     </span>
                 </a>
 
                 <a href="{{ url('dashboard') }}" class="logo text-center logo-light">
                     <span class="logo-lg">
-                        <img src="{{ asset('template/dist') }}/assets/images/logo-light.png" alt="" height="22">
+                        <img src="{{ asset('template/dist') }}/assets/images/logo-light.png" alt=""
+                            height="22">
                         <!-- <span class="logo-lg-text-dark">Uplon</span> -->
                     </span>
                     <span class="logo-sm">
                         <!-- <span class="logo-lg-text-dark">U</span> -->
-                        <img src="{{ asset('template/dist') }}/assets/images/logo-sm-light.png" alt="" height="24">
+                        <img src="{{ asset('template/dist') }}/assets/images/logo-sm-light.png" alt=""
+                            height="24">
                     </span>
                 </a>
             </div>
@@ -179,10 +185,12 @@
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{ url('admin/jenis_sampah') }}">Data Jenis</a></li>
                                     <li><a href="{{ url('admin/data_sampah') }}">Data Sampah</a></li>
                                     <li><a href="{{ url('admin/data_nasabah') }}">Data Nasabah</a></li>
                                     <li><a href="{{ url('admin/data_pegawai') }}">Data Pegawai</a></li>
-                                    <li><a href="{{ url('admin/jenis_sampah') }}">Data Jenis</a></li>
+                                    <li><a href="{{ url('admin/data_koordinator') }}">Data Koordinator</a></li>
+
                                 </ul>
                             </li>
                             {{-- <li>
@@ -200,7 +208,7 @@
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
                                     <li><a href="{{ url('admin/setoran_sampah') }}">Setoran Sampah</a></li>
-
+                                    <li><a href="{{ url('admin/penarikan') }}">Penarikan</a></li>
                                 </ul>
                             </li>
                             {{-- <li>
@@ -229,12 +237,6 @@
                                     <span> Jenis Sampah </span>
                                 </a>
                             </li> --}}
-                            <li>
-                                <a href="{{ url('admin/data_user') }}">
-                                    <i class="mdi mdi-shield-account"></i>
-                                    <span>User </span>
-                                </a>
-                            </li>
                         @endif
                         @if (auth()->user()->level == 'superadmin')
                             <li>
@@ -244,60 +246,101 @@
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{ url('admin/jenis_sampah') }}">Data Jenis</a></li>
                                     <li><a href="{{ url('admin/data_sampah') }}">Data Sampah</a></li>
                                     <li><a href="{{ url('admin/data_nasabah') }}">Data Nasabah</a></li>
                                     <li><a href="{{ url('admin/data_pegawai') }}">Data Pegawai</a></li>
-                                    <li><a href="{{ url('admin/jenis_sampah') }}">Data Jenis</a></li>
+                                    <li><a href="{{ url('admin/data_koordinator') }}">Data Koordinator</a></li>
+                                    <li><a href="{{ url('admin/data_user') }}">Data User</a></li>
                                 </ul>
                             </li>
+                            <li>
+                                <a href="javascript: void(0);">
+                                    <i class="mdi mdi-book-open"></i>
+                                    <span> Transaksi </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{ url('admin/setoran_sampah') }}">Setoran Sampah</a></li>
+                                    <li><a href="{{ url('admin/penarikan') }}">Penarikan</a></li>
+                                </ul>
+                            </li>
+                            {{-- <li>
+                                <a href="">
+                                    <i class="mdi mdi-shield-account"></i>
+                                    <span>User </span>
+                                </a>
+                            </li> --}}
                         @endif
                         @if (auth()->user()->level == 'teller')
                             <li>
-                                <a href="{{ url('teller/data_sampah') }}">
-                                    <i class="mdi mdi-trash-can"></i>
-                                    <span>Data Sampah </span>
+                                <a href="javascript: void(0);">
+                                    <i class="mdi mdi-collage"></i>
+                                    <span> Master Data </span>
+                                    <span class="menu-arrow"></span>
                                 </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{ url('teller/data_sampah') }}">Data Sampah</a></li>
+                                    <li><a href="{{ url('teller/data_nasabah') }}">Data Nasabah</a></li>
+                                    <li><a href="{{ url('teller/data_koordinator') }}">Data Koordinator</a></li>
+                                </ul>
                             </li>
                             <li>
-                                <a href="{{ url('teller/setoran_sampah') }}">
+                                <a href="javascript: void(0);">
                                     <i class="mdi mdi-book-open"></i>
-                                    <span>Setoran Sampah </span>
+                                    <span> Transaksi </span>
+                                    <span class="menu-arrow"></span>
                                 </a>
-                            </li>
-                            <li>
-                                <a href="{{ url('teller/data_nasabah') }}">
-                                    <i class="mdi mdi-account-multiple"></i>
-                                    <span> Data Nasabah </span>
-                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{ url('teller/setoran_sampah') }}">Setoran Sampah</a></li>
+                                    <li><a href="{{ url('teller/penarikan') }}">Penarikan</a></li>
+
+                                </ul>
                             </li>
                         @endif
 
                         @if (auth()->user()->level == 'koor')
                             <li>
-                                <a href="{{ url('koor/setoran_sampah') }}">
-                                    <i class="mdi mdi-book-open"></i>
-                                    <span>Setoran Sampah </span>
+                                <a href="javascript: void(0);">
+                                    <i class="mdi mdi-collage"></i>
+                                    <span> Master Data </span>
+                                    <span class="menu-arrow"></span>
                                 </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{ url('koor/data_sampah') }}">Data Sampah</a></li>
+                                    <li><a href="{{ url('koor/data_nasabah') }}">Data Nasabah</a></li>
+                                </ul>
                             </li>
                             <li>
-                                <a href="{{ url('koor/data_nasabah') }}">
-                                    <i class="mdi mdi-account-multiple"></i>
-                                    <span> Data Nasabah </span>
+                                <a href="javascript: void(0);">
+                                    <i class="mdi mdi-book-open"></i>
+                                    <span> Transaksi </span>
+                                    <span class="menu-arrow"></span>
                                 </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{ url('koor/setoran_sampah') }}">Setoran Sampah</a></li>
+                                    <li><a href="{{ url('koor/penarikan') }}">Penarikan</a></li>
+                                </ul>
                             </li>
                         @endif
                         @if (auth()->user()->level == 'nasabah')
+
                             <li>
-                                <a href="{{ url('nasabah/tabungan') }}">
-                                    <i class="mdi mdi-cash"></i>
-                                    <span> Tabungan</span>
+                                <a href="{{ url('nasabah/profile') }}">
+                                    <i class="mdi mdi-account"></i>
+                                    <span>Profil</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ url('nasabah/profile') }}">
-                                    <i class="mdi mdi-cash"></i>
-                                    <span>Profil</span>
+                                <a href="javascript: void(0);">
+                                    <i class="mdi mdi-book-open"></i>
+                                    <span> Transaksi </span>
+                                    <span class="menu-arrow"></span>
                                 </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{ url('nasabah/tabungan') }}">Setoran Sampah</a></li>
+                                    <li><a href="{{ url('koor/setoran_sampah') }}">Penarikan</a></li>
+                                </ul>
                             </li>
                         @endif
                     </ul>
@@ -367,7 +410,8 @@
                         class="img-fluid img-thumbnail" alt="">
                 </div>
                 <div class="custom-control custom-switch mb-3">
-                    <input type="checkbox" class="custom-control-input theme-choice" id="light-mode-switch" checked />
+                    <input type="checkbox" class="custom-control-input theme-choice" id="light-mode-switch"
+                        checked />
                     <label class="custom-control-label" for="light-mode-switch">Light Mode</label>
                 </div>
 
