@@ -26,9 +26,13 @@
                     @include('sweetalert::alert')
                     @if (auth()->user()->level == 'admin')
                         <p>
-                            <a href="{{ route('addKoor') }}" class="btn btn-success waves-effect waves-light">
+                            {{-- <a href="{{ route('addKoor') }}" class="btn btn-success waves-effect waves-light">
                                 <span class="btn-label"><i class="mdi mdi-plus"></i>
-                                </span> Tambah Koordinator</a>
+                                </span> Tambah Koordinator</a> --}}
+                            <a href="" class="btn btn-success waves-effect waves-light" data-toggle="modal"
+                                data-target="#addkoor">
+                                <span class="btn-label"><i class="mdi mdi-plus"></i>
+                                </span> Tambah Data</a>
                         </p>
                     @endif
 
@@ -50,17 +54,19 @@
                                     <td>{{ $koor->no_hp }}</td>
 
                                     <td>
-                                        <a href="" class="btn btn-danger waves-effect waves-light"
-                                            data-toggle="modal" data-target="#hapus">
-                                            <i class="mdi mdi-delete"></i></a>
+                                        <a href="" class="btn btn-info waves-effect waves-light" data-toggle="modal"
+                                            data-target="#updatekoor{{ $koor->id_koor }}">
+                                            <i class="mdi mdi-pencil"></i></a>
                                     </td>
                                 </tr>
+                                @include('admin.update_koor')
                             @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+        @include('admin.add_koor')
         <!-- end row -->
 
     </div> <!-- end container-fluid -->

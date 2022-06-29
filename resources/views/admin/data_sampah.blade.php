@@ -27,13 +27,13 @@
                 <div class="card-box">
                     @if (auth()->user()->level == 'admin')
                         <p>
-                            {{-- <a href="" class="btn btn-success waves-effect waves-light" data-toggle="modal"
+                            <a href="" class="btn btn-success waves-effect waves-light" data-toggle="modal"
                             data-target="#addsampah">
                             <span class="btn-label"><i class="mdi mdi-plus"></i>
-                            </span> Tambah Data</a> --}}
-                            <a href="{{ route('addSampahView') }}" class="btn btn-success waves-effect waves-light">
+                            </span> Tambah Data</a>
+                            {{-- <a href="{{ route('addSampahView') }}" class="btn btn-success waves-effect waves-light">
                                 <span class="btn-label"><i class="mdi mdi-plus"></i>
-                                </span> Tambah Data</a>
+                                </span> Tambah Data</a> --}}
                         </p>
                     @endif
 

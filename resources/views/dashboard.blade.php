@@ -87,9 +87,22 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card-box">
+                    <div>
+                        <h4 class="header-title">Grafik Transaksi</h4>
+                        
 
+                        <div class="p-3">
+                            <canvas id="lineChart" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
 
-
+                </div>
+            </div>
         </div>
 
     </div> <!-- end container-fluid -->

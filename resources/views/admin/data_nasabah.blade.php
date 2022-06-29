@@ -25,9 +25,14 @@
                 <div class="card-box">
                     @include('sweetalert::alert')
                     <p>
-                        <a href="{{ route('tambah_nasabah') }}" class="btn btn-success waves-effect waves-light">
+                        {{-- <a href="{{ route('tambah_nasabah') }}" class="btn btn-success waves-effect waves-light">
                             <span class="btn-label"><i class="mdi mdi-plus"></i>
-                            </span> Tambah Nasabah</a>
+                            </span> Tambah Nasabah</a> --}}
+
+                        <a href="" class="btn btn-success waves-effect waves-light" data-toggle="modal"
+                            data-target="#addnasabah">
+                            <span class="btn-label"><i class="mdi mdi-plus"></i>
+                            </span> Tambah Data</a>
                     </p>
                     <table id="datatable" class="table table-bordered dt-responsive nowrap"
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -48,14 +53,14 @@
                                     <td>{{ $nasabahs->alamat }}</td>
                                     <td>{{ $nasabahs->no_hp }}</td>
                                     <td><a href="" class="btn btn-info waves-effect waves-light" data-toggle="modal"
-                                            data-target="#edit">
-                                            <i class="mdi mdi-information-variant"></i></a>
-                                        <a href="" class="btn btn-danger waves-effect waves-light" data-toggle="modal"
-                                            data-target="#hapus">
-                                            <i class="mdi mdi-delete"></i></a>
+                                            data-target="#updatenasabah{{ $nasabahs->id_nasabah }}">
+                                            <i class="mdi mdi-pencil"></i></a>
+
                                     </td>
                                 </tr>
+                                @include('admin.update_nasabah')
                             @endforeach
+                            @include('admin.add_nasabah')
                         </tbody>
                     </table>
                 </div>

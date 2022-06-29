@@ -55,7 +55,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('data_sampah', [AdminController::class, 'dataSampah']);
         Route::get('data_nasabah', [AdminController::class, 'dataNasabah']);
         Route::get('data_nasabah/tambah_nasabah', [AdminController::class, 'addNasabah'])->name('tambah_nasabah');
-        Route::post('data_nasabah/tambah_nasabah/simpan', [AdminController::class, 'addNasabah2'])->name('tambahNasabah');
+        Route::post('data_nasabah/tambah_nasabah/simpan', [AdminController::class, 'addNasabah2'])->name('tambahNasabahh');
+        Route::post('data_nasabah/edit/simpan', [AdminController::class, 'updateNasabah'])->name('updateNasabahh');
 
         Route::get('data_pegawai', [AdminController::class, 'dataPegawai']);
         Route::get('tambah_pegawai', [AdminController::class, 'addPegawai'])->name('addPegawai');
@@ -65,6 +66,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('data_koordinator', [AdminController::class, 'dataKoor'])->name('datakoor');
         Route::get('data_koordinator/tambah_koor', [AdminController::class, 'addKoor'])->name('addKoor');
         Route::post('data_koordinator/tambah_koor/simpan', [AdminController::class, 'addKoor2'])->name('addKoor2');
+        Route::post('data_koordinator/edit/simpan', [AdminController::class, 'updateKoor'])->name('updateKoorr');
 
         //view
         Route::get('data_sampah/tambah_sampah',[ AdminController::class, 'addSampahView'])->name('addSampahView');
@@ -89,6 +91,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('data_user', [AdminController::class, 'dataUser']);
         Route::post('updateStatus/{id_user}', [AdminController::class, 'updateStatus']);
         Route::post('resetpassword', [AdminController::class, 'resetPassword'])->name('resetPassword');
+
+        Route::get('setoran/generate-pdf', [PDFController::class, 'generatePDF'])->name('cetakpdf');
     });
 
     Route::group(['prefix' => 'teller/'], function () {

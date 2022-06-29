@@ -492,6 +492,10 @@
     <script src="{{ asset('template/dist') }}/assets/libs/autocomplete/jquery.autocomplete.min.js"></script>
     <script src="{{ asset('template/dist') }}/assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
 
+      <!-- Chart JS -->
+      <script src="{{ asset('template/dist') }}/assets/libs/chart-js/Chart.bundle.min.js"></script>
+      <!-- Init js -->
+      <script src="{{ asset('template/dist') }}/assets/js/pages/chartjs.init.js"></script>
     <!--Form Wizard-->
     <script src="{{ asset('template/dist') }}/assets/libs/jquery-steps/jquery.steps.min.js"></script>
 

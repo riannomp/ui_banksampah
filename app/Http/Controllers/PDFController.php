@@ -14,4 +14,16 @@ class PDFController extends Controller
         $pdf = PDF::loadview('pdf', compact('detail'));
         return $pdf->download('Detail_Setoran.pdf');
     }
+    public function generatePDF()
+    {
+        // $data = [
+        //     'title' => 'Welcome to ItSolutionStuff.com',
+        //     'date' => date('m/d/Y')
+        // ];
+
+        $pdf = PDF::loadView('pdf');
+
+        return $pdf->download('itsolutionstuff.pdf');
+    }
 }
+

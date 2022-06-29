@@ -49,7 +49,7 @@
                                 <td>{{ $nasabahs->nik }}</td>
                                 <td>{{ $nasabahs->alamat }}</td>
                                 <td>{{ $nasabahs->no_hp }}</td>
-                                <td>{{ $nasabahs->saldo }}</td>
+                                <td>Rp {{ number_format($nasabahs->saldo), 2 }}</td>
                                 <td><a href="" class="btn btn-info waves-effect waves-light"  data-toggle="modal" data-target="#updatenasabah{{ $nasabahs->id_nasabah }}">
                                     <i class="mdi mdi-pencil"></i></a>
                                     <a href="" class="btn btn-danger waves-effect waves-light"   data-toggle="modal" data-target="#hapus">

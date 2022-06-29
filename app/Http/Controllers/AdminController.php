@@ -169,6 +169,18 @@ class AdminController extends Controller
         Alert::success('Success', 'Berhasil Menambahkan Nasabah');
         return redirect('admin/data_nasabah');
     }
+    public function updateNasabah(Request $request)
+    {
+        Nasabah::where('id_nasabah', $request->edit_id)
+            ->update([
+                'nama'      => $request->edit_nama,
+                'alamat'    => $request->edit_alamat,
+                'nik'       => $request->edit_nik,
+                'no_hp'     => $request->edit_no_hp
+            ]);
+        Alert::success('Success', 'Berhasil Mengubah Data Nasabah');
+        return redirect()->back();
+    }
 
     public function dataPegawai()
     {
@@ -243,7 +255,7 @@ class AdminController extends Controller
 
     public function deletePegawai($id)
     {
-        DB::table('pegawais')->where('id_pegawai',$id)->delete();
+        DB::table('pegawais')->where('id_pegawai', $id)->delete();
         return redirect('admin/data_pegawai');
     }
     public function dataKoor()
@@ -282,6 +294,7 @@ class AdminController extends Controller
         $validator = FacadesValidator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
+
             return redirect()->back()->withErrors($validator)->withInput($request->all);
         }
         Koordinator::create([
@@ -306,12 +319,25 @@ class AdminController extends Controller
         Alert::success('Success', 'Berhasil Menambahkan Koordinator');
         return redirect('admin/data_koordinator');
     }
+
+    public function updateKoor(Request $request)
+    {
+        Koordinator::where('id_koor', $request->edit_id)
+            ->update([
+                'nama'      => $request->edit_nama,
+                'alamat'    => $request->edit_alamat,
+                'no_hp'     => $request->edit_no_hp
+            ]);
+        Alert::success('Success', 'Berhasil Mengubah Data Koor');
+        return redirect()->back();
+    }
+
     public function searchBydate(Request $request)
     {
         $user       = Auth::user();
         $setoran = Setoran::where('tanggal', '>=', $request->start)->where('tanggal', '<=', $request->end)->get();
         // dd($request->peminjaman);
-        return view('admin.setoran', compact('setoran','user'));
+        return view('admin.setoran', compact('setoran', 'user'));
     }
 
     public function dataSetoran()
@@ -359,7 +385,7 @@ class AdminController extends Controller
     public function updateJenis(Request $request)
     {
         // dd($request);
-        Jenis::where('id_jenis' , $request->edit_id)
+        Jenis::where('id_jenis', $request->edit_id)
             ->update([
                 'nama' => $request->edit_nama
             ]);
