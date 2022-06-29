@@ -22,12 +22,12 @@
         <!-- end page title -->
 
         <div class="row">
-            <div class="col-8">
+            <div class="col-12">
                 <div class="card-box">
                     <div class="row">
 
                         @if (auth()->user()->level == 'admin' || auth()->user()->level == 'teller' || auth()->user()->level == 'superadmin')
-                            <div class="col-5">
+                            <div class="col-12 col-md-5 col-lg-5">
                                 <div class="form-group">
                                     <div class="text-center">
                                         <div class="">
@@ -47,7 +47,7 @@
                             </style>
 
                             <div class="vl"></div>
-                            <div class="col-6">
+                            <div class="col-12 col-md-6 col-lg-6">
                                 <h3>Personal info</h3>
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item">
@@ -110,7 +110,7 @@
                                             <label for="example-text-input" class="col-lg-2 col-form-label">Email
                                             </label>
                                             <div class="col-lg-8">
-                                                <input class="form-control" value="{{ $user->id_user }}"
+                                                <input class="form-control" value="{{ $user->id_user }}" name="edit_id"
                                                     type="hidden">
                                                 <input class="form-control" value="{{ $user->email }}" type="text" name="edit_email">
                                             </div>
@@ -132,7 +132,7 @@
                             </div>
                         @endif
                         @if (auth()->user()->level == 'koor')
-                            <div class="col-5">
+                            <div class="col-12 col-md-5 col-lg-5">
                                 <div class="form-group">
                                     <div class="text-center">
                                         <div class="">
@@ -144,7 +144,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <style>
+                            {{-- <style>
                                 .vl {
                                     border-left: 2px solid green;
                                     height: 400px;
@@ -152,8 +152,8 @@
                                 }
                             </style>
 
-                            <div class="vl"></div>
-                            <div class="col-6">
+                            <div class="vl"></div> --}}
+                            <div class="col-12 col-md-6 col-lg-6">
                                 <h3>Personal info</h3>
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item">

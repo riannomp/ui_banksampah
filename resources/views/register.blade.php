@@ -26,7 +26,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-6 col-xl-8">
-                    <div class="account-card-box">
+                    <div class="">
                         <div class="card mb-0">
                             <div class="card-body p-4">
 
@@ -37,7 +37,7 @@
                                                     height="100"></span>
                                         </a>
                                     </div>
-                                    <h5 class="text-muted text-uppercase py-3 font-20">Register</h5>
+                                    <h5 class="text-muted text-uppercase py-3 font-20">Register Nasabah</h5>
                                 </div>
                                 <form action="{{ route('register') }}" method="post">
                                     @csrf

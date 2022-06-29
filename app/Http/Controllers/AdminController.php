@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\Validator as FacadesValidator;
 use Illuminate\Validation\Rules\Unique;
 use RealRashid\SweetAlert\Facades\Alert;
 
+use function PHPUnit\Framework\returnSelf;
+
 class AdminController extends Controller
 {
     public function dataSampah()
@@ -239,6 +241,11 @@ class AdminController extends Controller
         return redirect('admin/data_pegawai')->with(['success' => 'Data berhasil ditambahkan']);
     }
 
+    public function deletePegawai($id)
+    {
+        DB::table('pegawais')->where('id_pegawai',$id)->delete();
+        return redirect('admin/data_pegawai');
+    }
     public function dataKoor()
     {
         $user        = Auth::user();
@@ -299,6 +306,13 @@ class AdminController extends Controller
         Alert::success('Success', 'Berhasil Menambahkan Koordinator');
         return redirect('admin/data_koordinator');
     }
+    public function searchBydate(Request $request)
+    {
+        $user       = Auth::user();
+        $setoran = Setoran::where('tanggal', '>=', $request->start)->where('tanggal', '<=', $request->end)->get();
+        // dd($request->peminjaman);
+        return view('admin.setoran', compact('setoran','user'));
+    }
 
     public function dataSetoran()
     {
@@ -341,6 +355,25 @@ class AdminController extends Controller
         ]);
         return redirect()->back();
     }
+
+    public function updateJenis(Request $request)
+    {
+        // dd($request);
+        Jenis::where('id_jenis' , $request->edit_id)
+            ->update([
+                'nama' => $request->edit_nama
+            ]);
+        return redirect()->back();
+    }
+
+    public function deleteJenis($id)
+    {
+        DB::table('jenis')->where('id_jenis', $id)->delete();
+        return redirect()->back();
+    }
+
+
+
     public function dataUser()
     {
         $user = Auth::user();
@@ -359,6 +392,7 @@ class AdminController extends Controller
 
     public function resetPassword(Request $request)
     {
+        dd($request);
         User::where('id_user', $request->edit_id)
             ->update([
                 'password' =>  bcrypt('12345678')

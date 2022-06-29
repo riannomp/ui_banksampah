@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DetailSetoran;
+use App\Models\Jenis;
 use App\Models\Nasabah;
 use App\Models\Sampah;
 use App\Models\Setoran;
@@ -38,7 +39,7 @@ class KoordinatorController extends Controller
     }
     public function addSetoran2(Request $request)
     {
-        dd($request);
+        // dd($request);
         $user = Auth::user();
         Setoran::create([
             'id_setoran'    => $request->id_setoran2,
@@ -90,6 +91,14 @@ class KoordinatorController extends Controller
         return view('koor.detail_setoran', compact('user', 'data_setor', 'detail_setor', 'total', 'id_setoran'));
     }
 
+    public function dataSampah()
+    {
+        $user = Auth::user();
+        $sampah = Sampah::all();
+        $jenis = Jenis::all();
+        return view('koor.data_sampah', compact('user', 'sampah', 'jenis'));
+    }
+
     public function penarikan()
     {
         $user           = Auth::user();
@@ -109,6 +118,17 @@ class KoordinatorController extends Controller
         $nasabah = Nasabah::all();
         return view('koor.data_nasabah', compact('nasabah', 'user'));
     }
+    public function updateNasabah(Request $request)
+    {
+        Nasabah::where('id_nasabah', $request->edit_id)
+        ->update([
+            'nama' => $request->edit_nama,
+            'nik' => $request->edit_nik,
+            'alamat' => $request->edit_alamat,
+            'no_hp' => $request->edit_no_hp,
+        ]);
+        return redirect()->back();
+    }
 
     public function addNasabah()
     {
@@ -121,7 +141,7 @@ class KoordinatorController extends Controller
         $rules = [
             'nama'                  => 'required',
             'alamat'                => 'required',
-            'nik'                   => 'required|min:16',
+            'nik'                   => 'required|min:16|max:16',
             'email'                 => 'required|email|unique:users,email',
             'no_hp'                 => 'required'
         ];
@@ -131,6 +151,7 @@ class KoordinatorController extends Controller
             'alamat.required'       => 'Alamat wajib diisi',
             'nik.required'          => 'NIK wajib diisi',
             'nik.min'               => 'Minimal 16 karakter ',
+            'nik.max'               => 'Maksimal 16 karakter ',
             'no_hp.required'        => 'Nomor HP wajib diisi',
             'email.required'        => 'Email wajib diisi',
             'email.email'           => 'Email tidak valid',

@@ -95,7 +95,7 @@
                         <div class="dropdown-divider"></div>
 
                         <!-- item-->
-                        <a href="{{ route('logout') }}" class="dropdown-item notify-item">
+                        <a href="" class="dropdown-item notify-item" data-toggle="modal" data-target="#logout">
                             <i class="mdi mdi-logout-variant"></i>
                             <span>Logout</span>
 
@@ -161,7 +161,7 @@
         </div>
         <!-- end Topbar -->
 
-
+        @include('logout')
         <!-- ========== Left Sidebar Start ========== -->
         <div class="left-side-menu">
             <div class="slimscroll-menu">
@@ -324,7 +324,6 @@
                             </li>
                         @endif
                         @if (auth()->user()->level == 'nasabah')
-
                             <li>
                                 <a href="{{ url('nasabah/profile') }}">
                                     <i class="mdi mdi-account"></i>

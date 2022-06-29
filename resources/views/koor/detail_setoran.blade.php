@@ -26,7 +26,34 @@
                 <div class="card-box">
                     {{-- <h4 class="header-title">Basic example</h4> --}}
                     <div class="row">
-                        <div class="col-5">
+                        <div class="col-4 ">
+                            <div class="form-group text-center">
+                                <span class="logo-lg">
+                                    <img src="{{ asset('template/dist') }}/assets/images/sampah/kabmadiun.jpg"
+                                        alt="" height="100">
+                                    <!-- <span class="logo-lg-text-dark">Uplon</span> -->
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="text-center">
+                                <H2>BANK SAMPAH </H2>
+                                <h2>KABUPATEN MADIUN</h2>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group text-center">
+                                <span class="logo-lg">
+                                    <img src="{{ asset('template/dist') }}/assets/images/sampah/pesilat.png"
+                                        alt="" height="120">
+                                    <!-- <span class="logo-lg-text-dark">Uplon</span> -->
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-4">
                             <div class="form-group">
                                 @foreach ($data_setor as $data_setor)
                                     <table>
@@ -34,20 +61,29 @@
                                             <h6 class="txt-dark"><strong>Kode Setoran :</strong> </h6>
                                             <p>{{ $data_setor->id_setoran }}</p>
                                         </div>
-                                        <div class="text-left">
-                                            <h6 class="txt-dark"><strong>Tanggal Setor :</strong></h6>
-                                            <p> {{ date('d M Y', strtotime($data_setor->tanggal)) }}</p>
-                                        </div>
+
 
                                     </table>
 
                             </div>
                         </div>
-                        <div class="col-5">
+                        <div class="col-4">
                             <div class="form-group">
 
                                     <table>
-                                        <div class="text-left">
+                                        <div class="text-center">
+                                            <h6 class="txt-dark"><strong>Tanggal Setor :</strong></h6>
+                                            <p> {{ date('d M Y', strtotime($data_setor->tanggal)) }}</p>
+                                        </div>
+                                    </table>
+
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+
+                                    <table>
+                                        <div class="text-right">
                                             <h6 class="txt-dark"><strong>Koordinator :</strong> </h6>
                                             <p>{{ $data_setor->koor->nama }}</p>
                                         </div>
@@ -56,7 +92,6 @@
 
                             </div>
                         </div>
-
                     </div>
                     <br>
                     <div class="table-responsive">

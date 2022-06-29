@@ -46,7 +46,7 @@
                                     <h5 class="text-muted text-uppercase py-3 font-20">Forget Password</h5>
                                 </div>
 
-                                <form class="mt-2" action="" method="post">
+                                <form class="mt-2" action="{{ route('forgot-password') }}" method="post">
                                     @csrf
                                     @if (session('errors'))
                                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -90,8 +90,7 @@
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col-12 text-center">
-                                            <p class="text-black-50">Kembali ke <a
-                                                    href="{{ route('login') }}"
+                                            <p class="text-black-50">Kembali ke <a href="{{ route('login') }}"
                                                     class="text-black ml-1"><b>Login</b></a></p>
                                         </div> <!-- end col -->
                                     </div>

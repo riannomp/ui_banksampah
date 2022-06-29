@@ -38,6 +38,7 @@
                                 <th>NIK</th>
                                 <th>Alamat</th>
                                 <th>No Telp</th>
+                                <th>Saldo</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -48,12 +49,14 @@
                                 <td>{{ $nasabahs->nik }}</td>
                                 <td>{{ $nasabahs->alamat }}</td>
                                 <td>{{ $nasabahs->no_hp }}</td>
-                                <td><a href="" class="btn btn-info waves-effect waves-light"  data-toggle="modal" data-target="#edit">
-                                    <i class="mdi mdi-information-variant"></i></a>
+                                <td>{{ $nasabahs->saldo }}</td>
+                                <td><a href="" class="btn btn-info waves-effect waves-light"  data-toggle="modal" data-target="#updatenasabah{{ $nasabahs->id_nasabah }}">
+                                    <i class="mdi mdi-pencil"></i></a>
                                     <a href="" class="btn btn-danger waves-effect waves-light"   data-toggle="modal" data-target="#hapus">
                                         <i class="mdi mdi-delete"></i></a>
                                 </td>
                             </tr>
+                            @include('koor.update_nasabah')
                             @endforeach
                         </tbody>
                     </table>

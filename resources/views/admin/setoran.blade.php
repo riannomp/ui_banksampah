@@ -25,11 +25,28 @@
             <div class="col-12">
 
                 <div class="card-box">
-                    {{-- <p>
-                    <a href="{{ url('admin/addsetoran') }}" class="btn btn-success waves-effect waves-light" >
-                        <span class="btn-label"><i class="mdi mdi-plus"></i>
-                    </span> Tambah Data</a>
-                </p> --}}
+                    <h5 class="txt-dark"> <strong> Filter </strong></h5>
+                    <form action="{{ route('filtersetoran')}}" method="GET">
+                        <div class="row">
+                            <div class="col-12 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <label class="control-label ">Start date</label>
+                                    <input type="date" id="start" name="start" class="form-control" value="{{date('d-m-Y')}}">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <label class="control-label ">End date</label>
+                                    <input type="date" id="end" name="end" value="{{date('d-m-Y')}}" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4 col-lg-4 my-4">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Cek </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
 
                     <table id="datatable" class="table table-bordered dt-responsive nowrap"
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">

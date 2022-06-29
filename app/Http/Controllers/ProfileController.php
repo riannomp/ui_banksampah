@@ -93,20 +93,19 @@ class ProfileController extends Controller
 
     public function updateAuth(Request $request)
     {
-        if ($request->edit_email) {
+        dd($request);
+        if ($request->edit_email and $request->edit_password) {
             User::where('id_user', $request->edit_id)
                 ->update([
                     'email'     => $request->edit_email,
-                    'password' => $request->password
+                    'password'  => bcrypt($request->edit_password)
                 ]);
         } else {
             User::where('id_user', $request->edit_id)
                 ->update([
-                    'email'    => $request->edit_email,
-                    'password' => bcrypt($request->edit_password)
+                    'password'  => $request->password
                 ]);
         }
-        dd($request);
         Alert::success('Success', 'Data Berhasil Diubah');
         return redirect('dashboard');
     }

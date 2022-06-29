@@ -54,8 +54,10 @@
                                     <td>{{ $pegawais->no_hp }}</td>
                                     <td>{{ $pegawais->user != null ? $pegawais->user->level : 'belum ada' }}</td>
                                     <td>
-                                        <a href="" class="btn btn-danger waves-effect waves-light" data-toggle="modal"
-                                            data-target="#hapus">
+                                        <a href="/admin/data_pegawai/hapus/{{ $pegawais->id_pegawai }}"
+                                            class="btn btn-danger waves-effect waves-light"
+                                            onclick="
+                                            return confirm('Are you sure to delete ?')">
                                             <i class="mdi mdi-delete"></i></a>
                                     </td>
                                 </tr>

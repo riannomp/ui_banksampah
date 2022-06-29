@@ -48,11 +48,15 @@
                                     <td>{{ $jns->nama }}</td>
                                     <td>{{ $jns->id_jenis }}</td>
                                     <td>
+                                        <a href="" class="btn btn-primary waves-effect waves-light"
+                                            data-toggle="modal" data-target="#update{{ $jns->id_jenis }}">
+                                            <i class="mdi mdi-pencil"></i></a>
                                         <a href="" class="btn btn-danger waves-effect waves-light"
                                             data-toggle="modal" data-target="#hapus">
                                             <i class="mdi mdi-delete"></i></a>
                                     </td>
                                 </tr>
+                                @include('admin.update_jenis')
                             @endforeach
 
                         </tbody>

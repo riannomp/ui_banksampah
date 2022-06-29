@@ -26,25 +26,65 @@
                 <div class="card-box">
                     {{-- <h4 class="header-title">Basic example</h4> --}}
                     <div class="row">
+                        <div class="col-4 ">
+                            <div class="form-group text-center">
+                                <span class="logo-lg">
+                                    <img src="{{ asset('template/dist') }}/assets/images/sampah/kabmadiun.jpg"
+                                        alt="" height="100">
+                                    <!-- <span class="logo-lg-text-dark">Uplon</span> -->
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="text-center">
+                                <H2>BANK SAMPAH </H2>
+                                <h2>KABUPATEN MADIUN</h2>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group text-center">
+                                <span class="logo-lg">
+                                    <img src="{{ asset('template/dist') }}/assets/images/sampah/pesilat.png"
+                                        alt="" height="120">
+                                    <!-- <span class="logo-lg-text-dark">Uplon</span> -->
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        @foreach ($data_setor as $data_setor)
+                            <div class="col-4">
+                                <div class="form-group">
 
-                        <div class="col-7">
-                            <div class="form-group">
-                                @foreach ($data_setor as $data_setor)
                                     <table>
                                         <div class="text-left">
                                             <h6 class="txt-dark"><strong>Kode Setoran :</strong> </h6>
                                             <p>{{ $data_setor->id_setoran }}</p>
                                         </div>
-                                        <div class="text-left">
-                                            <h6 class="txt-dark"><strong>Tanggal Setor :</strong></h6>
-                                            <p> {{ date('d M Y', strtotime($data_setor->tanggal)) }}</p>
-                                        </div>
+
 
                                     </table>
-                                @endforeach
-                            </div>
-                        </div>
 
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <div class="text-center">
+                                        <h6 class="txt-dark"><strong>Tanggal Setor :</strong></h6>
+                                        <p> {{ date('d M Y', strtotime($data_setor->tanggal)) }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <div class="text-right">
+                                        <h6 class="txt-dark"><strong>Nasabah :</strong></h6>
+                                        <p> {{ $data_setor->nasabah->nama }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
                     <br>
                     <div class="table-responsive">
@@ -100,10 +140,10 @@
 
 @endsection
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-        crossorigin="anonymous"></script>
-    <script>
-        function cetak() {
-            $('#print').addClass('d-none');
-            window.print();
-        };
+    crossorigin="anonymous"></script>
+<script>
+    function cetak() {
+        $('#print').addClass('d-none');
+        window.print();
+    };
 </script>

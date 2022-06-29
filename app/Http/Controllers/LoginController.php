@@ -19,7 +19,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class LoginController extends Controller
 {
-
     public function showFormLogin()
     {
         if (Auth::check()) { // true sekalian session field di users nanti bisa dipanggil via Auth
@@ -31,6 +30,8 @@ class LoginController extends Controller
 
     public function postlogin(Request $request)
     {
+
+
         $rules = [
             'email'                 => 'required|email',
             'password'              => 'required|string'
@@ -95,7 +96,7 @@ class LoginController extends Controller
 
         $rules = [
             'email'                 => 'required|email|unique:users,email',
-            'password'              => 'required|confirmed'
+            'password'              => 'required|min:8|confirmed'
         ];
 
         $messages = [
@@ -103,6 +104,7 @@ class LoginController extends Controller
             'email.email'           => 'Email tidak valid',
             'email.unique'          => 'Email sudah terdaftar',
             'password.required'     => 'Password wajib diisi',
+            'password.min'          => 'Password minimal memiliki 8 karakter',
             'password.confirmed'    => 'Password tidak sama dengan konfirmasi password'
         ];
 
@@ -114,7 +116,7 @@ class LoginController extends Controller
 
         Nasabah::create([
             'nama'  => $request->nama,
-            'alamat'=> $request->alamat,
+            'alamat' => $request->alamat,
             'foto'  => 'profile.png',
             'no_hp' => $request->no_hp
         ]);
@@ -152,6 +154,7 @@ class LoginController extends Controller
     {
         return view('forget_password');
     }
+
     public function forgotPasswordValidate($token)
     {
         $user = User::where('token', $token)->where('is_verified', 0)->first();
@@ -162,6 +165,7 @@ class LoginController extends Controller
         Alert::error('Failed', 'Link Reset Password Kadaluarsa !!');
         return redirect()->route('forgot-password');
     }
+
     public function resetPassword(Request $request)
     {
         $this->validate($request, [
@@ -182,18 +186,19 @@ class LoginController extends Controller
 
         Mail::to($request->email)->send(new ResetPassword($user->name, $token));
 
-        if(Mail::failures() != 0) {
+        if (Mail::failures() != 0) {
             Alert::success('Success', 'Link reset password sudah dikirim ke email anda !');
             return back();
         }
         Alert::error('Failed', 'Ada beberapa masalah dengan penyedia email');
         return back();
     }
-    public function updatePassword(Request $request) {
+    public function updatePassword(Request $request)
+    {
         $this->validate($request, [
-            'email' => 'required',
-            'password' => 'required|min:6',
-            'confirm_password' => 'required|same:password'
+            'email'             => 'required',
+            'password'          => 'required|min:6',
+            'confirm_password'  => 'required|same:password'
         ]);
 
         $user = User::where('email', $request->email)->first();
@@ -210,5 +215,4 @@ class LoginController extends Controller
         Alert::error('Failed', 'Ada sesuatu yang salah, silahkan coba lagi');
         return redirect()->route('forgot-password');
     }
-
 }
