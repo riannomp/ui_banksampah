@@ -10,9 +10,11 @@ class Transaksi extends Model
     use HasFactory;
     protected $fillable = [
         'id_nasabah',
+        'id_koor',
         'penarikan',
         'setoran',
-        'saldo'
+        'saldo',
+        'status'
     ];
 
     protected $dates = [
@@ -27,12 +29,17 @@ class Transaksi extends Model
         return $this->belongsTo(Nasabah::class, 'id_nasabah');
     }
 
+    public function KOOR()
+    {
+        return $this->belongsTo(Koordinator::class, 'id_koor');
+    }
+
     // public function saldo($id)
     // {
     //     $setoran = Transaksi::where('id_nasabah', $id)->get();
     //     $saldo = 0;
     //     foreach ($setoran as $key => $value) {
-    //         $saldo = $saldo + $value->setoran;
+    //         $saldo = $saldo - $value->setoran;
     //     }
     //     return $saldo;
     // }

@@ -9,13 +9,15 @@ use App\Models\Koordinator;
 use App\Models\Nasabah;
 use App\Models\Sampah;
 use App\Models\Setoran;
+use App\Models\Transaksi;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator as FacadesValidator;
-
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Response;
 
 class TellerController extends Controller
 {
@@ -158,10 +160,21 @@ class TellerController extends Controller
             'id_nasabah' => $id,
             'remember_token' => Str::random(60)
         ]);
-
-        return redirect('teller/data_nasabah')->with(['success' => 'Data berhasil ditambahkan']);
+        Alert::success('Success', 'Berhasil Menambahkan Nasabah');
+        return redirect()->back();
     }
-
+    public function updateNasabah(Request $request)
+    {
+        Nasabah::where('id_nasabah', $request->edit_id)
+            ->update([
+                'nama'      => $request->edit_nama,
+                'alamat'    => $request->edit_alamat,
+                'nik'       => $request->edit_nik,
+                'no_hp'     => $request->edit_no_hp
+            ]);
+        Alert::success('Success', 'Berhasil Mengubah Data Nasabah');
+        return redirect()->back();
+    }
     public function dataKoor()
     {
         $user = Auth::user();
@@ -169,9 +182,71 @@ class TellerController extends Controller
         return view('teller.data_koor', compact('user', 'koordinator'));
     }
 
+    public function addKoor2(Request $request)
+    {
+
+        $rules = [
+            'nama'                  => 'required',
+            'alamat'                => 'required',
+            'email'                 => 'required|email|unique:users,email',
+            'no_hp'                 => 'required'
+        ];
+
+        $messages = [
+            'nama.required'         => 'Nama Lengkap wajib diisi',
+            'alamat.required'       => 'Alamat wajib diisi',
+            'no_hp.required'        => 'Nomor HP wajib diisi',
+            'email.required'        => 'Email wajib diisi',
+            'email.email'           => 'Email tidak valid',
+            'email.unique'          => 'Email sudah terdaftar'
+        ];
+
+        // $this->validate($request, $rules, $messages);
+
+        $validator = FacadesValidator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+
+            return redirect()->back()->withErrors($validator)->withInput($request->all);
+        }
+        Koordinator::create([
+            'nama'      => $request->nama,
+            'alamat'    => $request->alamat,
+            'foto'      => 'profile.png',
+            'no_hp'     => $request->no_hp
+        ]);
+
+        $id = DB::getPdo()->lastInsertId();
+
+        User::create([
+            'email' => strtolower($request->email),
+            'password' => bcrypt('12345678'),
+            'email_verified_at' =>  \Carbon\Carbon::now(),
+            'level' => 'koor',
+            'status' => '1',
+            'id_koor' => $id,
+            'remember_token' => Str::random(60)
+        ]);
+        // dd($request);
+        Alert::success('Success', 'Berhasil Menambahkan Koordinator');
+        return redirect()->back();
+    }
+
+    public function updateKoor(Request $request)
+    {
+        Koordinator::where('id_koor', $request->edit_id)
+            ->update([
+                'nama'      => $request->edit_nama,
+                'alamat'    => $request->edit_alamat,
+                'no_hp'     => $request->edit_no_hp
+            ]);
+        Alert::success('Success', 'Berhasil Mengubah Data Koor');
+        return redirect()->back();
+    }
+
     public function dataSetoran()
     {
-        $setoran = Setoran::all();
+        $setoran = Setoran::where([['status', '2']])->get();
         $user = Auth::user();
         return view('teller.setoran', compact('user', 'setoran'));
     }
@@ -185,8 +260,9 @@ class TellerController extends Controller
         $angka      = sprintf("%03d", (int)$check + 1);
         $id_setoran = $kode . "" . $angka;
 
-        $nasabah = Nasabah::all();
-        $sampah  = Sampah::all();
+        $nasabah     = Nasabah::all();
+        $koordinator = Koordinator::all();
+        $sampah      = Sampah::all();
 
         // foreach($request->nama as $key => $value)
         // {
@@ -194,7 +270,7 @@ class TellerController extends Controller
 
         //     ]);
         // }
-        return view('teller.setoran_add', compact('nasabah', 'sampah', 'id_setoran', 'user'));
+        return view('teller.setoran_add', compact('nasabah', 'sampah', 'id_setoran', 'user', 'koordinator'));
     }
 
     //action
@@ -202,12 +278,20 @@ class TellerController extends Controller
     {
         // dd($request);
         // $user = Auth::user();
+
         Setoran::create([
             'id_setoran'    => $request->id_setoran2,
-            'id_nasabah'    => $request->nasabah,
-            'total_harga'   => $request->total,
-            'tanggal'       =>  $request->tanggal
+            'id_koor'       => $request->koor,
+            'total_koor'   => str_replace(',', '',  $request->total),
+            'tanggal'       =>  $request->tanggal,
+            'status'        => '2'
         ]);
+
+        $total = Koordinator::total($request->koor);
+
+        $koor = Koordinator::find($request->koor);
+        $koor->saldo = $total;
+        $koor->save();
 
         // $jumlah_data = count($request->id_sampah);
         // for ($i = 0; $i < $jumlah_data; $i++) {
@@ -227,13 +311,13 @@ class TellerController extends Controller
                     'id_setoran'   => $request->id_setoran[$key],
                     'id_sampah'    => $request->nama[$key],
                     'jumlah'       => $request->jumlah[$key],
-                    'harga'        => $request->harga[$key],
-                    'subtotal'     => $request->sub_total[$key]
+                    'harga'        => str_replace(',', '',  $request->harga[$key]),
+                    'subtotal'     => str_replace(',', '',  $request->sub_total[$key])
                 ]
             );
         }
-
-        return redirect('teller/setoran_sampah')->with(['success' => 'Data berhasil ditambahkan']);
+        Alert::success('Success', 'Berhasil Menambah Setoran');
+        return redirect('teller/setoran_sampah');
     }
 
     public function detailSetoran($id_setoran)
@@ -244,5 +328,47 @@ class TellerController extends Controller
         $total          = DetailSetoran::where('id_setoran', $id_setoran)->sum('subtotal');
 
         return view('teller.detailsetoran', compact('user', 'data_setor', 'detail_setor', 'total', 'id_setoran'));
+    }
+
+    public function penarikan()
+    {
+        $user        = Auth::user();
+        $koordinator = Koordinator::all();
+        return view('teller.penarikan', compact('user','koordinator'));
+    }
+
+    public function addPenarikan(Request $request)
+    {
+        // dd($request);
+        $user       = Auth::user();
+
+
+        Transaksi::create([
+            'id_koor'   =>  $request->id_koor,
+            'penarikan' =>  str_replace(',', '',  $request->penarikan),
+            'status'    => '2'
+        ]);
+
+
+        $saldo = Koordinator::tarik($request->id_koor, $request->penarikan);
+        $koor = Koordinator::find($request->id_koor);
+        $koor->saldo = $saldo;
+        $koor->save();
+
+        Alert::success('Success', 'Berhasil Menambahkan Penarikan');
+        return redirect()->back();
+    }
+
+    public function get_harga($id, Request $request)
+    {
+        $harga = Sampah::where('id_sampah', $id)->first();
+        if ($request->ajax()) {
+            // Client wants JSON returned
+            return response()->json($harga);
+        } else {
+            return response()->json($harga);
+        }
+        // return response()->json($harga);
+        // return json_encode(array('data' => $harga));
     }
 }

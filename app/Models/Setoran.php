@@ -12,7 +12,9 @@ class Setoran extends Model
         'id_setoran',
         'id_nasabah',
         'id_koor',
+        'status',
         'total_harga',
+        'total_koor',
         'tanggal'
     ];
 

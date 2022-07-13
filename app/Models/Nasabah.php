@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class Nasabah extends Model
 {
@@ -50,4 +51,11 @@ class Nasabah extends Model
         return $total;
     }
 
+    public function tarik($id, $transaksi)
+    {
+        $nasabah = Nasabah::where('id_nasabah', $id)->first();
+        $saldo = $nasabah->saldo - $transaksi;
+
+        return $saldo;
+    }
 }

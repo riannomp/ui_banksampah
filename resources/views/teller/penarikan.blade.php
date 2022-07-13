@@ -1,8 +1,6 @@
 @extends('layout.master')
-@section('tittle', 'Data Nasabah')
+@section('tittle', 'Penarikan Koordinator')
 @section('content')
-
-
     <div class="container-fluid">
 
         <!-- start page title -->
@@ -15,7 +13,7 @@
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Data Nasabah</h4>
+                    <h4 class="page-title">Penarikan Nasabah</h4>
                 </div>
             </div>
         </div>
@@ -24,47 +22,45 @@
             <div class="col-12">
                 @include('sweetalert::alert')
                 <div class="card-box">
-                    <p>
-                        <a href="" class="btn btn-success waves-effect waves-light" data-toggle="modal"
-                            data-target="#addnasabah">
-                            <span class="btn-label"><i class="mdi mdi-plus"></i>
-                            </span> Tambah Data</a>
-                        @include('koor.add_nasabah')
-                    </p>
+                    @if ($message = Session::get('success'))
+                        <div class="alert alert-success">
+                            {{ session()->get('success') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                        </div>
+                    @endif
 
                     <table id="datatable" class="table table-bordered dt-responsive nowrap"
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
-                                <th>Nama Nasabah</th>
-                                <th>NIK</th>
-                                <th>Alamat</th>
-                                <th>No Telp</th>
-                                <th>Saldo</th>
+                                <th>Nasabah</th>
+                                <th>Total Saldo</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($nasabah as $nasabahs)
+                            @foreach ($koordinator as $koor)
                                 <tr>
-                                    <td>{{ $nasabahs->nama }}</td>
-                                    <td>{{ $nasabahs->nik }}</td>
-                                    <td>{{ $nasabahs->alamat }}</td>
-                                    <td>{{ $nasabahs->no_hp }}</td>
-                                    <td>Rp {{ number_format($nasabahs->saldo), 2 }}</td>
-                                    <td><a href="" class="btn btn-info waves-effect waves-light" data-toggle="modal"
-                                            data-target="#updatenasabah{{ $nasabahs->id_nasabah }}">
-                                            <i class="mdi mdi-pencil"></i></a>
+                                    <td>{{ $koor->nama }}</td>
+                                    <td>Rp {{ number_format($koor->saldo, 2, ',', '.') }}</td>
+                                    <td>
+                                        @if ($koor->saldo >= 50000)
+                                            <a href="" class="btn btn-primary waves-effect waves-light"
+                                                data-toggle="modal" data-target="#penarikan{{ $koor->id_koor }}">
+                                                Penarikan</a>
+                                        @endif
+
                                     </td>
                                 </tr>
-                                @include('koor.update_nasabah')
+                                @include('teller.tambah_penarikan')
                             @endforeach
                         </tbody>
                     </table>
+
                 </div>
             </div>
         </div>
-
         <!-- end row -->
 
     </div> <!-- end container-fluid -->

@@ -59,9 +59,9 @@
                                         <a href="" class="btn btn-primary waves-effect waves-light"
                                             data-toggle="modal" data-target="#resetpassword{{ $usr->id_user }}">Reset
                                             Password</i></a>
-                                        <a href="" class="btn btn-danger waves-effect waves-light"
+                                        {{-- <a href="" class="btn btn-danger waves-effect waves-light"
                                             data-toggle="modal" data-target="#hapus">
-                                            <i class="mdi mdi-delete"></i></a>
+                                            <i class="mdi mdi-delete"></i></a> --}}
                                         @include('admin.resetpassword')
                                     </td>
                                 </tr>

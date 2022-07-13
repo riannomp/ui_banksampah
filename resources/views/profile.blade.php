@@ -25,7 +25,7 @@
             <div class="col-12">
                 <div class="card-box">
                     <div class="row">
-
+@include('sweetalert::alert')
                         @if (auth()->user()->level == 'admin' || auth()->user()->level == 'teller' || auth()->user()->level == 'superadmin')
                             <div class="col-12 col-md-5 col-lg-5">
                                 <div class="form-group">
@@ -110,9 +110,10 @@
                                             <label for="example-text-input" class="col-lg-2 col-form-label">Email
                                             </label>
                                             <div class="col-lg-8">
-                                                <input class="form-control" value="{{ $user->id_user }}" name="edit_id"
-                                                    type="hidden">
-                                                <input class="form-control" value="{{ $user->email }}" type="text" name="edit_email">
+                                                <input class="form-control" value="{{ $user->id_user }}"
+                                                    name="edit_id" type="hidden">
+                                                <input class="form-control" value="{{ $user->email }}" type="text"
+                                                    name="edit_email">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -144,7 +145,7 @@
                                     </div>
                                 </div>
                             </div>
-                            {{-- <style>
+                            <style>
                                 .vl {
                                     border-left: 2px solid green;
                                     height: 400px;
@@ -152,88 +153,60 @@
                                 }
                             </style>
 
-                            <div class="vl"></div> --}}
+                            <div class="vl"></div>
                             <div class="col-12 col-md-6 col-lg-6">
                                 <h3>Personal info</h3>
-                                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#profile"
-                                            role="tab" aria-controls="profile" aria-expanded="true">Profil</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#auth"
-                                            role="tab" aria-controls="auth">Auth</a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content text-muted" id="myTabContent">
-                                    <div role="tabpanel" class="tab-pane fade in active show" id="profile"
-                                        aria-labelledby="home-tab">
-                                        <div class="form-group">
-                                            <form action="{{ route('updateKoor') }}" method="POST"
-                                                enctype="multipart/form-data">
-                                                {{ csrf_field() }}
-                                                <div class="form-group row">
-                                                    <label for="example-text-input" class="col-lg-2 col-form-label">Nama
-                                                    </label>
-                                                    <div class="col-lg-8">
-                                                        <input name="edit_id" type="hidden" class="form-control"
-                                                            value="{{ $user->koordinator->id_koor }}">
-                                                        <input class="form-control" name="edit_nama"
-                                                            value="{{ $user->koordinator->nama }}" type="text">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="example-search-input" class="col-lg-2 col-form-label">No
-                                                        HP</label>
-                                                    <div class="col-lg-8">
-                                                        <input class="form-control" name="edit_no_hp"
-                                                            value="{{ $user->koordinator->no_hp }}" type="text">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="example-search-input"
-                                                        class="col-lg-2 col-form-label">Alamat</label>
-                                                    <div class="col-lg-8">
-                                                        <textarea class="form-control" value="" name="edit_alamat" type="text">{{ $user->koordinator->alamat }}</textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="example-search-input"
-                                                        class="col-lg-2 col-form-label">Foto</label>
-                                                    <div class="col-lg-8">
-                                                        <input type="file" name="edit_foto" class="form-control"
-                                                            id="foto">
-                                                    </div>
-                                                </div>
-                                                <button type="submit" class="btn btn-primary">Simpan</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="auth" role="tabpanel"
-                                        aria-labelledby="profile-tab">
+
+
+                                <div class="form-group">
+                                    <form action="{{ route('updateKoor') }}" method="POST"
+                                        enctype="multipart/form-data">
+                                        {{ csrf_field() }}
                                         <div class="form-group row">
-                                            <label for="example-text-input" class="col-lg-2 col-form-label">Email
+                                            <label for="example-text-input" class="col-lg-2 col-form-label">Nama
                                             </label>
                                             <div class="col-lg-8">
-                                                <input class="form-control" value="{{ $user->email }}" type="text">
+                                                <input name="edit_id" type="hidden" class="form-control"
+                                                    value="{{ $user->koordinator->id_koor }}">
+                                                <input class="form-control" name="edit_nama"
+                                                    value="{{ $user->koordinator->nama }}" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="example-search-input" class="col-lg-2 col-form-label">No
+                                                HP</label>
+                                            <div class="col-lg-8">
+                                                <input class="form-control" name="edit_no_hp"
+                                                    value="{{ $user->koordinator->no_hp }}" type="text">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="example-search-input"
-                                                class="col-lg-2 col-form-label">Password</label>
+                                                class="col-lg-2 col-form-label">Alamat</label>
                                             <div class="col-lg-8">
-                                                <input class="form-control" name="edit_password" type="password"
-                                                    id="inputPassword" value="">
-                                                <input class="form-control" name="password" type="hidden"
-                                                    id="inputPassword" value="{{ $user->password }}">
+                                                <textarea class="form-control" value="" name="edit_alamat" type="text">{{ $user->koordinator->alamat }}</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="example-search-input" class="col-lg-2 col-form-label">Foto</label>
+                                            <div class="col-lg-8">
+                                                <input type="file" name="edit_foto" class="form-control"
+                                                    id="foto">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
 
-                                                <input type="checkbox" onclick="shwoPassword()"> Show Password
+                                            <div class="col-lg-10" style="text-align:right;">
+                                                <a href="" class="btn btn-success waves-effect waves-light"  data-toggle="modal"
+                                                data-target="#ubahpassword{{ $user->id_user }}">
+                                                    Ubah Password</a>
+                                                <button type="submit" class="btn btn-primary">Simpan</button>
                                             </div>
                                         </div>
 
-                                        <button type="submit" class="btn btn-primary">Simpan</button>
-                                    </div>
+                                    </form>
                                 </div>
+                            </div>
                         @endif
                         @if (auth()->user()->level == 'nasabah')
                             <div class="col-5">
@@ -344,6 +317,7 @@
                 </div>
             </div>
         </div>
+        @include('ubahpassword')
         <!-- end row -->
 
     </div> <!-- end container-fluid -->

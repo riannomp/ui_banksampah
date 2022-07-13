@@ -8,6 +8,7 @@ use App\Http\Controllers\NasabahController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TellerController;
+use App\Models\Koordinator;
 use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Route;
 
@@ -48,6 +49,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('profile/pegawai/edit', [ProfileController::class, 'updatePegawai'])->name('updatePegawai');
     Route::post('profile/koor/edit', [ProfileController::class, 'updateKoor'])->name('updateKoor');
     Route::post('profile/nasabah/edit', [ProfileController::class, 'updateNasabah'])->name('updateNasabah');
+
     Route::post('profile/auth/edit', [ProfileController::class, 'updateAuth'])->name('updateAuth');
 
 
@@ -61,6 +63,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('data_pegawai', [AdminController::class, 'dataPegawai']);
         Route::get('tambah_pegawai', [AdminController::class, 'addPegawai'])->name('addPegawai');
         Route::post('tambah_pegawai/simpan', [AdminController::class, 'addPegawai2'])->name('addPegawai2');
+        Route::post('update_pegawai/simpan', [AdminController::class, 'updatePegawai'])->name('updatePegawaii');
         Route::delete('data_pegawai/hapus/{id_pegawai}', [AdminController::class, 'deletePegawai'])->name('deletePegawai');
 
         Route::get('data_koordinator', [AdminController::class, 'dataKoor'])->name('datakoor');
@@ -69,12 +72,13 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('data_koordinator/edit/simpan', [AdminController::class, 'updateKoor'])->name('updateKoorr');
 
         //view
-        Route::get('data_sampah/tambah_sampah',[ AdminController::class, 'addSampahView'])->name('addSampahView');
+        Route::get('data_sampah/tambah_sampah', [AdminController::class, 'addSampahView'])->name('addSampahView');
         //modal
         Route::post('addsampah', [AdminController::class, 'addSampah'])->name('addsampah');
 
         Route::get('data_sampah/ubah/{id_sampah}', [AdminController::class, 'editSampah']);
         Route::put('data_sampah/ubah/simpan', [AdminController::class, 'updateSampah'])->name('updatesampah2');
+        Route::post('data_sampah/hapus/{id_sampah}', [AdminController::class, 'deleteSampah'])->name('deleteSampah');
 
         Route::get('setoran_sampah', [AdminController::class, 'dataSetoran']);
         Route::get('setoran_sampah2', [AdminController::class, 'searchBydate'])->name('filtersetoran');
@@ -87,12 +91,13 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('jenis_sampah', [AdminController::class, 'dataJenis']);
         Route::post('addjenis', [AdminController::class, 'addJenis']);
         Route::post('updatejenis', [AdminController::class, 'updateJenis'])->name('updateJenis');
+        Route::post('jenis_sampah/hapus/{id_jenis}', [AdminController::class, 'deleteJenis'])->name('deleteJenis');
 
         Route::get('data_user', [AdminController::class, 'dataUser']);
         Route::post('updateStatus/{id_user}', [AdminController::class, 'updateStatus']);
         Route::post('resetpassword', [AdminController::class, 'resetPassword'])->name('resetPassword');
 
-        Route::get('setoran/generate-pdf', [PDFController::class, 'generatePDF'])->name('cetakpdf');
+        Route::get('setoran/cetakpdf', [PDFController::class, 'cetakpdf'])->name('cetakpdf');
     });
 
     Route::group(['prefix' => 'teller/'], function () {
@@ -106,32 +111,37 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('data_nasabah', [TellerController::class, 'dataNasabah']);
         Route::get('data_nasabah/tambah_nasabah', [TellerController::class, 'addNasabah'])->name('addnasabah');
-        Route::post('data_nasabah/tambah_nasabah/simpan', [TellerController::class, 'addNasabah2'])->name('tambahNasabah');
+        Route::post('data_nasabah/tambah_nasabah/simpan', [TellerController::class, 'addNasabah2'])->name('addNasabahTeller');
+        Route::post('data_nasabah/edit/simpan', [TellerController::class, 'updateNasabah'])->name('updateNasabahTeller');
+
 
         Route::get('data_koordinator', [TellerController::class, 'dataKoor']);
+        Route::post('data_koordinator/tambah_koor/simpan', [TellerController::class, 'addKoor2'])->name('addKoorTeller');
+        Route::post('data_koordinator/edit/simpan', [TellerController::class, 'updateKoor'])->name('updateKoorTeller');
+
         Route::get('setoran_sampah', [TellerController::class, 'dataSetoran']);
+
 
         Route::post('addsetor', [TellerController::class, 'addSetoran']);
         Route::post('addsetor/simpan', [TellerController::class, 'addSetoran2'])->name('teller.setoran');
 
         Route::get('detail_setoran/{id_setoran}', [TellerController::class, 'detailSetoran']);
 
-
+        Route::get('penarikan', [TellerController::class, 'penarikan']);
+        Route::post('penarikan/tambah_penarikan', [TellerController::class, 'addPenarikan'])->name('penarikan.teller');
 
         // PDF
         Route::get('detail_setoran/cetak_pdf={id_setoran}', [PDFController::class, 'cetakPDF'])->name('cetak_pdf');
 
         Route::get('addsetoran', [TellerController::class, 'addSetoran']);
-
     });
 
     Route::group(['prefix' => 'nasabah/'], function () {
         Route::get('tabungan', [NasabahController::class, 'tabungan']);
+        Route::get('penarikan', [NasabahController::class, 'penarikan']);
         Route::get('detail_setoran/{id_setoran}', [NasabahController::class, 'detailSetoran']);
 
         Route::get('profile', [NasabahController::class, 'profile'])->name('nasabah.profile');
-
-
     });
 
 
@@ -143,12 +153,19 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('addsetor/simpan', [KoordinatorController::class, 'addSetoran2'])->name('koor.setoran');
         Route::get('detail_setoran/{id_setoran}', [KoordinatorController::class, 'detailSetoran']);
 
+        // Route::post('setoran/kode', [KoordinatorController::class, 'kode'])->name('fetch');
+
+        // Riwayat
+        Route::get('riwayat_setoran', [KoordinatorController::class, 'riwayatSetor']);
+        Route::get('riwayat_penarikan', [KoordinatorController::class, 'riwayatPenarikan']);
+
+
         Route::get('penarikan', [KoordinatorController::class, 'penarikan']);
+        Route::post('penarikan/tambah_penarikan', [KoordinatorController::class, 'addPenarikan'])->name('penarikan.koor');
 
         Route::get('data_nasabah', [KoordinatorController::class, 'dataNasabah']);
-        Route::get('data_nasabah/tambah_nasabah', [KoordinatorController::class, 'addNasabah'])->name('koor.addNasabah');
-        Route::post('data_nasabah/tambah_nasabah/simpan', [KoordinatorController::class, 'addNasabah2'])->name('tambahNasabah2');
+        // Route::get('data_nasabah/tambah_nasabah', [KoordinatorController::class, 'addNasabah'])->name('addNasabahKoor');
+        Route::post('data_nasabah/tambah_nasabah/simpan', [KoordinatorController::class, 'addNasabah2'])->name('addNasabahKoor');
         Route::post('data_nasabah/update', [KoordinatorController::class, 'updateNasabah'])->name('updateNasabahh');
-
     });
 });

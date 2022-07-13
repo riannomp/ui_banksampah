@@ -1,8 +1,8 @@
-<div class="modal fade bs-example-modal-lg" id="penarikan{{ $nsb->id_nasabah }}" tabindex="-1" role="dialog"
+<div class="modal fade bs-example-modal-lg" id="penarikan{{ $koor->id_koor }}" tabindex="-1" role="dialog"
     aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
 
     <div class="modal-dialog modal-lg">
-        <form action="{{ route('penarikan.koor') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('penarikan.teller') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="modal-content">
                 <div class="modal-header">
@@ -10,13 +10,13 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
-                    <input name="edit_id" type="hidden" class="form-control" value="{{ $nsb->id_nasabah }}">
+                    <input name="id_koor" type="hidden" class="form-control" value="{{ $koor->id_koor }}">
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
                                 <label class="control-label mb-10 text-left">Total Saldo</label>
                                 <input name="saldo" type="text" class="form-control"
-                                    value="Rp {{ number_format($nsb->saldo, 2, ',', '.') }}" readonly>
+                                    value="Rp {{ number_format($koor->saldo, 2, ',', '.') }}" readonly>
                             </div>
 
                         </div>

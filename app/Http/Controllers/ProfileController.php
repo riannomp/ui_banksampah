@@ -93,19 +93,32 @@ class ProfileController extends Controller
 
     public function updateAuth(Request $request)
     {
-        dd($request);
-        if ($request->edit_email and $request->edit_password) {
-            User::where('id_user', $request->edit_id)
-                ->update([
-                    'email'     => $request->edit_email,
-                    'password'  => bcrypt($request->edit_password)
-                ]);
-        } else {
-            User::where('id_user', $request->edit_id)
-                ->update([
-                    'password'  => $request->password
-                ]);
-        }
+
+        $user = User::find($request->edit_id);
+        $user->email    = $request->edit_email;
+        $user->password = bcrypt($request->edit_password);
+        $user->save();
+
+        // if($simpan){
+        //     Alert::success('Success', 'Data Berhasil Diubah');
+        //     return redirect('profile');
+        // } else {
+        //     Alert::error('Error', 'Data Gagal Diubah');
+        //     return redirect('profile');
+        // }
+        // if ($request->edit_email and $request->edit_password) {
+
+        //     // User::where('id_user', $request->edit_id)
+        //     //     ->update([
+        //     //         'email'     => $request->edit_email,
+        //     //         'password'  => bcrypt($request->edit_password)
+        //     //     ]);
+        // } else {
+        //     User::where('id_user', $request->edit_id)
+        //         ->update([
+        //             'password'  => $request->password
+        //         ]);
+        // }
         Alert::success('Success', 'Data Berhasil Diubah');
         return redirect('dashboard');
     }

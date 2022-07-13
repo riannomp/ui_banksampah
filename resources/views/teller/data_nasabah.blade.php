@@ -30,11 +30,14 @@
                                 <span aria-hidden="true">&times;</span>
                         </div>
                     @endif
+                    @include('sweetalert::alert')
                     <p>
-                        <a href="{{ route('addnasabah') }}" class="btn btn-success waves-effect waves-light">
+                        <a href="" class="btn btn-success waves-effect waves-light" data-toggle="modal"
+                        data-target="#addnasabah">
                             <span class="btn-label"><i class="mdi mdi-plus"></i>
                             </span> Tambah Data</a>
                     </p>
+                    @include('teller.add_nasabah')
 
                     <table id="datatable" class="table table-bordered dt-responsive nowrap"
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -55,10 +58,11 @@
                                     <td>{{ $nasabahs->alamat }}</td>
                                     <td>{{ $nasabahs->no_hp }}</td>
                                     <td><a href="" class="btn btn-info waves-effect waves-light" data-toggle="modal"
-                                            data-target="#edit">
-                                            <i class="mdi mdi-information-variant"></i></a>
+                                            data-target="#updatenasabah{{ $nasabahs->id_nasabah }}">
+                                            <i class="mdi mdi-pencil"></i></a>
                                     </td>
                                 </tr>
+                                @include('teller.update_nasabah')
                             @endforeach
 
                         </tbody>

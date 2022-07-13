@@ -21,6 +21,7 @@
         </div>
         <!-- end page title -->
         <div class="row">
+            @include('sweetalert::alert')
             <div class="col-12">
                 <div class="card-box">
                     @if ($message = Session::get('success'))
@@ -31,7 +32,8 @@
                         </div>
                     @endif
                     <p>
-                        <a href="{{ route('addPegawai') }}" class="btn btn-success waves-effect waves-light">
+                        <a href="" class="btn btn-success waves-effect waves-light" data-toggle="modal"
+                        data-target="#addpegawai">
                             <span class="btn-label"><i class="mdi mdi-plus"></i>
                             </span> Tambah Pegawai</a>
                     </p>
@@ -55,12 +57,14 @@
                                     <td>{{ $pegawais->user != null ? $pegawais->user->level : 'belum ada' }}</td>
                                     <td>
                                         <a href="" class="btn btn-info waves-effect waves-light" data-toggle="modal"
-                                        data-target="#updatenasabah">
+                                        data-target="#updatepegawai{{ $pegawais->id_pegawai }}">
                                         <i class="mdi mdi-pencil"></i></a>
                                     </td>
                                 </tr>
+                                @include('admin.update_pegawai')
                             @endforeach
                         </tbody>
+                        @include('admin.add_pegawai')
                     </table>
                 </div>
             </div>

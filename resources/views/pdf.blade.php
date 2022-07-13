@@ -12,34 +12,26 @@
             <thead class="table-dark">
                 <tr>
                     <th>No</th>
-                    <th>Deskripsi</th>
-                    <th>Keterangan</th>
-                    <th>Qty</th>
-                    <th>Rate (Rp)</th>
-                    <th>Amount (Rp)</th>
+                    <th>nama</th>
+                    <th>harga</th>
+                   
                     <!-- <th colspan="3">Aksi</th> -->
                 </tr>
             </thead>
             <tbody>
                 <?php $no = 1; ?>
-                @foreach ($detail as $details)
+                @foreach ($setoran as $setorans)
                     <tr>
                         <td>{{ $no++ }}</td>
                         <td>
                             <div id="" data-title="Nama barang"> <span><b></b></span>
-                                <br>&nbsp;&nbsp;- {{ $details->nama }}</div>
+                                <br>&nbsp;&nbsp;- {{ $setorans->nasabah->nama }}</div>
                         </td>
+
                         <td>
+                            <div id=""  data-title="Rate"> Rp. {{ number_format($setorans->total_harga, 2, ',', '.') }}</a></div>
                         </td>
-                        <td>
-                            <div id="" data-title="Jumlah">{{$details->jumlah}}</a></div>
-                        </td>
-                        <td>
-                            <div id=""  data-title="Rate"> Rp. {{ number_format($details->harga, 2, ',', '.') }}</a></div>
-                        </td>
-                        <td> <div id=""  data-title="Amount">
-                                Rp. {{ number_format($details->subtotal, 2, ',', '.') }}</div>
-                        </td>
+
                     </tr>
                 @endforeach
             </tbody>

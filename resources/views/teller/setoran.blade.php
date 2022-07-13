@@ -25,13 +25,7 @@
             <div class="col-12">
 
                 <div class="card-box">
-                    @if ($message = Session::get('success'))
-                        <div class="alert alert-success">
-                            {{ session()->get('success') }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                        </div>
-                    @endif
+                    @include('sweetalert::alert')
                     <p>
                         <a href="{{ url('teller/addsetoran') }}" class="btn btn-success waves-effect waves-light">
                             <span class="btn-label"><i class="mdi mdi-plus"></i>
@@ -42,7 +36,7 @@
                         <thead>
                             <tr>
                                 <th>Kode Setoran</th>
-                                <th>Nama Nasabah</th>
+                                <th>Nama Koordinator</th>
                                 <th>Tanggal Setor</th>
                                 <th>Total Harga</th>
                                 <th>Aksi</th>
@@ -53,9 +47,9 @@
                             @foreach ($setoran as $str)
                                 <tr>
                                     <td>{{ $str->id_setoran }}</td>
-                                    <td>{{ $str->nasabah->nama }}</td>
+                                    <td>{{ $str->koor->nama }}</td>
                                     <td>{{ date('d M Y', strtotime($str->tanggal)) }}</td>
-                                    <td>Rp {{ number_format($str->total_harga), 2 }}</td>
+                                    <td>Rp {{ number_format($str->total_koor), 2 }}</td>
                                     <td><a href="{{ url('teller/detail_setoran') }}/{{ $str->id_setoran }}"
                                             class="btn btn-info waves-effect waves-light">
                                             <i class="mdi mdi-information-variant"></i></a>

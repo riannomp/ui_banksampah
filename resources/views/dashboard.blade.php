@@ -15,11 +15,7 @@
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
                     </div>
-                    <marquee width="300" height="60">
-                        <h4 class="page-title">Sistem Informasi Bank Sampah</h4>
-                    </marquee>
-
-
+                    <h4 class="page-title">Sistem Informasi Bank Sampah</h4>
                 </div>
             </div>
         </div>
@@ -93,7 +89,7 @@
                 <div class="card-box">
                     <div>
                         <h4 class="header-title">Grafik Transaksi</h4>
-                        
+
 
                         <div class="p-3">
                             <canvas id="lineChart" height="300"></canvas>
@@ -101,9 +97,9 @@
                     </div>
                 </div>
 
-                </div>
             </div>
         </div>
+    </div>
 
     </div> <!-- end container-fluid -->
 @endsection

@@ -17,7 +17,9 @@ class CreateSetoransTable extends Migration
             $table->string('id_setoran',6)->primary();
             $table->integer('id_nasabah')->unsigned()->nullable();
             $table->integer('id_koor')->unsigned()->nullable();
-            $table->integer('total_harga')->unsigned();
+            $table->integer('status')->unsigned();
+            $table->integer('total_harga')->nullable()->unsigned();
+            $table->integer('total_koor')->nullable()->unsigned();
             $table->date('tanggal');
             $table->timestamps();
         });

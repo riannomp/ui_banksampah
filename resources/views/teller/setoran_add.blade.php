@@ -24,16 +24,17 @@
         <div class="row">
             <div class="col-12">
                 <div class="card-box">
-                    <form action="{{ route('teller.setoran') }}"  class="parsley-examples" method="POST"  enctype="multipart/form-data">
+                    <form action="{{ route('teller.setoran') }}" class="parsley-examples" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-12 col-md-4 col-lg-4">
                                 <div class="form-group">
-                                    <label for="userName">Nama Nasabah</label>
-                                    <select name="nasabah" id="nasabah" class="form-control">
-                                        <option value="">Pilih Nama Nasabah</option>
-                                        @foreach ($nasabah as $nsb)
-                                            <option value="{{ $nsb->id_nasabah }}">{{ $nsb->nama }} </option>
+                                    <label for="userName">Nama Koordinator</label>
+                                    <select name="koor" id="koor" class="form-control">
+                                        <option value="">Pilih Nama Koordinator</option>
+                                        @foreach ($koordinator as $koor)
+                                            <option value="{{ $koor->id_koor }}">{{ $koor->nama }} </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -55,7 +56,8 @@
                             <div class="col-12 col-md-4 col-lg-4">
                                 <div class="form-group">
                                     <label for="tanggal">Tanggal Setor</label>
-                                    <input type="date" class="form-control mb-3" placeholder="" name ="tanggal" id="tanggal">
+                                    <input type="date" class="form-control mb-3" placeholder="" name="tanggal"
+                                        id="tanggal">
                                 </div>
                             </div>
                         </div>
@@ -63,30 +65,32 @@
                             <div class="col-12 col-md-3 col-lg-3">
                                 <div class="form-group">
                                     <label for="userName">Nama Sampah</label>
-                                    <select name="nama" id="nama" class="form-control">
+                                    <select name="nama" id="nama_sampah" class="form-control">
                                         <option value="">Pilih Nama Sampah</option>
                                         @foreach ($sampah as $sampahs)
-                                            <option value="{{ $sampahs->id_sampah }}">{{ $sampahs->nama}} | {{ $sampahs->id_sampah }}</option>
+                                            <option value="{{ $sampahs->id_sampah }}"
+                                                data-harga="{{ $sampahs->harga_koordinator }}">{{ $sampahs->nama }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4 col-md-3 col-lg-3">
                                 <div class="form-group">
-                                    <label for="userName">Jumlah</label>
-                                    <input type="text" name="jumlah" id="jumlah" class="form-control a1">
+                                    <label for="userName">Jumlah(Kg)</label>
+                                    <input type="text" name="jumlah" id="jumlah1" class="form-control a1">
                                 </div>
                             </div>
                             <div class="col-4 col-md-3 col-lg-3">
                                 <div class="form-group">
-                                    <label for="userName">Harga</label>
-                                    <input type="text" name="harga" id="harga" class="form-control b1">
+                                    <label for="userName">Harga(Rp)</label>
+                                    <input type="text" name="harga" id="harga1" class="form-control b1" readonly>
                                 </div>
                             </div>
                             <div class="col-4 col-md-3 col-lg-3">
                                 <div class="form-group">
-                                    <label for="userName">Sub Total</label>
-                                    <input type="text" name="sub_total" id="sub_total" class="form-control" readonly>
+                                    <label for="userName">Sub Total(Rp)</label>
+                                    <input type="text" name="sub_total" id="sub_total1" class="form-control" readonly>
                                 </div>
                             </div>
 
@@ -111,9 +115,9 @@
                                                         <tr>
                                                             <th>No</th>
                                                             <th>Nama Sampah</th>
-                                                            <th>Jumlah</th>
-                                                            <th>Harga</th>
-                                                            <th>Sub Total</th>
+                                                            <th>Jumlah(Kg)</th>
+                                                            <th>Harga(Rp)</th>
+                                                            <th>Sub Total(Rp)</th>
                                                             <th>Remove</th>
                                                         </tr>
                                                     </thead>
@@ -123,7 +127,8 @@
                                                         <tr>
                                                             <td align="right" colspan="4"><strong>Total</strong></td>
                                                             <td align="left" colspan="2">
-                                                                <input style="outline:none;border:0;" type="text" name="total" id="total">
+                                                                Rp<input style="outline:none;border:0;" type="text"
+                                                                    name="total" id="total">
                                                             </td>
                                                         </tr>
                                                     </tfoot>
@@ -149,36 +154,39 @@
 
 @section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript">
-        setInterval(function() {
-            var jumlah = $('#jumlah').val();
-            var harga = $('#harga').val();
 
-            var sub_total = jumlah * harga;
-            $('#sub_total').val(sub_total);
-        }, 500);
+    <script type="text/javascript">
+        // setInterval(function() {
+        //     var jumlah = $('#jumlah').val();
+        //     var harga = $('#harga').val();
+
+        //     var sub_total = jumlah * harga;
+        //     $('#sub_total').val(sub_total);
+        // }, 500);
 
         setInterval(function() {
             // total = (parseInt(total) - parseInt($('#sub_total' + row_id + '').val()));
             // $("#total").val(pecah(total));
             var sum = 0;
             $('.sub_total').each(function() {
-                sum += parseFloat($(this).val());
+                sum += parseInt($(this).val().replace(/\D/g, ''));
             });
-            $('#total').val(sum);
+
+            let nf = new Intl.NumberFormat('en-US');
+            $('#total').val(nf.format(sum));
         }, 1);
 
         function ambildata() {
 
-            var nasabah = document.getElementById("nasabah").value;
+            var koor = document.getElementById("koor").value;
             var tanggal = document.getElementById("tanggal").value;
-            var nama = document.getElementById("nama").value;
-            var jumlah = document.getElementById("jumlah").value;
-            var harga = document.getElementById("harga").value;
+            var nama = document.getElementById("nama_sampah").value;
+            var jumlah = document.getElementById("jumlah1").value;
+            var harga = document.getElementById("harga1").value;
 
 
-            if (nasabah == "") {
-                alert("Nama Nasabah tidak boleh kosong");
+            if (koor == "") {
+                alert("Nama Koordinator tidak boleh kosong");
                 return false;
             } else if (tanggal == "") {
                 alert("Tanggal Setor tidak boleh kosong");
@@ -196,10 +204,10 @@
 
 
             var id_setoran = document.getElementById('id_setoran').value;
-            var nama = document.getElementById('nama').value;
-            var jumlah = document.getElementById('jumlah').value;
-            var harga = document.getElementById('harga').value;
-            var sub_total = document.getElementById('sub_total').value;
+            var nama = document.getElementById('nama_sampah').value;
+            var jumlah = document.getElementById('jumlah1').value;
+            var harga = document.getElementById('harga1').value;
+            var sub_total = document.getElementById('sub_total1').value;
             addrow(id_setoran, nama, jumlah, harga, sub_total);
         }
         var i = 0;
@@ -231,8 +239,28 @@
         //     // $('#row' + row_id + '').remove();
         // });
         // });
+
         function removed(param) {
             $('#row' + param + '').remove();
         }
     </script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> --}}
+    {{-- onchange --}}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            harga = 0;
+            $('#nama_sampah').change(function() {
+                harga = $(this).find(':selected').data('harga');
+                let nf = new Intl.NumberFormat('en-US');
+                $('#harga1').val(nf.format(harga));
+                $('#sub_total1').val(nf.format(harga));
+            });
 
+            $('#jumlah1').change(function() {
+                jumlah = $(this).val();
+                total = jumlah * harga;
+                let nf = new Intl.NumberFormat('en-US');
+                $('#sub_total1').val(nf.format(total));
+            });
+        });
+    </script>

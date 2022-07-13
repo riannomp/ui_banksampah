@@ -82,6 +82,7 @@ class AdminController extends Controller
         Alert::success('Success', 'Data Berhasil Ditambahkan');
         return view('admin.data_sampah');
     }
+
     public function updateSampah(Request $request)
     {
         if ($request->edit_gambar) {
@@ -104,6 +105,11 @@ class AdminController extends Controller
                     'harga_koordinator' => $request->edit_harga_koordinator
                 ]);
         }
+        return redirect()->back();
+    }
+    public function deleteSampah($id)
+    {
+        DB::table('sampahs')->where('id_sampah', $id)->delete();
         return redirect()->back();
     }
     public function dataNasabah()
@@ -250,7 +256,19 @@ class AdminController extends Controller
         // $user->remember_token = Str::random(60);
         // $simpan = $user->save();
         // dd($request);
-        return redirect('admin/data_pegawai')->with(['success' => 'Data berhasil ditambahkan']);
+        Alert::success('Success', 'Berhasil Menambah Data Pegawai');
+        return redirect('admin/data_pegawai');
+    }
+    public function updatePegawai(Request $request)
+    {
+        Pegawai::where('id_pegawai', $request->edit_id)
+            ->update([
+                'nama'      => $request->edit_nama,
+                'alamat'    => $request->edit_alamat,
+                'no_hp'     => $request->edit_no_hp
+            ]);
+        Alert::success('Success', 'Berhasil Mengubah Data Pegawai');
+        return redirect()->back();
     }
 
     public function deletePegawai($id)
@@ -418,7 +436,7 @@ class AdminController extends Controller
 
     public function resetPassword(Request $request)
     {
-        dd($request);
+        // dd($request);
         User::where('id_user', $request->edit_id)
             ->update([
                 'password' =>  bcrypt('12345678')

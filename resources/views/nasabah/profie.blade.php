@@ -67,7 +67,7 @@
                                                 <td>{{ $str->id_setoran }}</td>
                                                 <td>{{ date('d M Y', strtotime($str->tanggal)) }}</td>
                                                 <td>Rp {{ number_format($str->total_harga), 2 }}</td>
-                                                <td><a href="{{ url('admin/detail_setoran') }}/{{ $str->id_setoran }}"
+                                                <td><a href="{{ url('nasabah/detail_setoran') }}/{{ $str->id_setoran }}"
                                                         class="btn btn-info waves-effect waves-light">
                                                         Detail</i></a>
                                                 </td>

@@ -21,7 +21,7 @@ class KoordinatorController extends Controller
     public function dataSetoran()
     {
         $user = Auth::user();
-        $setoran = Setoran::all();
+        $setoran = Setoran::all()->where('status', '', '1')->where('id_koor', '', $user->id_koor);
         return view('koor.setoran', compact('user', 'setoran'));
     }
     public function addSetoran(Request $request)
@@ -39,13 +39,14 @@ class KoordinatorController extends Controller
     }
     public function addSetoran2(Request $request)
     {
-        // dd($request);
+        // dd(str_replace(',', '',  $request->total));
         $user = Auth::user();
         Setoran::create([
             'id_setoran'    => $request->id_setoran2,
             'id_nasabah'    => $request->nasabah,
-            'total_harga'   => $request->total,
+            'total_harga'   => str_replace(',', '',  $request->total),
             'tanggal'       =>  $request->tanggal,
+            'status'        => '1',
             'id_koor'       =>  $user->id_koor
         ]);
 
@@ -61,21 +62,11 @@ class KoordinatorController extends Controller
                     'id_setoran'   => $request->id_setoran[$key],
                     'id_sampah'    => $request->nama[$key],
                     'jumlah'       => $request->jumlah[$key],
-                    'harga'        => $request->harga[$key],
-                    'subtotal'     => $request->sub_total[$key]
+                    'harga'        => str_replace(',', '',  $request->harga[$key]),
+                    'subtotal'     => str_replace(',', '',  $request->sub_total[$key])
                 ]
             );
         }
-        Transaksi::create([
-            'id_nasabah' => $request->nasabah,
-            'setoran' => $request->total,
-        ]);
-        // $saldo = Transaksi::saldo($request->nasabah);
-
-        // $nasabah = Transaksi::find($request->nasabah);
-        // $nasabah->saldo = $saldo;
-        // $nasabah->save();
-
 
         Alert::success('Success', 'Setoran Berhasil Ditambahkan');
         return redirect('koor/setoran_sampah');
@@ -90,6 +81,21 @@ class KoordinatorController extends Controller
 
         return view('koor.detail_setoran', compact('user', 'data_setor', 'detail_setor', 'total', 'id_setoran'));
     }
+
+    // public function kode(Request $request){
+    //     // dd($request);
+    //     $select = $request->get('select');
+    //     $values = $request->get('value');
+    //     $dependent = $request->get('dependent');
+
+    //     //    dd($dependent);
+    //     $data = DB::table('sampahs')->where('id_sampah', $values)->get();
+
+    //     foreach ($data as $row) {
+    //         $output = '<option value="'.$row->id_sampah.'">'.$row->id_sampah.'</option>';
+    //     }
+    //     echo $output;
+    // }
 
     public function dataSampah()
     {
@@ -107,8 +113,27 @@ class KoordinatorController extends Controller
         return view('koor.penarikan', compact('nasabah', 'user'));
     }
 
-    public function addPenarikan()
+    public function addPenarikan(Request $request)
     {
+
+        $user       = Auth::user();
+
+
+        Transaksi::create([
+            'id_nasabah'=> $request->edit_id,
+            'id_koor'   =>  $user->id_koor,
+            'penarikan' =>  str_replace(',', '',  $request->penarikan),
+            'status'    => '1'
+        ]);
+
+
+        $saldo = Nasabah::tarik($request->edit_id, $request->penarikan);
+        $nasabah = Nasabah::find($request->edit_id);
+        $nasabah->saldo = $saldo;
+        $nasabah->save();
+
+        Alert::success('Success', 'Berhasil Menambahkan Penarikan');
+        return redirect()->back();
     }
 
 
@@ -118,17 +143,7 @@ class KoordinatorController extends Controller
         $nasabah = Nasabah::all();
         return view('koor.data_nasabah', compact('nasabah', 'user'));
     }
-    public function updateNasabah(Request $request)
-    {
-        Nasabah::where('id_nasabah', $request->edit_id)
-        ->update([
-            'nama' => $request->edit_nama,
-            'nik' => $request->edit_nik,
-            'alamat' => $request->edit_alamat,
-            'no_hp' => $request->edit_no_hp,
-        ]);
-        return redirect()->back();
-    }
+
 
     public function addNasabah()
     {
@@ -185,7 +200,34 @@ class KoordinatorController extends Controller
             'id_nasabah' => $id,
             'remember_token' => Str::random(60)
         ]);
+        Alert::success('Success', 'Berhasil Menambahkan Nasabah');
+        return redirect('koor/data_nasabah');
+    }
+    public function updateNasabah(Request $request)
+    {
+        Nasabah::where('id_nasabah', $request->edit_id)
+            ->update([
+                'nama' => $request->edit_nama,
+                'nik' => $request->edit_nik,
+                'alamat' => $request->edit_alamat,
+                'no_hp' => $request->edit_no_hp,
+            ]);
+        Alert::success('Success', 'Berhasil Mengubah Data Nasabah');
+        return redirect()->back();
+    }
 
-        return redirect('koor/data_nasabah')->with(['success' => 'Data berhasil ditambahkan']);
+    public function riwayatSetor()
+    {
+        $user = Auth::user();
+        $setoran = Setoran::all()->where('status', '', '2')->where('id_koor', '', $user->id_koor);
+
+        return view('koor.riwayat_setoran', compact('user', 'setoran'));
+    }
+
+    public function riwayatPenarikan()
+    {
+        $user = Auth::user();
+        $penarikan = Transaksi::all()->where('status', '', '2')->where('id_koor', '', $user->id_koor);
+        return view('koor.riwayat_penarikan', compact('user', 'penarikan'));
     }
 }

@@ -322,6 +322,17 @@
                                     <li><a href="{{ url('koor/penarikan') }}">Penarikan</a></li>
                                 </ul>
                             </li>
+                            <li>
+                                <a href="javascript: void(0);">
+                                    <i class="mdi mdi-book-open"></i>
+                                    <span> Riwayat </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{ url('koor/riwayat_setoran') }}">Setoran</a></li>
+                                    <li><a href="{{ url('koor/riwayat_penarikan') }}">Penarikan</a></li>
+                                </ul>
+                            </li>
                         @endif
                         @if (auth()->user()->level == 'nasabah')
                             <li>
@@ -333,12 +344,12 @@
                             <li>
                                 <a href="javascript: void(0);">
                                     <i class="mdi mdi-book-open"></i>
-                                    <span> Transaksi </span>
+                                    <span> Riwayat </span>
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
-                                    <li><a href="{{ url('nasabah/tabungan') }}">Setoran Sampah</a></li>
-                                    <li><a href="{{ url('koor/setoran_sampah') }}">Penarikan</a></li>
+                                    <li><a href="{{ url('nasabah/tabungan') }}">Setoran</a></li>
+                                    <li><a href="{{ url('nasabah/penarikan') }}">Penarikan</a></li>
                                 </ul>
                             </li>
                         @endif
@@ -492,10 +503,10 @@
     <script src="{{ asset('template/dist') }}/assets/libs/autocomplete/jquery.autocomplete.min.js"></script>
     <script src="{{ asset('template/dist') }}/assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
 
-      <!-- Chart JS -->
-      <script src="{{ asset('template/dist') }}/assets/libs/chart-js/Chart.bundle.min.js"></script>
-      <!-- Init js -->
-      <script src="{{ asset('template/dist') }}/assets/js/pages/chartjs.init.js"></script>
+    <!-- Chart JS -->
+    <script src="{{ asset('template/dist') }}/assets/libs/chart-js/Chart.bundle.min.js"></script>
+    <!-- Init js -->
+    <script src="{{ asset('template/dist') }}/assets/js/pages/chartjs.init.js"></script>
     <!--Form Wizard-->
     <script src="{{ asset('template/dist') }}/assets/libs/jquery-steps/jquery.steps.min.js"></script>
 
@@ -505,6 +516,13 @@
     <script src="{{ asset('template/dist') }}/assets/js/pages/form-wizard.init.js"></script>
     <!-- form advanced init -->
     <script src="{{ asset('template/dist') }}/assets/js/pages/form-advanced.init.js"></script>
+
+    <!-- Plugins js -->
+    <script src="{{ asset('template/dist') }}/assets/libs/jquery-mask-plugin/jquery.mask.min.js"></script>
+    <script src="{{ asset('template/dist') }}/assets/libs/autonumeric/autoNumeric.min.js"></script>
+
+    <!-- Init js-->
+    <script src="{{ asset('template/dist') }}/assets/js/pages/form-masks.init.js"></script>
 
     @yield('script')
 </body>

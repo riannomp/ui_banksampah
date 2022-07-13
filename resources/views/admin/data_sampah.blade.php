@@ -71,11 +71,11 @@
                                             data-toggle="modal" data-target="#updatesampah{{ $sampah->id_sampah }}">
                                             <i class="mdi mdi-pencil"></i></a>
                                         <a href="" class="btn btn-danger waves-effect waves-light"
-                                            data-toggle="modal" data-target="#hapus">
+                                            data-toggle="modal" data-target="#hapussampah{{ $sampah->id_sampah }}">
                                             <i class="mdi mdi-delete"></i></a>
                                     </td>
                                 </tr>
-
+                                @include('admin.hapus_sampah')
                                 @include('admin.update_sampah')
                             @endforeach
                             @include('admin.add_sampah')

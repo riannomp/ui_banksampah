@@ -15,7 +15,7 @@
                             </label>
                             <div class="col-lg-8">
                                 <input type="text" name="nama" parsley-trigger="change" required
-                                     class="form-control" id="userName">
+                                    class="form-control" id="userName">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -25,7 +25,7 @@
                                 <select name="jenis" id="jenis" class="form-control">
                                     <option value="">Pilih Jenis</option>
                                     @foreach ($jenis as $jns)
-                                        <option value="{{ $jns->id_jenis }}">{{ $jns->id_jenis }} |
+                                        <option value="{{ $jns->id_jenis }}">
                                             {{ $jns->nama }}
                                         </option>
                                     @endforeach
@@ -36,16 +36,16 @@
                             <label for="example-text-input" class="col-lg-4 col-form-label">Harga Nasabah
                             </label>
                             <div class="col-lg-8">
-                                <input type="text" required  class="form-control"
-                                    name="harga_nasabah" id="harga_nasabah">
+                                <input type="text" required class="form-control" name="harga_nasabah"
+                                    id="harga_nasabah">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="example-text-input" class="col-lg-4 col-form-label">Harga Koordinator
                             </label>
                             <div class="col-lg-8">
-                                <input type="text" required  class="form-control"
-                                    name="harga_koordinator" id="harga_koordinator">
+                                <input type="text" required class="form-control" name="harga_koordinator"
+                                    id="harga_koordinator">
                             </div>
                         </div>
                         <div class="form-group row">

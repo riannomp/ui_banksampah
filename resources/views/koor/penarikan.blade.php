@@ -21,6 +21,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card-box">
+                    @include('sweetalert::alert')
                     @if ($message = Session::get('success'))
                         <div class="alert alert-success">
                             {{ session()->get('success') }}
@@ -46,7 +47,7 @@
                                     <td>
                                         @if ($nsb->saldo >= 50000)
                                             <a href="" class="btn btn-primary waves-effect waves-light"
-                                                data-toggle="modal" data-target="#penarikan{{$nsb->id_nasabah}}">
+                                                data-toggle="modal" data-target="#penarikan{{ $nsb->id_nasabah }}">
                                                 Penarikan</a>
                                         @endif
 
@@ -65,3 +66,4 @@
     </div> <!-- end container-fluid -->
 
 @endsection
+

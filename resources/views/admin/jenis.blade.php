@@ -52,10 +52,11 @@
                                             data-toggle="modal" data-target="#update{{ $jns->id_jenis }}">
                                             <i class="mdi mdi-pencil"></i></a>
                                         <a href="" class="btn btn-danger waves-effect waves-light"
-                                            data-toggle="modal" data-target="#hapus">
+                                            data-toggle="modal" data-target="#hapusjenis{{ $jns->id_jenis }}">
                                             <i class="mdi mdi-delete"></i></a>
                                     </td>
                                 </tr>
+                                @include('admin.hapus_jenis')
                                 @include('admin.update_jenis')
                             @endforeach
 

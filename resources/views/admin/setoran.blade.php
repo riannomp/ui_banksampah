@@ -28,14 +28,14 @@
                     <h5 class="txt-dark"> <strong> Filter </strong></h5>
                     <form action="{{ route('filtersetoran') }}" method="GET">
                         <div class="row">
-                            <div class="col-12 col-md-4 col-lg-4">
+                            <div class="col-12 col-md-3 col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label ">Start date</label>
                                     <input type="date" id="start" name="start" class="form-control"
                                         value="{{ date('d-m-Y') }}">
                                 </div>
                             </div>
-                            <div class="col-12 col-md-4 col-lg-4">
+                            <div class="col-12 col-md-3 col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label ">End date</label>
                                     <input type="date" id="end" name="end" value="{{ date('d-m-Y') }}"
@@ -46,21 +46,20 @@
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary">Cek </button>
 
+
                                 </div>
                             </div>
 
+
                         </div>
                     </form>
-                    {{-- <form action="{{ route('cetakpdf') }}">
-                        <button type="submit" class="btn btn-success btn-icon left-icon">
-                            <i class="fa fa-print"></i><span> Print</span>
-                        </button>
-                    </form> --}}
+
+                    <a href="{{ route('cetakpdf') }}" target="_blank" class="btn btn-success btn-icon left-icon"><i class="fa fa-print"></i><span> Print</span></a>
+
                     <table id="datatable" class="table table-bordered dt-responsive nowrap"
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
-                                <th>Nama Nasabah</th>
                                 <th>Kode Setoran</th>
                                 <th>Tanggal Setor</th>
                                 <th>Total Harga</th>
@@ -71,7 +70,6 @@
                         <tbody>
                             @foreach ($setoran as $str)
                                 <tr>
-                                    <td>{{ $str->nasabah->nama }}</td>
                                     <td>{{ $str->id_setoran }}</td>
                                     <td>{{ date('d M Y', strtotime($str->tanggal)) }}</td>
                                     <td>Rp {{ number_format($str->total_harga), 2 }}</td>

@@ -24,6 +24,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card-box">
+                    {{-- <h4 class="header-title">Basic example</h4> --}}
                     <div class="row">
                         <div class="col-4 ">
                             <div class="form-group text-center">
@@ -52,10 +53,9 @@
                     </div>
                     <hr>
                     <div class="row">
-                        @foreach ($data_setor as $data_setor)
-                            <div class="col-5">
-                                <div class="form-group">
-
+                        <div class="col-4">
+                            <div class="form-group">
+                                @foreach ($data_setor as $data_setor)
                                     <table>
                                         <div class="text-left">
                                             <h6 class="txt-dark"><strong>Kode Setoran :</strong> </h6>
@@ -65,25 +65,33 @@
 
                                     </table>
 
-                                </div>
                             </div>
-                            <div class="col-5">
-                                <div class="form-group">
-                                    <div class="text-left">
-                                        <h6 class="txt-dark"><strong>Tanggal Setor :</strong></h6>
-                                        <p> {{ date('d M Y', strtotime($data_setor->tanggal)) }}</p>
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+
+                                    <table>
+                                        <div class="text-center">
+                                            <h6 class="txt-dark"><strong>Tanggal Setor :</strong></h6>
+                                            <p> {{ date('d M Y', strtotime($data_setor->tanggal)) }}</p>
+                                        </div>
+                                    </table>
+
                             </div>
-                            <div class="col-2">
-                                <div class="form-group">
-                                    <div class="text-left">
-                                        <h6 class="txt-dark"><strong>Koordinator :</strong></h6>
-                                        <p> {{ $data_setor->koor->nama }}</p>
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+
+                                    <table>
+                                        <div class="text-right">
+                                            <h6 class="txt-dark"><strong>Koordinator :</strong> </h6>
+                                            <p>{{ $data_setor->koor->nama }}</p>
+                                        </div>
+                                    </table>
+                                @endforeach
+
                             </div>
-                        @endforeach
+                        </div>
                     </div>
                     <br>
                     <div class="table-responsive">
@@ -119,10 +127,6 @@
                             </tbody>
                         </table>
                     </div>
-                    {{-- <div class="form-group" style="text-align:right;">
-                        <a href="{{ route('cetak_pdf', $id_setoran) }}" ><button type="button" class="btn btn-success btn-icon right-icon">
-                                <i class="fa fa-print"></i><span> Print</span></button></a>
-                    </div> --}}
                     <div class="pull-right mr-30" style="text-align:right;">
                         <button type="button" class="btn btn-success btn-icon left-icon" onclick="cetak()" id="print">
                             <i class="fa fa-print"></i><span> Print</span>

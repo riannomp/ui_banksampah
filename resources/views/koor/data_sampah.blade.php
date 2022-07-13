@@ -47,7 +47,7 @@
                                 <th width="30px">Harga Nasabah</th>
                                 <th width="30px">Harga Koordinator</th>
                                 <th>Gambar</th>
-                                <th width="20px">Aksi</th>
+
 
                             </tr>
                         </thead>
@@ -67,13 +67,13 @@
                                             @endif
                                         </span>
                                     </td>
-                                    <td><a href="" class="btn btn-success waves-effect waves-light"
+                                    {{-- <td><a href="" class="btn btn-success waves-effect waves-light"
                                             data-toggle="modal" data-target="#updatesampah{{ $sampah->id_sampah }}">
                                             <i class="mdi mdi-pencil"></i></a>
                                         <a href="" class="btn btn-danger waves-effect waves-light"
                                             data-toggle="modal" data-target="#hapus">
                                             <i class="mdi mdi-delete"></i></a>
-                                    </td>
+                                    </td> --}}
                                 </tr>
 
                                 @include('admin.update_sampah')

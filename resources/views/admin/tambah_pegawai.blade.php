@@ -57,13 +57,21 @@
                             <label for="nama">Email</label>
                             <input type="email" class="form-control" id="email" name="email">
                         </div>
-                        <div class="form-group">
-                            <label for="nama">Role</label>
-                            <select class="form-control" name="level">
-                                {{-- <option value="admin">Admin</option> --}}
-                                <option value="teller">Teller</option>
-                            </select>
-                        </div>
+                        @if (auth()->user()->level == 'superadmin')
+                            <div class="form-group">
+                                <label for="nama">Role</label>
+                                <select class="form-control" name="level">
+                                    <option value="admin">Admin</option>
+                                </select>
+                            </div>
+                        @elseif (auth()->user()->level == 'admin')
+                            <div class="form-group">
+                                <label for="nama">Role</label>
+                                <select class="form-control" name="level">
+                                    <option value="teller">Teller</option>
+                                </select>
+                            </div>
+                        @endif
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>

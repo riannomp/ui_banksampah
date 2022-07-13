@@ -8,14 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Koordinator extends Model
 {
     use HasFactory;
-    protected $fillable=[
+    protected $fillable = [
         'nama',
         'foto',
         'alamat',
-        'no_hp'
+        'no_hp',
+        'total'
     ];
 
-    protected $dates=[
+    protected $dates = [
         'created_at',
         'updated_at',
         'deleted_at'
@@ -33,5 +34,20 @@ class Koordinator extends Model
     {
         return $this->hasOne(Nasabah::class, 'id_koor');
     }
-}
+    public function total($id)
+    {
+        $setoran = Setoran::where('id_koor', $id)->get();
+        $total = 0;
+        foreach ($setoran as $key => $value) {
+            $total = $total + $value->total_koor;
+        }
+        return $total;
+    }
+    public function tarik($id, $transaksi)
+    {
+        $koor = Koordinator::where('id_koor', $id)->first();
+        $saldo = $koor->saldo - $transaksi;
 
+        return $saldo;
+    }
+}
