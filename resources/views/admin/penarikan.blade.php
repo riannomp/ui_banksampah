@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('tittle', 'Penarikan Koordinator')
+@section('tittle', 'Data Penarikan')
 @section('content')
     <div class="container-fluid">
 
@@ -13,7 +13,7 @@
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Penarikan Nasabah</h4>
+                    <h4 class="page-title">Data Penarikan</h4>
                 </div>
             </div>
         </div>
@@ -22,39 +22,36 @@
             <div class="col-12">
                 @include('sweetalert::alert')
                 <div class="card-box">
-                    @if ($message = Session::get('success'))
-                        <div class="alert alert-success">
-                            {{ session()->get('success') }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                        </div>
-                    @endif
-
                     <table id="datatable" class="table table-bordered dt-responsive nowrap"
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
-                                <th>Koordinator</th>
-                                <th>Total Saldo</th>
-                                <th>Aksi</th>
+                                <th>Nama Penarik</th>
+                                <th>Sebagai</th>
+                                <th>Total Penarikan</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($koordinator as $koor)
+                            @foreach ($penarikan as $trk)
                                 <tr>
-                                    <td>{{ $koor->nama }}</td>
-                                    <td>Rp {{ number_format($koor->saldo, 2, ',', '.') }}</td>
                                     <td>
-                                        @if ($koor->saldo >= 50000)
-                                            <a href="" class="btn btn-primary waves-effect waves-light"
-                                                data-toggle="modal" data-target="#penarikan{{ $koor->id_koor }}">
-                                                Penarikan</a>
+                                        @if ($trk->status == '1')
+                                            {{ $trk->nasabah->nama }}
+                                        @else
+                                            {{ $trk->koor->nama }}
                                         @endif
-
                                     </td>
+                                    <td>
+                                        @if ($trk->status == '1')
+                                            Nasabah
+                                        @else
+                                           Koordinator
+                                        @endif
+                                    </td>
+                                    <td> Rp {{ number_format($trk->penarikan), 2 }}</td>
                                 </tr>
-                                @include('teller.tambah_penarikan')
                             @endforeach
+
                         </tbody>
                     </table>
 

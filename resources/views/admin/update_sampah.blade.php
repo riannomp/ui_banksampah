@@ -21,7 +21,11 @@
                         <input type="text" name="edit_jenis" parsley-trigger="change" readonly value="{{$sampah->jenis->nama}}"
                             class="form-control" id="userName">
                     </div>
-
+                    <div class="form-group">
+                        <label for="jenis">Keterangan</label>
+                        <input type="text" name="edit_keterangan" parsley-trigger="change" value="{{$sampah->keterangan}}"
+                            class="form-control" id="userName">
+                    </div>
                     <div class="form-group">
                         <label for="harga">Harga Nasabah</label>
                         <input type="text" required placeholder="Harga" class="form-control" name="edit_harga_nasabah" id="harga" value="{{$sampah->harga_nasabah}}">

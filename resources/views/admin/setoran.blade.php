@@ -63,6 +63,7 @@
                                 <th>Kode Setoran</th>
                                 <th>Tanggal Setor</th>
                                 <th>Total Harga</th>
+                                <th>Jenis Setoran</th>
                                 <th>Aksi</th>
 
                             </tr>
@@ -72,7 +73,19 @@
                                 <tr>
                                     <td>{{ $str->id_setoran }}</td>
                                     <td>{{ date('d M Y', strtotime($str->tanggal)) }}</td>
-                                    <td>Rp {{ number_format($str->total_harga), 2 }}</td>
+                                    <td>
+                                        @if ($str->status == '1')
+                                        Rp {{ number_format($str->total_harga), 2 }}
+                                        @else
+                                        Rp {{ number_format($str->total_koor), 2 }}</td>
+                                        @endif
+                                    <td>
+                                        @if ($str->status == '1')
+                                            Setoran Nasabah
+                                        @else
+                                            Setoran Koordinator
+                                        @endif
+                                    </td>
                                     <td><a href="{{ url('admin/detail_setoran') }}/{{ $str->id_setoran }}"
                                             class="btn btn-info waves-effect waves-light">
                                             <i class="mdi mdi-information-variant"></i></a>

@@ -13,6 +13,7 @@ class Sampah extends Model
         'id_sampah',
         'id_jenis',
         'nama',
+        'keterangan',
         'harga_nasabah',
         'harga_koordinator',
         'gambar'
@@ -34,5 +35,4 @@ class Sampah extends Model
     {
         return $this->hasMany(DetailSetoran::class, 'id_sampah');
     }
-
 }

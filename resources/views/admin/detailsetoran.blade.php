@@ -76,14 +76,25 @@
                                     </div>
                                 </div>
                             </div>
+                            @if ($data_setor->status == '1')
                             <div class="col-4">
                                 <div class="form-group">
                                     <div class="text-right">
-                                        <h6 class="txt-dark"><strong>Nasabah :</strong></h6>
+                                        <h6 class="txt-dark"><strong>Penyetor :</strong></h6>
                                         <p> {{ $data_setor->nasabah->nama }}</p>
                                     </div>
                                 </div>
                             </div>
+                            @else
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <div class="text-right">
+                                        <h6 class="txt-dark"><strong>Nasabah :</strong></h6>
+                                        <p> {{ $data_setor->koor->nama }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
                         @endforeach
                     </div>
                     <br>

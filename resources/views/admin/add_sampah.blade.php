@@ -33,6 +33,13 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label for="example-text-input" class="col-lg-4 col-form-label">Keterangan
+                            </label>
+                            <div class="col-lg-8">
+                                <input type="text" required class="form-control" name="keterangan" id="keterangan">
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="example-text-input" class="col-lg-4 col-form-label">Harga Nasabah
                             </label>
                             <div class="col-lg-8">

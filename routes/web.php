@@ -85,6 +85,8 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('detail_setoran/{id_setoran}', [AdminController::class, 'detailSetoran']);
         Route::get('addsetoran', [AdminController::class, 'addSetor']);
+        
+        Route::get('penarikan', [AdminController::class, 'penarikan']);
 
 
 
@@ -103,7 +105,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'teller/'], function () {
         Route::get('data_sampah', [TellerController::class, 'dataSampah']);
 
-        Route::post('addsampah', [TellerController::class, 'addSampah2'])->name('addsampah');
+        // Route::post('addsampah', [TellerController::class, 'addSampah2'])->name('addsampah');
 
 
         Route::get('data_sampah/ubah/{id_sampah}', [TellerController::class, 'editSampah']);

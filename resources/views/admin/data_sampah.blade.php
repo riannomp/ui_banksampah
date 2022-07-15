@@ -28,9 +28,9 @@
                     @if (auth()->user()->level == 'admin')
                         <p>
                             <a href="" class="btn btn-success waves-effect waves-light" data-toggle="modal"
-                            data-target="#addsampah">
-                            <span class="btn-label"><i class="mdi mdi-plus"></i>
-                            </span> Tambah Data</a>
+                                data-target="#addsampah">
+                                <span class="btn-label"><i class="mdi mdi-plus"></i>
+                                </span> Tambah Data</a>
                             {{-- <a href="{{ route('addSampahView') }}" class="btn btn-success waves-effect waves-light">
                                 <span class="btn-label"><i class="mdi mdi-plus"></i>
                                 </span> Tambah Data</a> --}}
@@ -42,12 +42,13 @@
                         <thead>
                             <tr>
                                 <th>Nama</th>
-                                <th width="30px">Kode Sampah</th>
-                                <th width="30px">Jenis</th>
-                                <th width="30px">Harga Nasabah</th>
-                                <th width="30px">Harga Koordinator</th>
+                                <th >Kode Sampah</th>
+                                <th >Jenis</th>
+                                <th >Keterangan</th>
+                                <th >Harga Nasabah</th>
+                                <th >Harga Koordinator</th>
                                 <th>Gambar</th>
-                                <th width="20px">Aksi</th>
+                                <th >Aksi</th>
 
                             </tr>
                         </thead>
@@ -57,6 +58,7 @@
                                     <td>{{ $sampah->nama }}</td>
                                     <td>{{ $sampah->id_sampah }}</td>
                                     <td>{{ $sampah->jenis->nama }}</td>
+                                    <td>{{ $sampah->keterangan }}</td>
                                     <td>Rp {{ number_format($sampah->harga_nasabah, 2, ',', '.') }}</td>
                                     <td>Rp {{ number_format($sampah->harga_koordinator, 2, ',', '.') }}</td>
                                     <td>

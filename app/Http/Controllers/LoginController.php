@@ -96,7 +96,8 @@ class LoginController extends Controller
 
         $rules = [
             'email'                 => 'required|email|unique:users,email',
-            'password'              => 'required|min:8|confirmed'
+            'password'              => 'required|min:8|confirmed',
+            'no_hp'                 => 'required|numeric',
         ];
 
         $messages = [
@@ -105,7 +106,9 @@ class LoginController extends Controller
             'email.unique'          => 'Email sudah terdaftar',
             'password.required'     => 'Password wajib diisi',
             'password.min'          => 'Password minimal memiliki 8 karakter',
-            'password.confirmed'    => 'Password tidak sama dengan konfirmasi password'
+            'password.confirmed'    => 'Password tidak sama dengan konfirmasi password',
+            'no_hp.required'        => 'Nomor HP wajib diisi',
+            'no_hp.numeric'         => 'Format no hp tidak valid',
         ];
 
         $validator = FacadesValidator::make($request->all(), $rules, $messages);

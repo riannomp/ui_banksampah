@@ -9,6 +9,7 @@ use App\Models\Nasabah;
 use App\Models\Pegawai;
 use App\Models\Sampah;
 use App\Models\Setoran;
+use App\Models\Transaksi;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -54,11 +55,12 @@ class AdminController extends Controller
             $id_sampah = $kode . "" . $angka;
 
             Sampah::create([
-                'nama'      => $request->nama,
-                'id_sampah' => $id_sampah,
-                'id_jenis' => $request->jenis,
-                'jumlah' => $request->jumlah,
-                'gambar' => $namaFile,
+                'nama'          => $request->nama,
+                'keterangan'    => $request->keterangan,
+                'id_sampah'     => $id_sampah,
+                'id_jenis'      => $request->jenis,
+                'jumlah'        => $request->jumlah,
+                'gambar'        => $namaFile,
                 'harga_nasabah' => $request->harga_nasabah,
                 'harga_koordinator' => $request->harga_koordinator
             ]);
@@ -71,6 +73,7 @@ class AdminController extends Controller
 
             Sampah::create([
                 'nama'          => $request->nama,
+                'keterangan'    => $request->keterangan,
                 'id_sampah'     => $id_sampah,
                 'gambar'        => 'no_image.png',
                 'id_jenis'      => $request->jenis,
@@ -80,7 +83,7 @@ class AdminController extends Controller
             ]);
         }
         Alert::success('Success', 'Data Berhasil Ditambahkan');
-        return view('admin.data_sampah');
+        return redirect('admin/data_sampah');
     }
 
     public function updateSampah(Request $request)
@@ -92,6 +95,7 @@ class AdminController extends Controller
                 ->update([
 
                     'nama'              => $request->edit_nama,
+                    'keterangan'        => $request->edit_keterangan,
                     'gambar'            => $namaFile,
                     'harga_nasabah'     => $request->edit_harga_nasabah,
                     'harga_koordinator' => $request->edit_harga_koordinator
@@ -101,6 +105,7 @@ class AdminController extends Controller
             Sampah::where('id_sampah', $request->edit_id)
                 ->update([
                     'nama'              => $request->edit_nama,
+                    'keterangan'        => $request->edit_keterangan,
                     'harga_nasabah'     => $request->edit_harga_nasabah,
                     'harga_koordinator' => $request->edit_harga_koordinator
                 ]);
@@ -372,6 +377,14 @@ class AdminController extends Controller
         $total          = DetailSetoran::where('id_setoran', $id_setoran)->sum('subtotal');
 
         return view('admin.detailsetoran', compact('user', 'data_setor', 'detail_setor', 'total', 'id_setoran'));
+    }
+
+    public function penarikan()
+    {
+        $user       = Auth::user();
+        $penarikan = Transaksi::all();
+
+        return view('admin.penarikan', compact('penarikan', 'user'));
     }
     public function addSetor()
     {
